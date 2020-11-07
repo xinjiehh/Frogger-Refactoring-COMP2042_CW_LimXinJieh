@@ -10,8 +10,8 @@ public class BackgroundImage extends Actor{
 		
 	}
 	
-	public BackgroundImage(String imageLink) {
-		setImage(new Image(imageLink, 600, 800, false, true));
+	public BackgroundImage() {
+		setImage(new Image("file:src/main/resources/gameBackground.png", 600, 800, false, true));
 		
 	}
 
