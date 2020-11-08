@@ -15,6 +15,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+//model?
 
 public abstract class World extends Pane {
     private AnimationTimer timer;
@@ -26,43 +27,47 @@ public abstract class World extends Pane {
 			@Override
 			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
 				if (newValue != null) {
-					newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
-						@Override
-						public void handle(KeyEvent event) {
-							if(getOnKeyReleased() != null) 
-								getOnKeyReleased().handle(event);
-							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor: myActors) {
-								if (anActor.getOnKeyReleased() != null) {
-									anActor.getOnKeyReleased().handle(event);
-								}
-							}
-						}
-						
-					});
-					
-					newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-						@Override
-						public void handle(KeyEvent event) {
-							if(getOnKeyPressed() != null) 
-								getOnKeyPressed().handle(event);
-							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor: myActors) {
-								if (anActor.getOnKeyPressed() != null) {
-									anActor.getOnKeyPressed().handle(event);
-								}
-							}
-						}
-						
-					});
+					createNewListeners(newValue);
 				}
-				
 			}
-    		
+
 		});
     }
+    
+	private void createNewListeners(Scene newValue) {
+		
+		newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				if(getOnKeyReleased() != null) 
+					getOnKeyReleased().handle(event);
+				List<Actor> myActors = getObjects(Actor.class);
+				for (Actor anActor: myActors) {
+					if (anActor.getOnKeyReleased() != null) {
+						anActor.getOnKeyReleased().handle(event);
+					}
+				}
+			}
+			
+		});
+		
+		newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				if(getOnKeyPressed() != null) 
+					getOnKeyPressed().handle(event);
+				List<Actor> myActors = getObjects(Actor.class);
+				for (Actor anActor: myActors) {
+					if (anActor.getOnKeyPressed() != null) {
+						anActor.getOnKeyPressed().handle(event);
+					}
+				}
+			}
+			
+		});
+	}
 
     public void createTimer() {
         timer = new AnimationTimer() {
