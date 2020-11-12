@@ -26,8 +26,10 @@ public class ViewManager {
 	public ViewManager() {
 		menuButtonList = new ArrayList<ButtonMod>();
 		menuPane = new MenuPane();
+		menuPane.setCache(true);
 		mainScene = new Scene(menuPane, WIDTH, HEIGHT);
 		mainStage = new Stage();
+		mainStage.setResizable(false);
 		createMenuBackground();
 		createButtons();
 		createInfoSubscene();

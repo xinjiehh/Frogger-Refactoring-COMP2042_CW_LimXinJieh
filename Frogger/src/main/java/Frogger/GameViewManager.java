@@ -40,6 +40,7 @@ public class GameViewManager {
 		gameScene = new Scene(gamePane, GAME_WIDTH, GAME_HEIGHT);
 		gameStage = new Stage();
 		gameStage.setScene(gameScene);
+		gameStage.setResizable(false);
 
 	}
 	
