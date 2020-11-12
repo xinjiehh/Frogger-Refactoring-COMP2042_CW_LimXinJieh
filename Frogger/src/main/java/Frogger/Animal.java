@@ -1,30 +1,16 @@
 package Frogger;
 
 import java.util.ArrayList;
-
 import javafx.event.EventHandler;
-
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-
 public class Animal extends Actor {
-	Image imgW1;
-	Image imgA1;
-	Image imgS1;
-	Image imgD1;
-	Image imgW2;
-	Image imgA2;
-	Image imgS2;
-	Image imgD2;
-	int points = 0;
+	int score = 0;
 	int end = 0;
 	private boolean second = false;
 	boolean noMove = false;
-	double movement = 13.3333333*2;
-	double movementX = 10.666666*2;
-	int imgSize = 40;
 	boolean carDeath = false;
 	boolean waterDeath = false;
 	boolean stop = false;
@@ -32,148 +18,144 @@ public class Animal extends Actor {
 	int carD = 0;
 	double w = 800;
 	ArrayList<End> inter = new ArrayList<End>();
-	
+
 	public Animal(String imageLink) {
-		setImage(new Image(imageLink, imgSize, imgSize, true, true));
-		setX(300);
-		setY(679.8+movement);
-		createImages();
+		setStartFrog();
 		createKeyListeners();
-	
+
 	}
-	
+
+	private void setStartFrog() {
+		setImage(AnimalData.imgW1);
+		setX(300);
+		setY(679.8 + AnimalData.movement);
+	}
+
+
 	private void moveAnim(double dx, double dy, Image value) {
-		move(dx,dy);
+		move(dx, dy);
 		setImage(value);
 	}
-			
 
 	private void createKeyListeners() {
-		
+
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event){
+			public void handle(KeyEvent event) {
 				if (noMove) {
-					
-				}
-				else {
-					
+
+				} else {
+
 					KeyCode keyCode = event.getCode();
 					Image img;
-						
-					second = second ? false : true;
+
 					
-					switch(keyCode) {
-					case W: 
-					case UP: 
-						img = second ? imgW1 : imgW2;
-						moveAnim(0, -movement, img);
-			            changeScore = false;
-			            break;
-							
+					switch (keyCode) {
+					case W:
+					case UP:
+						img = second ? AnimalData.imgW1 : AnimalData.imgW2;
+						moveAnim(0, -AnimalData.movement, img);
+						changeScore = false;
+						break;
+
 					case A:
 					case LEFT:
-						img = second ? imgA1 : imgA2;
-						moveAnim(-movementX, 0, img);
+						img = second ? AnimalData.imgA1 : AnimalData.imgA2;
+						moveAnim(-AnimalData.movementX, 0, img);
 						break;
-						
+
 					case S:
 					case DOWN:
-						img = second ? imgS1 : imgS2;
-						moveAnim(0, movement, img);
+						img = second ? AnimalData.imgS1 : AnimalData.imgS2;
+						moveAnim(0, AnimalData.movement, img);
 						break;
-							
+
 					case D:
 					case RIGHT:
-						img = second ? imgD1 : imgD2;
-						moveAnim(movementX, 0, img);
+						img = second ? AnimalData.imgD1 : AnimalData.imgD2;
+						moveAnim(AnimalData.movementX, 0, img);
 						break;
 					default:
 						break;
-	
+
 					}
+					
+					second = second ? false : true;
+
 
 				}
 			}
-		});	
-		
+		});
+
 		setOnKeyReleased(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event) {
-				if (noMove) {}
-				else {
+				if (noMove) {
+				} else {
 					second = false;
 					KeyCode keyCode = event.getCode();
-					
-					switch(keyCode) {
-					
-					case W: 
-					case UP: 
+
+					switch (keyCode) {
+
+					case W:
+					case UP:
 						if (getY() < w) {
 							changeScore = true;
 							w = getY();
-							points+=10;
+							score += 10;
 						}
-						
-						moveAnim(0, -movement, imgW1);
+
+						moveAnim(0, -AnimalData.movement, AnimalData.imgW1);
 						break;
-							
+
 					case A:
 					case LEFT:
-						moveAnim(-movementX, 0, imgA1);
+						moveAnim(-AnimalData.movementX, 0, AnimalData.imgA1);
 						break;
-						
+
 					case S:
 					case DOWN:
-						moveAnim(0, movement, imgS1);
+						moveAnim(0, AnimalData.movement, AnimalData.imgS1);
 						break;
-							
+
 					case D:
 					case RIGHT:
-						moveAnim(movementX, 0, imgD1);
+						moveAnim(AnimalData.movementX, 0, AnimalData.imgD1);
 						break;
 					default:
 						break;
-	
+
 					}
 
 				}
 			}
-			
+
 		});
 	}
 
-
-	private void createImages() {
-		imgW1 = new Image("file:src/main/resources/froggerUp.png", imgSize, imgSize, true, true);
-		imgA1 = new Image("file:src/main/resources/froggerLeft.png", imgSize, imgSize, true, true);
-		imgS1 = new Image("file:src/main/resources/froggerDown.png", imgSize, imgSize, true, true);
-		imgD1 = new Image("file:src/main/resources/froggerRight.png", imgSize, imgSize, true, true);
-		imgW2 = new Image("file:src/main/resources/froggerUpJump.png", imgSize, imgSize, true, true);
-		imgA2 = new Image("file:src/main/resources/froggerLeftJump.png", imgSize, imgSize, true, true);
-		imgS2 = new Image("file:src/main/resources/froggerDownJump.png", imgSize, imgSize, true, true);
-		imgD2 = new Image("file:src/main/resources/froggerRightJump.png", imgSize, imgSize, true, true);
-	}
-	
 	@Override
 	public void act(long now) {
 		int bounds = 0;
-		if (getY()<0 || getY()>734) {
-			setX(300);
-			setY(679.8+movement);
-		}
-		if (getX()<0) {
-			move(movement*2, 0);
-		}
-		/*
-		 * if (carDeath) { handleCarDeath(now);
-		 * 
-		 * } if (waterDeath) { handleWaterDeath(now);
-		 * 
-		 * }
-		 */
 		
-		if (getX()>600) {
-			move(-movement*2, 0);
+		if (getY() < 0 || getY() > 734) {
+			setX(300);
+			setY(679.8 + AnimalData.movement);
 		}
+		if (getX() < 0) {
+			move(AnimalData.movement * 2, 0);
+		}
+		if (carDeath) { 
+			//handleCarDeath(now);
+		 } 
+		if (waterDeath) { 
+			//handleWaterDeath(now);
+		}
+		 
+
+		
+		checkIntersecting();
+	
+	}
+
+	private void checkIntersecting() {
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
 			carDeath = true;
 		}
@@ -181,117 +163,109 @@ public class Animal extends Actor {
 			stop = true;
 		}
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-			if(getIntersectingObjects(Log.class).get(0).getLeft())
-				move(-2,0);
+			if (getIntersectingObjects(Log.class).get(0).getLeft())
+				move(-2, 0);
 			else
-				move (.75,0);
-		}
-		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			move(-1,0);
-		}
-		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
+				move(.75, 0);
+		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
+			move(-1, 0);
+		} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
 			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
 				waterDeath = true;
 			} else {
-				move(-1,0);
+				move(-1, 0);
 			}
-		}
-		else if (getIntersectingObjects(End.class).size() >= 1) {
+		} else if (getIntersectingObjects(End.class).size() >= 1) {
 			inter = (ArrayList<End>) getIntersectingObjects(End.class);
 			if (getIntersectingObjects(End.class).get(0).isActivated()) {
 				end--;
-				points-=50;
+				score -= 50;
 			}
-			points+=50;
+			score += 50;
 			changeScore = true;
-			w=800;
+			w = 800;
 			getIntersectingObjects(End.class).get(0).setEnd();
 			end++;
 			setX(300);
-			setY(679.8+movement);
-		}
-		else if (getY()<413){
+			setY(679.8 + AnimalData.movement);
+		} else if (getY() < 413) {
 			waterDeath = true;
-			//setX(300);
-			//setY(679.8+movement);
+			// setX(300);
+			// setY(679.8+movement);
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void handleWaterDeath(long now) {
 		noMove = true;
-		if ((now)% 11 ==0) {
+		if ((now) % 11 == 0) {
 			carD++;
 		}
-		if (carD==1) {
-			setImage(new Image("file:src/main/resources/waterdeath1.png", imgSize,imgSize , true, true));
-		}
-		if (carD==2) {
-			setImage(new Image("file:src/main/resources/waterdeath2.png", imgSize,imgSize , true, true));
-		}
-		if (carD==3) {
-			setImage(new Image("file:src/main/resources/waterdeath3.png", imgSize,imgSize , true, true));
-		}
-		if (carD == 4) {
-			setImage(new Image("file:src/main/resources/waterdeath4.png", imgSize,imgSize , true, true));
-		}
+		
+		setWaterDeathImage();
+	}
+
+	private void setWaterDeathImage() {
+
+		// if end of death animation
 		if (carD == 5) {
-			setX(300);
-			setY(679.8+movement);
+			restartFrog();
 			waterDeath = false;
-			carD = 0;
-			setImage(new Image("file:src/main/resources/froggerUp.png", imgSize, imgSize, true, true));
-			noMove = false;
-			if (points>50) {
-				points-=50;
-				changeScore = true;
-			}
+
+		} else if (carD > 0 && carD < 5) {
+
+			setImage(new Image("file:src/main/resources/waterdeath" + carD + ".png", AnimalData.imgSize, AnimalData.imgSize, true, true));
+
+		}
+
+	}
+
+	private void restartFrog() {
+		setStartFrog();
+		carD = 0;
+		noMove = false;
+		if (score > 50) {
+			score -= 50;
+			changeScore = true;
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void handleCarDeath(long now) {
 		noMove = true;
-		if ((now)% 11 ==0) {
+		if ((now) % 11 == 0) {
 			carD++;
 		}
-		if (carD==1) {
-			setImage(new Image("file:src/main/resources/cardeath1.png", imgSize, imgSize, true, true));
-		}
-		if (carD==2) {
-			setImage(new Image("file:src/main/resources/cardeath2.png", imgSize, imgSize, true, true));
-		}
-		if (carD==3) {
-			setImage(new Image("file:src/main/resources/cardeath3.png", imgSize, imgSize, true, true));
-		}
+		setCarDeathImage();
+	}
+
+	private void setCarDeathImage() {
+
 		if (carD == 4) {
-			setX(300);
-			setY(679.8+movement);
 			carDeath = false;
-			carD = 0;
-			setImage(new Image("file:src/main/resources/froggerUp.png", imgSize, imgSize, true, true));
-			noMove = false;
-			if (points>50) {
-				points-=50;
-				changeScore = true;
-			}
+			restartFrog();
+
+		} else if (carD > 0 && carD < 4) {
+			setImage(new Image("file:src/main/resources/cardeath" + carD + ".png", AnimalData.imgSize, AnimalData.imgSize, true, true));
+
 		}
 	}
-	
+
 	public boolean getStop() {
-		return end==5;
+		return end == 5;
 	}
-	
-	public int getPoints() {
-		return points;
+
+	public int getScore() {
+		return score;
 	}
-	
+
 	public boolean changeScore() {
 		if (changeScore) {
 			changeScore = false;
 			return true;
 		}
 		return false;
-		
+
 	}
-	
 
 }
