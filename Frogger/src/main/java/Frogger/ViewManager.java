@@ -9,7 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 
+//singleton
+//static method, private class
+
 public class ViewManager {
+	private static ViewManager instance = null;
 	private static final double HEIGHT = 800;//PaneModel.getPaneHeight();
 	private static final double WIDTH = 600;//PaneModel.getPaneWidth();;
 	private static final int BUTTON_START_XPOS = 100;
@@ -23,7 +27,7 @@ public class ViewManager {
 	//private GamePane gamePane;
 
 	
-	public ViewManager() {
+	private ViewManager() {
 		menuButtonList = new ArrayList<ButtonMod>();
 		menuPane = new MenuPane();
 		menuPane.setCache(true);
@@ -34,10 +38,18 @@ public class ViewManager {
 		createButtons();
 		createInfoSubscene();
 		mainStage.setScene(mainScene);
-		System.out.println(menuPane.getChildren());
 		mainStage.show();
+		//System.out.println(menuPane.getChildren());
 		
 
+	}
+	
+	public static ViewManager getInstance() {
+		if(instance == null) {
+			instance = new ViewManager();
+		} 
+		
+		return instance;
 	}
 	
 	
@@ -83,10 +95,17 @@ public class ViewManager {
 	}
 	
 	private void startGame(Stage menuStage) { 
-		GameViewManager gameManager = new GameViewManager();
-		gameManager.createNewStage(mainStage);
+		GameViewManager gameManager = new GameViewManager(menuStage);
+		mainStage.hide();
+		gameManager.createNewLevel();
+		
+		
 		
 	}
+	
+	
+	
+	
 	
 	public Stage getMainStage() {
 		return mainStage;
