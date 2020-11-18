@@ -6,7 +6,7 @@ public class Turtle extends Actor{
 	Image turtle1;
 	Image turtle2;
 	Image turtle3;
-	private int speed;
+	//private int speed;
 	int i = 1;
 	boolean bool = true;
 	@Override
