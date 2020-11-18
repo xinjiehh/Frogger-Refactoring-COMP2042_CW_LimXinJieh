@@ -5,8 +5,31 @@ import javafx.scene.input.InputEvent;
 
 import java.util.ArrayList;
 
+//TODO is it good to put speed here
+public abstract class Actor extends ImageView {
+//	protected float x,y;
+	protected double speed;
 
-public abstract class Actor extends ImageView{
+	//protected ObjectID id;
+	
+	public void setPosition(double x, double y) {
+		setX(x);
+		setY(y);
+		
+	}
+	
+	public double getSpeed() {
+		return this.speed;
+	}
+	
+//	public Actor(double x, double y, ObjectID id) {
+//		this.x = x;
+//		this.y = y;
+//		this.id = id;
+//		
+//	}
+	
+//	public abstract Rectangle getBounds();
 
     public void move(double dx, double dy) {
         setX(getX() + dx);
@@ -25,31 +48,13 @@ public abstract class Actor extends ImageView{
         return this.getBoundsInLocal().getHeight();
     }
 
-    public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls){
-        ArrayList<A> someArray = new ArrayList<A>();
-        for (A actor: getWorld().getObjects(cls)) {
-            if (actor != this && actor.intersects(this.getBoundsInLocal())) {
-                someArray.add(actor);
-            }
-        }
-        return someArray;
-    }
-    
     public void manageInput(InputEvent e) {
         
     }
-
-    public <A extends Actor> A getOneIntersectingObject(java.lang.Class<A> cls) {
-        A intersectingObj = null;
-        for (A actor: getWorld().getObjects(cls)) {
-            if (actor != this && actor.intersects(this.getBoundsInLocal())) {
-                intersectingObj = actor;
-                break;
-            }
-        }
-        return intersectingObj;
-    }
+    
 
     public abstract void act(long now);
+    
+    //public abstract Class<?> getClass();
 
 }
