@@ -3,7 +3,8 @@ package Frogger;
 import javafx.scene.image.Image;
 
 public class End extends Actor{
-	private static final int SIZE = 60;
+	private static final int WIDTH = 65;
+	private static final int HEIGHT = 60;
 	boolean activated = false;
 	@Override
 	public void act(long now) {
@@ -13,20 +14,20 @@ public class End extends Actor{
 	public End(int x, int y) {
 		setX(x);
 		setY(y);
-		setEndImage("file:src/main/resources/End.png");
+		setEndImage("End.png");
 	}
 	
 	public void setEnd() {
-		setEndImage("file:src/main/resources/FrogEnd.png");
+		setEndImage("FrogEnd.png");
 		activated = true;
-	}
-	
-	private void setEndImage(String url) {
-		setImage(new Image(url, SIZE, SIZE, true, true));
 	}
 	
 	public boolean isActivated() {
 		return activated;
+	}
+	
+	private void setEndImage(String url) {
+		setImage(new Image(url, WIDTH, HEIGHT, false, true));
 	}
 	
 
