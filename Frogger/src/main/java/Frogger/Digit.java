@@ -3,17 +3,18 @@ package Frogger;
 import javafx.scene.image.Image;
 
 public class Digit extends Actor{
-	int dim;
-	Image im1;
+	private static final int WIDTH = 30;
+	private static final int HEIGHT = 30;
+	
+	
 	@Override
 	public void act(long now) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public Digit(int n, int dim, int x, int y) {
-		im1 = new Image("file:src/main/resources/"+n+".png", dim, dim, true, true);
-		setImage(im1);
+	public Digit(int n, int x, int y) {
+		setImage(new Image("/digit/"+n+".png", WIDTH, HEIGHT, true, true));
 		setX(x);
 		setY(y);
 	}
