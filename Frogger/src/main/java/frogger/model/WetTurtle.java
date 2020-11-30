@@ -1,17 +1,14 @@
-package Frogger;
+package frogger.model;
 
 import javafx.scene.image.Image;
 
-public class WetTurtle extends Actor{
+public class WetTurtle extends Actor {
 	private static final int SIZE = 130;
-
-	private static final Image turtle1 = new Image("file:src/main/resources/turtle/TurtleAnimation1.png",SIZE,SIZE,true,true);
-	private static final Image turtle2 = new Image("file:src/main/resources/turtle/TurtleAnimation2Wet.png",SIZE,SIZE,true,true);
-	private static final Image turtle3 = new Image("file:src/main/resources/turtle/TurtleAnimation3Wet.png",SIZE,SIZE,true,true);
-	private static final Image turtle4 = new Image("file:src/main/resources/turtle/TurtleAnimation4Wet.png",SIZE,SIZE,true,true);
-//	private int speed;
-//	int i = 1;
-//	boolean bool = true;
+	private static final String PACKAGE_PATH = "/moving/";
+	private static final Image turtle1 = new Image(PACKAGE_PATH + "TurtleAnimation1.png",SIZE,SIZE,true,true);
+	private static final Image turtle2 = new Image(PACKAGE_PATH + "TurtleAnimation2Wet.png",SIZE,SIZE,true,true);
+	private static final Image turtle3 = new Image(PACKAGE_PATH + "TurtleAnimation3Wet.png",SIZE,SIZE,true,true);
+	private static final Image turtle4 = new Image(PACKAGE_PATH + "TurtleAnimation4Wet.png",SIZE,SIZE,true,true);
 	private boolean sunk = false;
 	@Override
 	public void act(long now) {
@@ -37,7 +34,7 @@ public class WetTurtle extends Actor{
 					sunk = true;
 				}
 			
-		move(speed , 0);
+		move(speed, 0);
 		
 		if (getX() > 600 && speed>0)
 			setX(-200);
@@ -45,7 +42,10 @@ public class WetTurtle extends Actor{
 		if (getX() < -75 && speed<0)
 			setX(600);
 	}
+	public WetTurtle() {
 	
+		
+	}
 	
 	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
 		setX(xpos);
@@ -53,10 +53,17 @@ public class WetTurtle extends Actor{
 		speed = s;
 		setImage(turtle2);
 	}
+	
+	
 	public boolean isSunk() {
 		return sunk;
 	}
 	
+	public Actor newInstance() {
+		return new WetTurtle();
+	}
+	
+
 //	
 //	private Image newTurtle(String link) {
 //		
