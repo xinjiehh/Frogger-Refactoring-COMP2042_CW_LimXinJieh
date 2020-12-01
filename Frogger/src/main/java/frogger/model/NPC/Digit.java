@@ -1,5 +1,6 @@
-package frogger.model;
+package frogger.model.NPC;
 
+import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
 public class Digit extends Actor{
@@ -14,7 +15,7 @@ public class Digit extends Actor{
 	}
 	
 	public Digit(int n, int x, int y) {
-		setImage(new Image("/digit/"+n+".png", WIDTH, HEIGHT, true, true));
+		setImage(new Image( FilePath.DIGIT_PATH + n + ".png", WIDTH, HEIGHT, true, true));
 		setX(x);
 		setY(y);
 	}

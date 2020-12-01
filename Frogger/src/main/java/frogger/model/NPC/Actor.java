@@ -1,5 +1,6 @@
-package frogger.model;
+package frogger.model.NPC;
 
+import frogger.model.World;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 
@@ -93,19 +94,3 @@ public abstract class Actor extends ImageView {
  
 
 }
-
-//public void resetEnds() {
-//	setImage(new Image("/swamp/End.png",65,60,false,true));
-//}
-
-
-//public Actor(double x, double y, ObjectID id) {
-//this.x = x;
-//this.y = y;
-//this.id = id;
-//
-//}
-
-//public abstract Rectangle getBounds();
-
-//public abstract Class<?> getClass();
