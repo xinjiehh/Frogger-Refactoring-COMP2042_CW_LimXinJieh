@@ -1,9 +1,10 @@
 package frogger.model;
 
 
-import frogger.DeathAnimation;
-import frogger.constant.AudioPlayer;
 import frogger.constant.Direction;
+import frogger.constant.FilePath;
+import frogger.util.AudioPlayer;
+import frogger.util.DeathAnimation;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -24,34 +25,49 @@ public class Frog extends PlayerAvatar {
 		NULL;
 	}
 	
-	public boolean isJump = false;
-	public boolean noMove = false; 
-	public int tempScore = 0;
 	
-	private static final int MAX_FROG = 2;
-	public static final int IMG_SIZE = 40;
-	public static final String PREFIX = "/frog/";
-	public static final Image imgW1 = new Image(PREFIX + "froggerUp.png", IMG_SIZE, IMG_SIZE, true, true);
-	public static final Image imgA1 = new Image(PREFIX + "froggerLeft.png", IMG_SIZE, IMG_SIZE, true, true);
-	public static final Image imgS1 = new Image(PREFIX + "froggerDown.png", IMG_SIZE, IMG_SIZE, true, true);
-	public static final Image imgD1 = new Image(PREFIX + "froggerRight.png", IMG_SIZE, IMG_SIZE, true, true);
-	public static final Image imgW2 = new Image(PREFIX + "froggerUpJump.png", IMG_SIZE, IMG_SIZE, true, true);
-	public static final Image imgA2 = new Image(PREFIX + "froggerLeftJump.png", IMG_SIZE, IMG_SIZE, true, true);
-	public static final Image imgS2 = new Image(PREFIX + "froggerDownJump.png", IMG_SIZE, IMG_SIZE, true, true);
-	public static final Image imgD2 = new Image(PREFIX + "froggerRightJump.png", IMG_SIZE, IMG_SIZE, true, true);
+	
+	private static final int MAX_FROG = 5;
+	
+	//Frog image initialization
+	private static final int IMG_SIZE = 40;
+	private static final Image imgW1 = new Image(FilePath.FROG_UP, IMG_SIZE, IMG_SIZE, true, true);
+	private static final Image imgA1 = new Image(FilePath.FROG_LEFT, IMG_SIZE, IMG_SIZE, true, true);
+	private static final Image imgS1 = new Image(FilePath.FROG_DOWN, IMG_SIZE, IMG_SIZE, true, true);
+	private static final Image imgD1 = new Image(FilePath.FROG_RIGHT, IMG_SIZE, IMG_SIZE, true, true);
+	private static final Image imgW2 = new Image(FilePath.FROG_UPJUMP, IMG_SIZE, IMG_SIZE, true, true);
+	private static final Image imgA2 = new Image(FilePath.FROG_LEFTJUMP, IMG_SIZE, IMG_SIZE, true, true);
+	private static final Image imgS2 = new Image(FilePath.FROG_DOWNJUMP, IMG_SIZE, IMG_SIZE, true, true);
+	private static final Image imgD2 = new Image(FilePath.FROG_RIGHTJUMP, IMG_SIZE, IMG_SIZE, true, true);
 	
 	private IntegerProperty lifeProp;
 	private IntegerProperty scoreProp;
 	
-
+	//type of frog death
 	private FrogDeath frogDeath = FrogDeath.NULL;
-	
+	private boolean isJump = false;
+	private boolean noMove = false; 
+	private int tempScore = 0;
 	private int swampFrogCount = 0; 
+	
+	//true if frog comes into contact with a swamp containing a fly
 	private boolean flyBonus;
+	
+	//x position of frog when it comes into contact with the fly 
 	private double bonusXPos;
+	
+	//true if frog is in contact with another moving log/turtle
 	private boolean attached;
+	
+	//horizontal and vertical distances to move when frog is attached
 	private double dx;
 	private double dy;
+	
+	public Frog() {
+		setStartFrog();
+		lifeProp = new SimpleIntegerProperty(3);
+		scoreProp = new SimpleIntegerProperty(0);
+	}
 	
 
 	public void handleDeath(FrogDeath death) {
@@ -71,7 +87,14 @@ public class Frog extends PlayerAvatar {
 		}
 		
 	}
-
+	
+	public void setTempScore(int i) {
+		tempScore=i;
+	}
+	
+	public boolean getNoMove() {
+		return noMove;
+	}
 
 	public void jump(Direction direction, boolean keyPress) {
 		if (!noMove) {
@@ -125,11 +148,19 @@ public class Frog extends PlayerAvatar {
 		setStartFrog();
 		noMove = false;
 		tempScore = 0;
-		System.out.println("tempScore " + tempScore);
 //		if (score > 50) {
 //			score -= 50;
 //			changeScore = true;
 //		}
+	}
+	
+	/**
+	 * This method sets player character in starting mode
+	 */
+	private void setStartFrog() {
+		setImage(imgW1);
+		setX(START_XPOS);
+		setY(START_YPOS);
 	}
 	
 	/**
@@ -187,8 +218,7 @@ public class Frog extends PlayerAvatar {
 
 	public boolean hasFlyBonus() {
 		if(flyBonus) {
-			
-			flyBonus=false;
+			//flyBonus=false;
 			return true;
 		}
 		
@@ -211,12 +241,7 @@ public class Frog extends PlayerAvatar {
 		swampFrogCount++;
 	}
 	
-	public Frog() {
-		setStartFrog();
-		lifeProp = new SimpleIntegerProperty(3);
-		scoreProp = new SimpleIntegerProperty(0);
-	}
-	
+
 
 	public void addScore(int x) {
 		scoreProp.setValue(scoreProp.intValue()+x);
@@ -231,14 +256,7 @@ public class Frog extends PlayerAvatar {
 	}
 	
 
-	/**
-	 * This method sets player character in starting mode
-	 */
-	public void setStartFrog() {
-		setImage(imgW1);
-		setX(START_XPOS);
-		setY(START_YPOS);
-	}
+
 	
 	public void setDeath(FrogDeath death) {
 		frogDeath=death;
