@@ -4,11 +4,17 @@ public class FilePath {
 	
 	public static final String RESOURCE_PATH = "src/main/resources/";
 	
-	
+	public static final String BONUS = "/misc/100.png";
 	//BACKGROUND
 	public static final String BG_PATH = "/background/";
 	public static final String GAMEBACKGROUND = BG_PATH + "GameBackground2.png";
 	public static final String MENUBACKGROUND = BG_PATH + "MenuBackground.png";
+	
+	//LOG
+	public static final String LOG_PATH = "/moving/";
+	public static final String L_LOG = LOG_PATH +  "logLong.png";
+	public static final String M_LOG = LOG_PATH +  "logMedium.png";
+	public static final String S_LOG = LOG_PATH +  "logShort.png";
 	
 	//FROG
 	public static final String FROG_PATH = "/frog/";

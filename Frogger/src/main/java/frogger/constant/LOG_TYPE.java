@@ -2,9 +2,9 @@ package frogger.constant;
 
 public enum LOG_TYPE {
 	
-	LONG("file:src/main/resources/moving/logLong.png",300),
-	MEDIUM("file:src/main/resources/moving/logMedium.png",225),
-	SHORT("file:src/main/resources/moving/logShort.png",150);
+	LONG(FilePath.L_LOG,300),
+	MEDIUM(FilePath.M_LOG,225),
+	SHORT(FilePath.S_LOG,150);
 	
 	
 	private String url;
