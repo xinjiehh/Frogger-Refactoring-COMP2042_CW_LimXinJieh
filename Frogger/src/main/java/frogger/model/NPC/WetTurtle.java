@@ -1,4 +1,4 @@
-package frogger.model;
+package frogger.model.NPC;
 
 import javafx.scene.image.Image;
 

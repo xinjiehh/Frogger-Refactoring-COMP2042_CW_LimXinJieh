@@ -1,7 +1,7 @@
-package frogger.model;
+package frogger.model.NPC;
 
+import frogger.constant.OBSTACLE_TYPE;
 import javafx.scene.image.Image;
-import trial.model.OBSTACLE_TYPE;
 
 
 public class Obstacle extends Actor {

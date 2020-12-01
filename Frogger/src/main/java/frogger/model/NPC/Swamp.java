@@ -1,9 +1,10 @@
-package frogger.model;
+package frogger.model.NPC;
 
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
 
@@ -23,13 +24,12 @@ import javafx.scene.image.Image;
  *
  */
 
-public class End extends Actor {
-	private static final String RESOURCE_PATH = "/swamp/";
-	private static final Image FLY_END = imageTest("FlyEnd.png");
-	private static final Image END = imageTest("End.png");
-	private static final Image CROC_END2 = imageTest("CrocEnd2.png");
-	private static final Image CROC_END1 = imageTest("CrocEnd1.png");
-	private static final Image FROG_END = imageTest("FrogEnd.png");
+public class Swamp extends Actor {
+	private static final Image FLY_END = newImage("FlyEnd.png");
+	private static final Image END = newImage("End.png");
+	private static final Image CROC_END2 = newImage("CrocEnd2.png");
+	private static final Image CROC_END1 = newImage("CrocEnd1.png");
+	private static final Image FROG_END = newImage("FrogEnd.png");
 	private static int DELAY = 10;
 	private static int MAX_FLY = 1;
 	private static int MAX_CROC = 2;
@@ -165,7 +165,6 @@ public class End extends Actor {
 	 */
 	public void resetEnd() {
 		setImage(END);
-		//setEndImage(RESOURCE_PATH + "End.png");
 	}
 	
 	
@@ -180,7 +179,7 @@ public class End extends Actor {
 	 * @param x - x position of object
 	 * @param y - y position of object
 	 */
-	public End(int x, int y) {
+	public Swamp(int x, int y) {
 		setX(x);
 		setY(y);
 		setImage(END);
@@ -226,14 +225,6 @@ public class End extends Actor {
 		return hasCroc;
 	}
 	
-	/**
-	 * This method sets the value of the property image for this object 
-	 * with predefined values using method inherited from ImageView class
-	 * @param url - path of image to be displayed 
-	 */
-	private void setEndImage(String url) {
-		setImage(new Image(url, WIDTH, HEIGHT, false, true));
-	}
 	
 	/**
 	 * This method constructs a new image with the given image URL and predefined
@@ -241,8 +232,8 @@ public class End extends Actor {
 	 * @param fileName - String representing the file name to use when fetching pixel data
 	 * @return new Image object
 	 */
-	private static Image imageTest(String fileName) {
-		return new Image(RESOURCE_PATH + fileName, WIDTH, HEIGHT, false, true);
+	private static Image newImage(String fileName) {
+		return new Image(FilePath.SWAMP_PATH + fileName, WIDTH, HEIGHT, false, true);
 	}
 	
 
