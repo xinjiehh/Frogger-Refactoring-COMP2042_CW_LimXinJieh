@@ -1,20 +1,14 @@
-package frogger.controller.test;
-import frogger.model.Frog;
+package frogger.util;
 import javafx.animation.Transition;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import trial.FlyBonus;
 
 public class BonusAnimation {
-	
-	ImageView imageView;
-	Frog frog;
-
-	Transition animation;
-	FlyBonus bonus;
+	private Transition animation;
+	private ImageView bonus;
 
 
-	public BonusAnimation(FlyBonus bonus) {
+	public BonusAnimation(ImageView bonus) {
 		initImages();
 		this.bonus=bonus;
 		
@@ -38,7 +32,6 @@ public class BonusAnimation {
 
 		animation.setOnFinished(e->{
 			bonus.setVisible(false);
-			System.out.println("invisible");
 		});
 		
 	}
