@@ -1,4 +1,4 @@
-package frogger.model.button;
+package frogger.utils.buttons;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,14 +15,19 @@ import javafx.scene.text.Font;
  * removed xPos yPos from constructor
  */
 //<%=outterBoxWidth;%>
-public class ButtonMod extends Button {
-	private static final String BUTTON_STYLE = "-fx-background-color: transparent; -fx-background-image: url('file:" + FilePath.RESOURCE_PATH + "button/";
-	private static final String FONT_PATH =  FilePath.FONT_PATH + "joystix monospace.ttf"; //TODO new FileInputStream, no need 'file:'
-	private String BUTTON_PRESSED = BUTTON_STYLE + "button_pressed.png" + "');";
-	private String BUTTON_UP = BUTTON_STYLE + "button.png" + "');";
+public class MenuButton extends Button {
+	private static final String FONT_PATH =  FilePath.DEFAULT_FONT; 
+	
+	private static final String BUTTON_STYLE = 
+			"-fx-background-color: transparent; " + 
+			"-fx-background-image: url(\"" + FilePath.BUTTON_PATH;
+	
+	
+	private String BUTTON_PRESSED = BUTTON_STYLE + "button_pressed.png" + "\");";
+	private String BUTTON_UP = BUTTON_STYLE + "button.png" + "\");";
 
 	
-	public ButtonMod (String text) {
+	public MenuButton (String text) {
 		setText(text);
 		setButtonFont();
 		setPrefWidth(190);
@@ -33,8 +38,7 @@ public class ButtonMod extends Button {
 	}
 	
 	//test
-	public ButtonMod () {
-		//setText(text);
+	public MenuButton () {
 		setButtonFont();
 		setPrefWidth(190);
 		setPrefHeight(49);
