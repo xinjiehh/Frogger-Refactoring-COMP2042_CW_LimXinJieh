@@ -2,9 +2,9 @@ package frogger.constant;
 
 public enum OBSTACLE_TYPE {
 	
-	TRUCK1("file:src/main/resources/moving/truck1Right.png", 120),
-	TRUCK2("file:src/main/resources/moving/truck2Right.png", 200),
-	CAR("file:src/main/resources/moving/car1Left.png", 50);
+	TRUCK1(FilePath.TRUCK1, 120),
+	TRUCK2(FilePath.TRUCK2, 200),
+	CAR(FilePath.CAR, 50);
 	
 	private String url; 
 	private int size;
