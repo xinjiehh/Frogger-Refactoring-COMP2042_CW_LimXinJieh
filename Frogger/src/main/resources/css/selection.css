@@ -1,0 +1,35 @@
+.root {
+	-fx-font-family: 'Joystix Monospace';
+    -fx-background-image: url("../background/MenuBackground.png");
+    -fx-background-size: 100%;
+}
+
+.menu {
+    -fx-alignment: center;
+}
+
+.menu__item {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-font-size: 20px;
+    -fx-opacity: 1;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, #444444, 15, 0, 0, 0);
+}
+
+.menu__item:hover {
+    -fx-opacity: 1;
+}
+
+
+.music {
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+}
+
+.music-on {
+    -fx-background-image: url("../button/musicOn.png");
+}
+
+.music-off {
+    -fx-background-image: url("../button/musicOff.png");
+}
