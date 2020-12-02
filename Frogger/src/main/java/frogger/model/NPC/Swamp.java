@@ -58,6 +58,7 @@ public class Swamp extends Actor {
 
 				if(rand==98 && flyCtr<MAX_FLY){
 					hasFly=true;
+					System.out.println("fly ctr is " + flyCtr);
 					flyCtr+=1;
 					
 				} else if (rand==99 && crocCtr<MAX_CROC) {
@@ -149,11 +150,9 @@ public class Swamp extends Actor {
 
 		} else if(this.crocAnimCtr==2) {
 			setImage(CROC_END1);
-			//setEndImage(RESOURCE_PATH + "CrocEnd1.png");
 			
 		} else if(this.crocAnimCtr==4+DELAY) {
 			setImage(END);
-			//setEndImage(RESOURCE_PATH + "End.png");
 			hasCroc=false;
 			crocCtr-=1;
 			this.crocAnimCtr=0;

@@ -4,8 +4,6 @@ import frogger.model.World;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 
-//TODO is it good to put speed here
-
 /**
  * This class allows to create an object with basic properties 
  * such as x-position, y-position and speed
