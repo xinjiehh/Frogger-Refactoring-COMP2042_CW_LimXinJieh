@@ -1,6 +1,6 @@
 package frogger.constant;
 
-public enum Direction {
+public enum DIRECTION {
 	UP,
 	DOWN,
 	LEFT,
