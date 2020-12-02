@@ -30,8 +30,10 @@ public class FilePath {
 	
 	//FONT
 	public static final String FONT_PATH = RESOURCE_PATH + "font/";
-	public static final String BUTTON_PATH = "button/";
+	
 	public static final String DEFAULT_FONT = FONT_PATH + "JoystixMonospace.ttf";
+	
+	public static final String BUTTON_PATH = "button/";
 	public static final String SWAMP_PATH = "/swamp/";
 	public static final String DIGIT_PATH = "/digit/";
 	
