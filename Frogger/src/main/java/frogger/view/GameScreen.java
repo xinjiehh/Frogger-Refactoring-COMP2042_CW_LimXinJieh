@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import frogger.Main;
 import frogger.constant.FilePath;
 import frogger.model.World;
-import frogger.utils.AudioPlayer;
-import frogger.utils.buttons.ExitButton;
-import frogger.utils.buttons.PauseButton;
+import frogger.util.AudioPlayer;
+import frogger.util.buttons.ExitButton;
+import frogger.util.buttons.PauseButton;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -109,7 +109,7 @@ public class GameScreen {
 	 * a fly
 	 */
 	private void initBonus() {
-		bonus.setImage(new Image("100.png", 50,50, true,true));
+		bonus.setImage(new Image(FilePath.BONUS, 50,50, true,true));
 		bonus.setY(50);
 		bonus.setVisible(false);
 		gamePane.add(bonus);
@@ -158,7 +158,7 @@ public class GameScreen {
 			e.printStackTrace();
 		}
 		
-		text.setX(100);
+		text.setX(205);
 		text.setY(60);
 		//Setting the color 
 		text.setFill(Color.LIMEGREEN); 
