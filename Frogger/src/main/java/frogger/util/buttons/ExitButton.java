@@ -1,4 +1,4 @@
-package frogger.utils.buttons;
+package frogger.util.buttons;
 
 
 import frogger.constant.FilePath;
@@ -77,7 +77,6 @@ public class ExitButton extends Button {
 	public void handleMouseEvent(MouseEvent e) {
 		
 		if(e.getButton().equals(MouseButton.PRIMARY) || e.getButton().equals(MouseButton.NONE)) {
-			System.out.println(e.getEventType());
 			switch(e.getEventType().toString()) {
 			case "MOUSE_PRESSED":
 				setButtonPressedStyle();
