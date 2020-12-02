@@ -4,7 +4,7 @@ package frogger.view;
 import frogger.Main;
 import frogger.constant.FilePath;
 import frogger.controller.MenuController;
-import frogger.utils.buttons.MenuButton;
+import frogger.util.buttons.MenuButton;
 
 //import backup.FrogSubscene;
 import java.util.ArrayList;

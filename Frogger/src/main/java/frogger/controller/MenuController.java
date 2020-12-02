@@ -22,18 +22,17 @@ public enum MenuController {
 		      this.pane = loader.load();
 		      Main.getPrimaryStage().getScene().setRoot(pane);
 		      Main.getPrimaryStage().show();
+		      
 		} catch (IOException e) {
 		      e.printStackTrace();
 		}
 
-		// add a jumping frog on the screen
-		//root.getChildren().add(frog);
 	}
 	
 	
 	public void showInfo() {
 		try {
-		      FXMLLoader loader = new FXMLLoader((getClass().getResource("/help.fxml")));
+		      FXMLLoader loader = new FXMLLoader((getClass().getResource("/view/info.fxml")));
 		      Pane root = loader.load();
 		      Stage infoStage = new Stage();
 		      infoStage.setScene(new Scene(root));
