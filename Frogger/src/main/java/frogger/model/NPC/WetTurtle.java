@@ -1,14 +1,14 @@
 package frogger.model.NPC;
 
+import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
 public class WetTurtle extends Actor {
 	private static final int SIZE = 130;
-	private static final String PACKAGE_PATH = "/moving/";
-	private static final Image turtle1 = new Image(PACKAGE_PATH + "TurtleAnimation1.png",SIZE,SIZE,true,true);
-	private static final Image turtle2 = new Image(PACKAGE_PATH + "TurtleAnimation2Wet.png",SIZE,SIZE,true,true);
-	private static final Image turtle3 = new Image(PACKAGE_PATH + "TurtleAnimation3Wet.png",SIZE,SIZE,true,true);
-	private static final Image turtle4 = new Image(PACKAGE_PATH + "TurtleAnimation4Wet.png",SIZE,SIZE,true,true);
+	private static final Image turtle1 = new Image(FilePath.TURTLE1,SIZE,SIZE,true,true);
+	private static final Image turtle2 = new Image(FilePath.TURTLE2_WET,SIZE,SIZE,true,true);
+	private static final Image turtle3 = new Image(FilePath.TURTLE3_WET,SIZE,SIZE,true,true);
+	private static final Image turtle4 = new Image(FilePath.TURTLE4_WET,SIZE,SIZE,true,true);
 	private boolean sunk = false;
 	@Override
 	public void act(long now) {

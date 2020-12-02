@@ -1,14 +1,15 @@
 package frogger.model.NPC;
 
+import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
 public class Turtle extends Actor{
 	private static final int SIZE = 130;
-	private static final String PREFIX = "/moving/";
-	Image turtle1;
-	Image turtle2;
-	Image turtle3;
-	//private int speed;
+	private static final Image turtle1 = new Image(FilePath.TURTLE1,SIZE,SIZE,true,true);
+	private static final Image turtle2 = new Image(FilePath.TURTLE2_DRY,SIZE,SIZE,true,true);
+	private static final Image turtle3 = new Image(FilePath.TURTLE3_DRY,SIZE,SIZE,true,true);
+	
+
 	int i = 1;
 	boolean bool = true;
 	@Override
@@ -34,22 +35,8 @@ public class Turtle extends Actor{
 			setX(600);
 	}
 	
-	public Turtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image(PREFIX + "TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image(PREFIX + "TurtleAnimation2.png", w, h, true, true);
-		turtle3 = new Image(PREFIX + "TurtleAnimation3.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-		setImage(turtle2);
-	}
-	
+
 	public Turtle() {
-		turtle1 = new Image(PREFIX + "TurtleAnimation1.png", SIZE, SIZE, true, true);
-		turtle2 = new Image(PREFIX + "TurtleAnimation2.png", SIZE, SIZE, true, true);
-		turtle3 = new Image(PREFIX + "TurtleAnimation3.png", SIZE, SIZE, true, true);
 		setImage(turtle2);
-		System.out.println("Turtle width: " + getWidth() + 
-				"\nheight: " + getHeight());
 	}
 }

@@ -32,14 +32,24 @@ public class FilePath {
 	public static final String FROG_DOWNJUMP = FROG_PATH + "froggerDownJump.png";
 	public static final String FROG_RIGHTJUMP = FROG_PATH + "froggerRightJump.png";
 	
+	//TURTLE
 	
+	public static final String TURTLE1 = NPC_PATH + "TurtleAnimation1.png";
+	public static final String TURTLE2_WET = NPC_PATH + "TurtleAnimation2Wet.png";
+	public static final String TURTLE3_WET = NPC_PATH + "TurtleAnimation3Wet.png";
+	public static final String TURTLE4_WET = NPC_PATH + "TurtleAnimation4Wet.png";
+	
+	
+	public static final String TURTLE2_DRY = NPC_PATH + "TurtleAnimation2.png";
+	public static final String TURTLE3_DRY = NPC_PATH + "TurtleAnimation3.png";
+			
 	//FONT
 	public static final String FONT_PATH = RESOURCE_PATH + "font/";
 	
 	public static final String DEFAULT_FONT = FONT_PATH + "JoystixMonospace.ttf";
 	
 	public static final String BUTTON_PATH = "button/";
-	public static final String SWAMP_PATH = "/swamp/";
+	public static final String SWAMP_PATH = "/npc/swamp/";
 	public static final String DIGIT_PATH = "/digit/";
 	
 	//FXML
