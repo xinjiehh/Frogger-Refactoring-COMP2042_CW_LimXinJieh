@@ -1,0 +1,31 @@
+.root {
+    -fx-font-family: 'Joystix Monospace';
+    -fx-background-color: black;
+}
+
+.title {
+    -fx-font-size: 25px;
+    -fx-alignment: center;
+}
+
+.list-view {
+    -fx-background-color: black;
+}
+
+.list-view .list-cell {
+	-fx-font-size: 20px;
+    -fx-background-color: black;
+    
+}
+
+.list-view .list-cell {
+    -fx-text-fill: #00ff48;
+}
+
+.level .list-cell {
+    -fx-alignment: center;
+}
+
+.score .list-cell {
+    -fx-alignment: center;
+}
