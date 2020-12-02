@@ -1,4 +1,4 @@
-package frogger.utils.buttons;
+package frogger.util.buttons;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
  * constructor initializes fixed button width, height, font, with customizable text
  * removed xPos yPos from constructor
  */
-//<%=outterBoxWidth;%>
+
 public class MenuButton extends Button {
 	private static final String FONT_PATH =  FilePath.DEFAULT_FONT; 
 	
@@ -107,15 +107,14 @@ public class MenuButton extends Button {
 	
 	//-------- Controller ----------------
 	/**
-	 * This method is the button controller, which updates the button
-	 * looks directly inside button view.
-	 * @param e mouse event
+	 * This method is controlls the button view, which updates 
+	 * the button style directly inside button class.
+	 * @param e  mouse event
 	 */
 	
 	public void handleMouseEvent(MouseEvent e) {
 		
 		if(e.getButton().equals(MouseButton.PRIMARY) || e.getButton().equals(MouseButton.NONE)) {
-			System.out.println(e.getEventType());
 			switch(e.getEventType().toString()) {
 			case "MOUSE_PRESSED":
 				setButtonPressedStyle();
