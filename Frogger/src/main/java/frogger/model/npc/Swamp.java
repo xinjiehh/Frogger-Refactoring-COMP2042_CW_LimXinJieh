@@ -1,40 +1,27 @@
-package frogger.model.NPC;
+package frogger.model.npc;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
 
-/* frog = new Frog(width/2-grid/2,height-grid,grid)
- * int totalLanes = int(height/grid)
- * lanes= new Lane[totalLanes]
- * for(int i=0; i<lanes.length; i++)
- * ypos = i*grid
- * show function in lane
- * 
- */
-
 /**
- * This class allows to create a swamp Image object. The image will change 
- * as a frog approaches a swamp spot.
- * @author Lim Xin Jieh (20082200)
- *
+ * This class is the model for Swamp. The Swamp object image will alternate
+ * to show crocodiles or flies, and changes when a frog approaches a swamp spot.
  */
 
-public class Swamp extends Actor {
-	private static final Image FLY_END = newImage("FlyEnd.png");
-	private static final Image END = newImage("End.png");
-	private static final Image CROC_END2 = newImage("CrocEnd2.png");
-	private static final Image CROC_END1 = newImage("CrocEnd1.png");
-	private static final Image FROG_END = newImage("FrogEnd.png");
+public class Swamp extends NPC {
+	
+	private static final int WIDTH = 65;
+	private static final int HEIGHT = 60;
+	private static final Image FLY_END = new Image(FilePath.S_FLY, WIDTH, HEIGHT, false, true);
+	private static final Image END = new Image(FilePath.SWAMP, WIDTH, HEIGHT, false, true);
+	private static final Image CROC_END2 = new Image(FilePath.S_CROC1, WIDTH, HEIGHT, false, true);
+	private static final Image CROC_END1 = new Image(FilePath.S_CROC2, WIDTH, HEIGHT, false, true);
+	private static final Image FROG_END = new Image(FilePath.S_FROG, WIDTH, HEIGHT, false, true);
 	private static int DELAY = 10;
 	private static int MAX_FLY = 1;
 	private static int MAX_CROC = 2;
-	private static final int WIDTH = 65;
-	private static final int HEIGHT = 60;
 	private static int flyCtr = 0;
 	private static int crocCtr = 0;
 	private boolean hasFly = false;
@@ -86,7 +73,7 @@ public class Swamp extends Actor {
 	/**
 	 * This method handles appearance and disappearance of fly in
 	 * the swamp. The fly is set to disappear after a fixed time.
-	 * @param now - the timestamp of the current timeframe given 
+	 * @param now  the timestamp of the current timeframe given 
 	 * in nanoseconds	 
 	 */
 	
@@ -126,7 +113,7 @@ public class Swamp extends Actor {
 	/**
 	 * This method handles appearance and disappearance of crocodile in 
 	 * the swamp. The crocodile is set to disappear after a fixed time.
-	 * @param now - the timestamp of the current timeframe given 
+	 * @param now  the timestamp of the current timeframe given 
 	 * in nanoseconds
 	 */
 	private void handleCroc(long now) {
@@ -166,7 +153,9 @@ public class Swamp extends Actor {
 		setImage(END);
 	}
 	
-	
+	/**
+	 * This method resets the counter for flies and crocodiles
+	 */
 	public static void resetCtr() {
 		flyCtr=0;
 		crocCtr=0;
@@ -175,8 +164,8 @@ public class Swamp extends Actor {
 
 	/**
 	 * This method is a public constructor to create an End object
-	 * @param x - x position of object
-	 * @param y - y position of object
+	 * @param x  x position of object
+	 * @param y  y position of object
 	 */
 	public Swamp(int x, int y) {
 		setX(x);
@@ -225,14 +214,18 @@ public class Swamp extends Actor {
 	}
 	
 	
-	/**
-	 * This method constructs a new image with the given image URL and predefined
-	 * parameters 
-	 * @param fileName - String representing the file name to use when fetching pixel data
-	 * @return new Image object
-	 */
-	private static Image newImage(String fileName) {
-		return new Image(FilePath.SWAMP_PATH + fileName, WIDTH, HEIGHT, false, true);
+
+
+	@Override
+	protected void checkOutOfBounds() {
+		
+	}
+
+
+	@Override
+	protected void playAnimation(long now) {
+		
+		
 	}
 	
 

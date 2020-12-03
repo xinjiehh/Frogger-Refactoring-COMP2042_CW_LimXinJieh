@@ -4,7 +4,7 @@ import frogger.constant.LOG_TYPE;
 import javafx.scene.image.Image;
 
 /**
- * This is the model for log
+ * This class is the model for log
  */
 public class Log extends NPC {
 
