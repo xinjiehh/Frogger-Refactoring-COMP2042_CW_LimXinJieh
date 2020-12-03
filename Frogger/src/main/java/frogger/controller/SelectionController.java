@@ -4,45 +4,58 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import frogger.constant.FilePath;
-import frogger.util.AudioPlayer;
 //import frogger.constant.GameLevel;
 //import frogger.constant.GameMode;
 //import frogger.util.MusicPlayer;
 //import frogger.util.SceneSwitch;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 
+/**
+ * This class is the controller for the selection view
+ */
 
 public class SelectionController {
 	
-
   @FXML private Button mode;
   @FXML private Button controls;
   @FXML private Button start;
-  @FXML private Button musicon;
-  @FXML private Button musicoff;
-
+  
+  
+  /**
+   * This enum represents the two key control options for users
+   *
+   */
   public enum Controls {
-	  A, //WASD
-	  B, //ARROW
+	  /**WASD*/
+	  A, 
+	 /**ARROW KEYS*/
+	  B; 
   }
   
+  /**
+   * This enum represents the two modes for user to choose 
+   * from (to be implemented)
+   *
+   */
   public enum Mode {
 	  SINGLE,
 	  DOUBLE;
   }
 
+  
   @FXML
   public void initialize() {
 	initFont();
-	switchMusicButton();
     mode.setUserData(Mode.SINGLE);
     controls.setUserData(Controls.A);
   }
   
+  /**
+   * This method initializes the font to be used in the 
+   * related fxml file
+   */
   private void initFont() {
 	  Font font;
 		
@@ -52,7 +65,7 @@ public class SelectionController {
 
 		} catch (FileNotFoundException e){
 			
-			System.out.println("error load font for selection");
+			System.out.println("Error loading font for selection");
 			font = Font.font("Sans Serif", 20);
 
 		}
@@ -63,57 +76,41 @@ public class SelectionController {
   }
 
 
-
+  /**
+   * This method allows users to switch between different playing 
+   * modes 
+   */
   @FXML
   public void switchMode() {
   }
 
-
+  
+  /**
+   * This method allows users to select their key controls
+   */
   @FXML
   public void switchControls() {
+	  switch ((Controls) controls.getUserData()) {
+	  case A:
+		  controls.setUserData(Controls.B);
+		  controls.setText("< ARROW KEYS >");
+		  break;
+	  case B:
+		  controls.setUserData(Controls.A);
+		  controls.setText("<    WASD    >");
+		  break;
+	  } 
 	  
-		    switch ((Controls) controls.getUserData()) {
-		      case A:
-		    	controls.setUserData(Controls.B);
-		    	controls.setText("< ARROW KEYS >");
-		        break;
-		      case B:
-		    	controls.setUserData(Controls.A);
-		    	controls.setText("<    WASD    >");
-		        break;
-
-		    } 
-	  
-
   }
 
+  /**
+   * This method starts the game
+   */
   @FXML
   public void startGame() {
     ScreenController.INSTANCE.startGame((Controls) controls.getUserData());
   }
 
-  @FXML
-  public void switchMusicState() {
-    if (AudioPlayer.INSTANCE.isOn())
-    	AudioPlayer.INSTANCE.setVolume(0);
 
-     else
-    	 AudioPlayer.INSTANCE.setVolume(0.5);
 
-    switchMusicButton();
-  }
-
-  
-  private void switchMusicButton() {
-	  
-	  if (AudioPlayer.INSTANCE.isOn()) {
-		  	musicon.setVisible(true);
-	      	musicoff.setVisible(false);
-	    } else {
-	    	musicon.setVisible(false);
-	    	musicoff.setVisible(true);
-	      
-	    }
-
-  }
 }
