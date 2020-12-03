@@ -1,5 +1,10 @@
 package frogger.constant;
 
+/**
+ * This enum defines the different types of logs and their
+ * corresponding file path and image size
+ *
+ */
 public enum LOG_TYPE {
 	
 	LONG(FilePath.L_LOG,300),

@@ -1,25 +1,45 @@
 package frogger.constant;
 
+/**
+ * This class contains all the paths for the media files used in
+ * this project for easy modification. This eliminates the need 
+ * for user to manually find and modify each reference of the media 
+ * file when media file name/location is changed
+ */
+
 public class FilePath {
 	
 	public static final String RESOURCE_PATH = "src/main/resources/";
 	
 	public static final String BONUS = "/misc/100.png";
+	
 	//BACKGROUND
 	public static final String BG_PATH = "/background/";
 	public static final String GAMEBACKGROUND = BG_PATH + "GameBackground2.png";
 	public static final String MENUBACKGROUND = BG_PATH + "MenuBackground.png";
 	
-	//LOG
+	
+	
 	public static final String NPC_PATH = "/npc/";
+	
+	//NPC: LOG
 	public static final String L_LOG = NPC_PATH +  "logLong.png";
 	public static final String M_LOG = NPC_PATH +  "logMedium.png";
 	public static final String S_LOG = NPC_PATH +  "logShort.png";
 	
+	//NPC: Obstacle
 	public static final String TRUCK1 = NPC_PATH + "truck1Right.png";
 	public static final String TRUCK2 = NPC_PATH + "truck2Right.png";
 	public static final String CAR = NPC_PATH + "car1Left.png";
-			
+	
+	//NPC: TURTLE
+	public static final String TURTLE1 = NPC_PATH + "TurtleAnimation1.png";
+	public static final String TURTLE2_WET = NPC_PATH + "TurtleAnimation2Wet.png";
+	public static final String TURTLE3_WET = NPC_PATH + "TurtleAnimation3Wet.png";
+	public static final String TURTLE4_WET = NPC_PATH + "TurtleAnimation4Wet.png";
+	public static final String TURTLE2_DRY = NPC_PATH + "TurtleAnimation2.png";
+	public static final String TURTLE3_DRY = NPC_PATH + "TurtleAnimation3.png";
+
 	
 	//FROG
 	public static final String FROG_PATH = "/frog/";
@@ -32,17 +52,7 @@ public class FilePath {
 	public static final String FROG_DOWNJUMP = FROG_PATH + "froggerDownJump.png";
 	public static final String FROG_RIGHTJUMP = FROG_PATH + "froggerRightJump.png";
 	
-	//TURTLE
-	
-	public static final String TURTLE1 = NPC_PATH + "TurtleAnimation1.png";
-	public static final String TURTLE2_WET = NPC_PATH + "TurtleAnimation2Wet.png";
-	public static final String TURTLE3_WET = NPC_PATH + "TurtleAnimation3Wet.png";
-	public static final String TURTLE4_WET = NPC_PATH + "TurtleAnimation4Wet.png";
-	
-	
-	public static final String TURTLE2_DRY = NPC_PATH + "TurtleAnimation2.png";
-	public static final String TURTLE3_DRY = NPC_PATH + "TurtleAnimation3.png";
-			
+		
 	//FONT
 	public static final String FONT_PATH = RESOURCE_PATH + "font/";
 	

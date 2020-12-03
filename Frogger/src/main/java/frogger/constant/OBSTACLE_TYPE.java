@@ -1,5 +1,11 @@
 package frogger.constant;
 
+/**
+ * This enum defines the type of obstacles and their
+ * corresponding file path and image size
+ *
+ */
+
 public enum OBSTACLE_TYPE {
 	
 	TRUCK1(FilePath.TRUCK1, 120),
