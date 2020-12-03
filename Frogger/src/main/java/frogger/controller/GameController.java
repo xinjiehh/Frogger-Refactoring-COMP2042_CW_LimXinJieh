@@ -17,10 +17,12 @@ import frogger.controller.SelectionController.Controls;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -28,10 +30,11 @@ import javafx.stage.Stage;
 import frogger.model.Frog;
 import frogger.model.GameModel;
 import frogger.model.World;
-import frogger.model.NPC.Swamp;
+import frogger.model.npc.Swamp;
 import frogger.util.AudioPlayer;
 import frogger.util.HighScoreFile;
 import frogger.view.GameScreen;
+import frogger.view.ScoreScreen;
 import frogger.Main;
 
 import java.io.IOException;
@@ -39,8 +42,16 @@ import java.util.List;
 
 
 /**
- * This class allows 
- *
+ * This class implements the singleton method using enum.
+ * Following the MVC pattern, this class acts as Controller for
+ * GameScreen (View) and GameModel (Model). This class acts as 
+ * a medium between the View and the Model by providing methods
+ * for the View to update the Model and vice versa. GameScreen 
+ * and GameModel do not interact with each other directly. This
+ * class creates a GameScreen and GameModel object. To reduce 
+ * redundancy, only a new GameModel is created for each new
+ * level as it contains the NPC for each level which have 
+ * different properties
  */
 
 public enum GameController  {
@@ -66,7 +77,14 @@ public enum GameController  {
 	private Alert alert;
 	private ImageView bonus;
 	
-
+	/**
+	 * This method initializes the game properties such as 
+	 * the controls chosen by user (WASD or arow keys),
+	 * the World (gamePane), the bonus element, and alert
+	 * box
+	 * @param control  the key control options ({@link Controls}) 
+	 * chosen by user
+	 */
 	public void initGame(Controls control) {
 
 		gameView = new GameScreen(control); 
@@ -84,6 +102,10 @@ public enum GameController  {
 		
 	}
 	
+	/**
+	 * This method creates and/or changes elements necessary 
+	 * for each new level, then starts the game
+	 */
 	public void nextLevel() {
 		levelNum+=1;
 		gameView.setLevelText(levelNum);
@@ -94,53 +116,96 @@ public enum GameController  {
 		System.out.println("This is level "+ levelNum);
 	}
 
-
+	/**
+	 * Replaced by {@link #handleGameDone(GameOver)}
+	 * This method (called by the CollisionHandler) calls the
+	 * GameModel object to update its properties when all 5 
+	 * frogs have reached the swamp
+	 */
+	@Deprecated
 	public void handleDoneLevel() {
 		gameModel.handleDoneLevel();
 		stopGame();
 		showScoreDisplay();
 	}
 	
-	public void handleGameOver() {
-		gameModel.handleGameOver();
+	/**
+	 * Replaced by {@link #handleGameDone(GameOver)}
+	 * This method (called by the CollisionHandler) calls the 
+	 * GameModel object to update its properties when the Frog
+	 * object dies for the 4th time and loses all its lives.
+	 */
+	@Deprecated 
+	public void handleLoseGame() {
+		gameModel.handleLoseGame();
 		stopGame();
 		showScoreDisplay();
 	}
 	
-	public void showScoreDisplay() {
+
+	/**
+	 * This method (called by the CollisionHandler) calls the 
+	 * GameModel object to update its properties when 
+	 * <u1> 
+	 * <li> all five Frogs have reached the swamp, or</li>
+	 * <li> the Frog object dies and loses all its lives</li>
+	 * </u1>
+	 * <p>
+	 * @param state  {@link GameOver.NEXT} for next level,
+	 * {@link GameOver.LOSE} when no lives are left
+	 */
+	public void handleGameDone(GameOver state) {
+		gameModel.handleGameDone(state);
+		stopGame();
+		showScoreDisplay();
+	}
 	
-		try {
-		      FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/scoreview.fxml"));
-		      Pane pane = loader.load();
-		      
-		      Stage scoreStage = new Stage();
-		      scoreStage.setScene(new Scene(pane));
-		      scoreStage.initOwner(mainStage.getScene().getWindow());
-		      scoreStage.setResizable(false);
-		      scoreStage.setOnHiding(this::showNext);
-		      scoreStage.setTitle("HIGH SCORES");
-		      
-		      ScoreViewController controller = loader.getController();
-		      controller.init(gameModel);
-		      
-		      scoreStage.show();
-		      
-		 } catch (IOException e) {
-		      e.printStackTrace();
-		    }
+	/**
+	 * 
+	 */
+	public void showScoreDisplay() {
+		
+		ScoreScreen scoreScreen = new ScoreScreen(gameModel.getLevel(), gameModel.getScores());
+		scoreScreen.show();
+		//scoreScreen.getController().init(gameModel.getLevel(), gameModel.getScores());
+//		try {
+//		      FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/scoreview.fxml"));
+//		      Pane pane = loader.load();
+//		      
+//		      Stage scoreStage = new Stage();
+//		      scoreStage.setScene(new Scene(pane));score
+//		      scoreStage.initOwner(mainStage.getScene().getWindow());
+//		      scoreStage.setResizable(false);
+//		      scoreStage.setOnHiding(this::showNext);
+//		      scoreStage.setTitle("HIGH SCORES");
+//		      
+//		      ScoreScreenController controller = loader.getController();
+//		      controller.init(gameModel.getLevel(), gameModel.getScores());
+//		      
+//		      scoreStage.show();
+//		      
+//		 } catch (IOException e) {
+//		      e.printStackTrace();
+//		    }
 	 }
 	
 
 
-	
-	
-	/**
-	 * This method updates the view after user closes dialog box by 
-	 * starting the next level or returning to main menu when maximum 
-	 * level is reached 
-	 */
-    
-	public void updateView(Event event) {
+    /** 
+     * This method defines the value of the alert on hiding,
+     * to simulate an {@link EventHandler} to handle the 
+     * {@link DialogEvent} which occurs when user closes the 
+     * dialog box. This method updates the view by either
+	 * <u1> 
+	 * <li> starting the next level, or </li>
+	 * <li> returning to main menu when maximum level 
+	 * is reached </li>
+	 * </u1>
+	 * <p>
+     * @param value  the event which occured after dialog box is
+     * closed
+     */
+	public void updateView(DialogEvent event) {
 		
 		gamePane.getChildren().removeAll(gameModel.getList());
 		Swamp.resetCtr();
@@ -228,9 +293,9 @@ public enum GameController  {
 	 * animation as the animation logic is contained 
 	 * inside the model (MVC pattern)
 	 */
-	public void showBonus() {
+	public void showBonus(double bonusX) {
 		ImageView bonus = gameView.getBonus();
-		bonus.setX(frog.getBonusX());
+		bonus.setX(bonusX);
 		gameModel.playBonus(); //method 2
 		
 		/*
@@ -248,17 +313,13 @@ public enum GameController  {
 	 * @param show  boolean, true to make 'bonus' visible
 	 */
 	public void setBonusVisible(boolean show) {
-		
-		if(show) 
-			bonus.setX(frog.getBonusX());
-			
 		bonus.setVisible(show);
-	
 	}
 	
 	
 	private void initFrog() {
 		this.frog = gameModel.getFrog();
+		frog.setNoMove(false);
 		frog.addScoreListener(this::updateScore);
 	    frog.addLifeListener(this::updateLifeView);
 	}
