@@ -18,7 +18,7 @@ public class FilePath {
 	public static final String GAMEBACKGROUND = BG_PATH + "GameBackground2.png";
 	public static final String MENUBACKGROUND = BG_PATH + "MenuBackground.png";
 	
-	
+	public static final String INFO_FXML = "/view/info.fxml";
 	
 	public static final String NPC_PATH = "/npc/";
 	
@@ -72,7 +72,7 @@ public class FilePath {
 	public static final String WATERDEATH_AUDIO = AUDIO_PREFIX + "plunk.wav";
 	public static final String CARDEATH_AUDIO = AUDIO_PREFIX + "squash.wav";
 	
-	//SWAMPnew Image(FilePath.SWAMP_PATH + fileName, WIDTH, HEIGHT, false, true);
+	//SWAMP
 	public static final String S_FLY = FilePath.SWAMP_PATH + "FlyEnd.png";
 	public static final String SWAMP = FilePath.SWAMP_PATH + "End.png";
 	public static final String S_CROC1 = FilePath.SWAMP_PATH + "CrocEnd2.png";
