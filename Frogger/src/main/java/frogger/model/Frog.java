@@ -19,13 +19,6 @@ import javafx.scene.image.Image;
 
 public class Frog extends PlayerAvatar {
 	
-	public enum FrogDeath {
-		WATER,
-		CAR,
-		NULL;
-	}
-	
-
 	//Frog image initialization
 	private static final int IMG_SIZE = 40;
 	private static final Image imgW1 = new Image(FilePath.FROG_UP, IMG_SIZE, IMG_SIZE, true, true);
@@ -40,7 +33,7 @@ public class Frog extends PlayerAvatar {
 	/** keeps track of the number of lives left */
 	private IntegerProperty lifeProp;
 	
-	/** keeps track of the score of this Frog object throughout a level */
+	/** keeps track of the score of this {@code Frog} object throughout a level */
 	private IntegerProperty scoreProp;
 	
 	/** keep track of the score of this frog object before it reaches the swamp */
@@ -58,8 +51,9 @@ public class Frog extends PlayerAvatar {
 	
 	/**
 	 * This method is a public constructor which sets this 
-	 * Frog object and its properties to their starting state,
-	 * and initializes life and score of this Frog object
+	 * {@code Frog} object and its properties to their starting 
+	 * state, and initializes life and score of this {@code Frog} 
+	 * object
 	 * 
 	 */
 	public Frog() {
@@ -76,9 +70,9 @@ public class Frog extends PlayerAvatar {
 
 	/**
 	 * This method sets the property {@link #tempScore} which is 
-	 * the temporary score that this Frog object accumulates 
+	 * the temporary score that this {@code Frog} object accumulates 
 	 * while travelling across the screen
-	 * @param i  temporary score of this Frog object
+	 * @param i  temporary score of this {@code Frog} object
 	 */
 	public void setTempScore(int i) {
 		tempScore=i;
@@ -87,7 +81,7 @@ public class Frog extends PlayerAvatar {
 	/**
 	 * This method returns the boolean property {@link #noMove}
 	 * which controls if the frog is able to move or not
-	 * @return  true if this Frog object cannot move
+	 * @return  true if this {@code Frog} object cannot move
 	 */
 	public boolean getNoMove() {
 		return noMove;
@@ -96,8 +90,8 @@ public class Frog extends PlayerAvatar {
 	
 	/**
 	 * This method handles the jump visual and audio for this 
-	 * Frog object.
-	 * @param direction  {@link DIRECTION} UP, DOWN, LEFT, RIGHT
+	 * {@code Frog} object.
+	 * @param direction  {@link DIRECTION} representing the frog jump direction
 	 * @param keyPress  true if key pressed, false if key released
 	 */
 	public void jump(DIRECTION direction, boolean keyPress) {
@@ -146,7 +140,7 @@ public class Frog extends PlayerAvatar {
 
 	
 	/**
-	 * This method resets this Frog object and its properties
+	 * This method resets this {@code Frog} object and its properties
 	 * to its starting state
 	 */
 	public void restartFrog() {
@@ -157,7 +151,7 @@ public class Frog extends PlayerAvatar {
 	}
 	
 	/**
-	 * This method sets this Frog object in starting position
+	 * This method sets this {@code Frog} object in starting position
 	 */
 	private void setStartFrog() {
 		setImage(imgW1);
@@ -177,8 +171,8 @@ public class Frog extends PlayerAvatar {
 
 	
 	/**
-	 * This method sets the score of this Frog object
-	 * @param i  new score of this Frog object
+	 * This method sets the score of this {@code Frog}
+	 * @param i  new score of this {@code Frog}
 	 */
 	public void setScore(int i) {
 		scoreProp.setValue(i);
@@ -187,9 +181,9 @@ public class Frog extends PlayerAvatar {
 	
 	/**
 	 * This method returns integer value of the score, which is
-	 * {@link #scoreProp} of this Frog object
+	 * {@link #scoreProp} of this {@code Frog} object
 	 * object
-	 * @return  integer value of the score of this Frog object
+	 * @return  integer value of the score of this {@code Frog} object
 	 */
 	public int getScore() {
 		return scoreProp.intValue();
@@ -197,7 +191,8 @@ public class Frog extends PlayerAvatar {
 	
 	/**
 	 * This method adds the given integer amount to the current 
-	 * score, which is {@link #scoreProp} of this Frog object
+	 * score, which is {@link #scoreProp} of this {@code Frog} 
+	 * object
 	 * @param x  the integer amount of points to be added
 	 */
 	
@@ -208,8 +203,8 @@ public class Frog extends PlayerAvatar {
 	/**
 	 * This method allows other classes to add listener to 
 	 * the IntegerProperty {@link #scoreProp} which corresponds to the
-	 * score of this Frog object
-	 * @param listener  {@link ChangeListener} for {@link #scoreProp}
+	 * score of this {@code Frog} object
+	 * @param listener  {@code ChangeListener} for {@code #scoreProp}
 	 * 
 	 */
 	public void addScoreListener(ChangeListener<? super Number> listener) {
@@ -217,11 +212,11 @@ public class Frog extends PlayerAvatar {
 	}
 	
 	/**
-	 * This method allows other classes to add a {@link ChangeListener}
+	 * This method allows other classes to add a {@code ChangeListener}
 	 * which will be notified whenever there is a change in the
 	 * IntegerProperty {@link #lifeProp} which corresponds to the lives
-	 * of this Frog object
-	 * @param listener  {@link ChangeListener} for {@link #lifeProp}
+	 * of this {@code Frog} object
+	 * @param listener  {@code ChangeListener} for {@code #lifeProp}
 	 */
 	public void addLifeListener(ChangeListener<? super Number> listener) {
 		lifeProp.addListener(listener);
@@ -230,23 +225,24 @@ public class Frog extends PlayerAvatar {
 	/**
 	 * This method sets the death state {@link #FrogDeath} of 
 	 * this object
-	 * @param death  {@link #FrogDeath} 
+	 * @param death  {@code #FrogDeath} representing the death type
+	 * of this {@code Frog} object
 	 */
 	public void setDeath(FrogDeath death) {
 		frogDeath=death;
 	}
 	
 	/**
-	 * This method gets the death state {@link #FrogDeath} of 
-	 * this object
-	 * @return  {@link #FrogDeath} 
+	 * This method gets the death state of this {@code Frog} 
+	 * object
+	 * @return  {@link #FrogDeath} representing the death state
 	 */
 	public FrogDeath getDeath() {
 		return frogDeath;
 	}
 	
 	/**
-	 * This method reduces the lives of this Frog object 
+	 * This method reduces the lives of this {@code Frog} object 
 	 * ({@link #lifeProp} by 1
 	 */
 	public void loseLife() {
@@ -256,16 +252,7 @@ public class Frog extends PlayerAvatar {
 	}
 	
 	/**
-	 * This method gets the integer value of the lives left 
-	 * ({@link #lifeProp} of this Frog object 
-	 * @return  integer value of lives left of this Frog object
-	 */
-	public int getLife() {
-		return lifeProp.intValue();
-	}
-	
-	/**
-	 * This method enables this Frog object to 'attach' to 
+	 * This method enables this {@code Frog} object to 'attach' to 
 	 * another moving character by following their speed
 	 * @param dx  horizontal distance to be moved
 	 * @param dy  vertical distance to be moved
