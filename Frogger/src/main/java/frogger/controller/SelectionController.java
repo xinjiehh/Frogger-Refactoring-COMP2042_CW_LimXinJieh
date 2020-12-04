@@ -4,10 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import frogger.constant.FilePath;
-//import frogger.constant.GameLevel;
-//import frogger.constant.GameMode;
-//import frogger.util.MusicPlayer;
-//import frogger.util.SceneSwitch;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;

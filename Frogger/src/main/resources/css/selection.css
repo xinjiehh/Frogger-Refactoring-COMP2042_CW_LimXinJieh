@@ -25,11 +25,3 @@
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
 }
-
-.music-on {
-    -fx-background-image: url("../button/musicOn.png");
-}
-
-.music-off {
-    -fx-background-image: url("../button/musicOff.png");
-}
