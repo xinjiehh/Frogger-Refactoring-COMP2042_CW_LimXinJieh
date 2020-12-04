@@ -22,35 +22,31 @@ public abstract class PlayerAvatar extends Actor {
 	protected static final double UPPER_BOUND = 800;
 	protected static final double MOVEMENT = 13.3333333 * 2;
 	protected static final double MOVEMENT_X = 10.666666 * 2;
+	
+	/** the image for up movement */
 	protected Image imgW1;
+	
+	/** the image for left movement */
 	protected Image imgA1;
+	
+	/** the image for down movement */
 	protected Image imgS1;
+	
+	/** the image for right movement */
 	protected Image imgD1;
+	
+	/** the image for up jump movement */
 	protected Image imgW2;
+	
+	/** the image for left jump movement */
 	protected Image imgA2;
+	
+	/** the image for down jump movement */
 	protected Image imgS2;
+	
+	/** the image for right jump movement */
 	protected Image imgD2;
-	
-	//get objects in World class by class, then check if they intersect with actor
-	//pass world objects into method, then handle
-	
-	/**
-	 * This method checks if this player object is out of visible 
-	 * bounds and reset player object position accordingly
-	 */
-	@Override
-	protected void checkOutOfBounds() {
-        if (getY() > START_YPOS) {
-			setY(START_YPOS);
-		}	
-		 if (getX() < 0 || getX() > 556) {
-			double m = getX() > 556 ? 556 : 0;
-			setX(m);
-			
-		}
-    }
-	
-	protected abstract void initImages();
+
 	
 	/** keeps track of the number of lives left */
 	protected IntegerProperty lifeProp;
@@ -174,15 +170,6 @@ public abstract class PlayerAvatar extends Actor {
 		tempScore = 0;
 
 	}
-	
-	/**
-	 * This method sets this {@code PlayerAvatar} object in starting position
-	 */
-	private void setStartPlayer() {
-		setImage(imgW1);
-		setX(START_XPOS);
-		setY(START_YPOS);
-	}
 
 	/**
 	 * This method sets the property {@link #noMove} which determines if
@@ -287,20 +274,6 @@ public abstract class PlayerAvatar extends Actor {
 		move(dx, dy);
 	}
 	
-
-	
-	/**
-	 * This method changes the x-position, y-position and image
-	 * property of this {@code PlayerAvatar} object
-	 * @param dx  horizontal distance to be moved
-	 * @param dy  vertical distance to be moved
-	 * @param value  Image object
-	 */
-	protected void moveAnim(double dx, double dy, Image value) {
-		move(dx, dy);
-		setImage(value);
-	}
-
 	/**
 	 * This method is called whenever this {@code PlayerAvatar} object 
 	 * dies so that the points gained is deducted. However, marks gained 
@@ -311,13 +284,58 @@ public abstract class PlayerAvatar extends Actor {
 		tempScore=0;
 	}
 	
+	/**
+	 * This method has to be overriden by subclass to initialize
+	 * the looks of the {@code PlayerAvatar} object
+	 */
+	protected abstract void initImages();
 	
+	
+	/**
+	 * This method checks if this player object is out of visible 
+	 * bounds and reset player object position accordingly
+	 */
+	@Override
+	protected void checkOutOfBounds() {
+        if (getY() > START_YPOS) {
+			setY(START_YPOS);
+		}	
+		 if (getX() < 0 || getX() > 556) {
+			double m = getX() > 556 ? 556 : 0;
+			setX(m);
+			
+		}
+    }
+
+	/**
+	 * This method sets this {@code PlayerAvatar} object in starting position
+	 */
+	private void setStartPlayer() {
+		setImage(imgW1);
+		setX(START_XPOS);
+		setY(START_YPOS);
+	}
+
+	
+	/**
+	 * This method changes the x-position, y-position and image
+	 * property of this {@code PlayerAvatar} object
+	 * @param dx  horizontal distance to be moved
+	 * @param dy  vertical distance to be moved
+	 * @param value  Image object
+	 */
+	private void moveAnim(double dx, double dy, Image value) {
+		move(dx, dy);
+		setImage(value);
+	}
+	
+
 
 	/**
 	 * This method checks the downward movement of this {@code PlayerAvatar} object
 	 * and deducts marks accordingly
 	 */
-	protected void checkDownY() {
+	private void checkDownY() {
 		/*player moving downwards (but above starting pos.)
 		deducts marks*/
 		if (getY() < START_YPOS && getY() > LOWER_BOUND+1) { 
@@ -331,7 +349,7 @@ public abstract class PlayerAvatar extends Actor {
 	 * This method checks the upward movement of this {@code PlayerAvatar} 
 	 * object and adds marks accordingly
 	 */
-	protected void checkUpY() {
+	private void checkUpY() {
 		if(getDeath()==DEATH.NULL) {
 			if (getY() < UPPER_BOUND && getY() > LOWER_BOUND) {
 				addScore(10);
@@ -340,6 +358,7 @@ public abstract class PlayerAvatar extends Actor {
 		}
 
 	}
+	
 
 
 //    public abstract void handleKeyPress(KeyEvent event);
