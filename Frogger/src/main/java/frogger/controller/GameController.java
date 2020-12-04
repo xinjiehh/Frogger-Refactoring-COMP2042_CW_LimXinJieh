@@ -35,6 +35,7 @@ import frogger.util.HighScoreFile;
 import frogger.view.GameScreen;
 import frogger.view.ScoreStageLoader;
 import frogger.Main;
+import frogger.constant.GameOver;
 
 import java.util.List;
 
@@ -56,13 +57,6 @@ public enum GameController  {
 
 	INSTANCE;
 	
-	public enum GameOver {
-		NEXT,
-		WIN,
-		LOSE;
-	}
-	
-	
 	private static Stage mainStage = Main.getPrimaryStage();
 	private static boolean pause = false;
 	private int levelNum = 0; 
@@ -77,9 +71,8 @@ public enum GameController  {
 	
 	/**
 	 * This method initializes the game properties such as 
-	 * the controls chosen by user (WASD or arow keys),
-	 * the World (gamePane), the bonus element, and alert
-	 * box
+	 * the controls chosen by user (WASD or arow keys), the 
+	 * {@link World} (gamePane), {@link bonus}, and {@code Alert}
 	 * @param control  the key control options ({@link Controls}) 
 	 * chosen by user
 	 */
@@ -122,11 +115,12 @@ public enum GameController  {
 	 * <li> the Frog object dies and loses all its lives</li>
 	 * </u1>
 	 * <p>
-	 * @param state  {@link GameOver.NEXT} for next level,
-	 * {@link GameOver.LOSE} when no lives are left
+	 * @param state  {@code GameOver.NEXT} for next level,
+	 * {@code GameOver.LOSE} when no lives are left
+	 * @see GameOver
 	 */
 	public void handleGameDone(GameOver state) {
-		gameModel.handleGameDone(state);
+		gameModel.handleDoneLevel(state);
 		stopGame();
 		showScoreDisplay();
 	}
@@ -142,9 +136,9 @@ public enum GameController  {
 
 
     /** 
-     * This method defines the value of the {@link Alert} property
-     * onHiding. This simulates an {@link EventHandler} to handle 
-     * the {@link DialogEvent} which occurs when user closes the 
+     * This method defines the value of the {@code Alert} property
+     * onHiding. This simulates an {@code EventHandler} to handle 
+     * the {@code DialogEvent} which occurs when user closes the 
      * dialog box. This method updates the view by either
 	 * <u1> 
 	 * <li> starting the next level, or </li>
@@ -153,8 +147,8 @@ public enum GameController  {
 	 * </u1>
 	 * <p>
 	 * 
-     * @param event  the event which occured after dialog box is
-     * closed
+     * @param event  the {@code DialogEvent} which occured after 
+     * dialog box is closed
      */
 	public void updateView(DialogEvent event) {
 		
@@ -176,9 +170,9 @@ public enum GameController  {
 	}
 	
 	/**
-	 * This method defines the value of the {@link ButtonBase} 
-	 * property onAction. This simulates an {@link EventHandler}
-	 * to handle the {@link ActionEvent} which occurs whenever
+	 * This method defines the value of the {@code ButtonBase} 
+	 * property onAction. This simulates an {@code EventHandler}
+	 * to handle the {@code ActionEvent} which occurs whenever
 	 * button is fired. This method calls the necessary methods 
 	 * for "cleanup" when user exits the game screen and redirects 
 	 * user back to the main menu.
@@ -197,7 +191,7 @@ public enum GameController  {
 	/**
 	 * This method defines the next view to show after score stage
 	 * pop up is exited
-	 * @param event  the {@link WindowEvent} that occurs after
+	 * @param event  the {@code WindowEvent} that occurs after
 	 * score stage is hidden 
 	 */
 	public void showNext(WindowEvent event) {
@@ -208,7 +202,7 @@ public enum GameController  {
 	 * This method handles the pausing and resuming of a game
 	 * whenever the pause button is clicked in {@link GameScreen}
 	 * 
-	 * @param event  the {@link ActionEvent} that occurs when the
+	 * @param event  the {@code ActionEvent} that occurs when the
 	 * pause button is fired
 	 */
 	public void handlePause(ActionEvent event) {
@@ -226,7 +220,7 @@ public enum GameController  {
 	 * by adding nodes to this {@link World} object to be displayed 
 	 * on the stage and seen by user
 	 * 
-	 * @param list  list of {@link Node} objects to be added
+	 * @param list  list of {@code Node} objects to be added
 	 */
 	public void addToView(List<Node> list) {
 		
@@ -241,7 +235,7 @@ public enum GameController  {
 	 * by removing nodes from this {@link World} object, which 
 	 * subsequently removes the nodes from the user's view
 	 * 
-	 * @param list  list of {@link Node} objects to be removed from
+	 * @param list  list of {@code Node} objects to be removed from
 	 * view
 	 */
 	public void removeFromView(List<Node> list) {
@@ -259,7 +253,7 @@ public enum GameController  {
 	 */
 	
 	/**
-	 * This method calls this GameModel object to play the bonus
+	 * This method calls this {@link GameModel} object to play the bonus
 	 * animation as the animation logic is contained inside the 
 	 * model (MVC pattern). If time permits, all animation logic 
 	 * will be refactored and moved into its own class.
@@ -276,12 +270,12 @@ public enum GameController  {
 	
 
 	/**
-	 * This method is called to update the visibility of the
-	 * ImageView 'bonus' in this GameView object (MVC pattern)
-	 * @param show  true to make 'bonus' visible.
+	 * This method is called to update the visibility of {@link #bonus}
+	 * in this GameView object (MVC pattern)
+	 * @param bool  true to make {@code bonus} visible
 	 */
-	public void setBonusVisible(boolean show) {
-		bonus.setVisible(show);
+	public void setBonusVisible(boolean bool) {
+		bonus.setVisible(bool);
 	}
 	
 	/**
@@ -314,16 +308,17 @@ public enum GameController  {
 	
 	
 	/**
-	 * This method simulates the method 'changed' of the {@link 
+	 * This method simulates the method 'changed' of the {@code 
 	 * ChangeListener} interface and defines the actions to be 
-	 * taken whenever the {@link Frog} object lifeProp changes. 
+	 * taken whenever the {@link Frog} object {@code lifeProp} changes. 
 	 * 
 	 * In this case, this method defines the actions to update the life 
 	 * array displayed on the game screen.  
 	 * 
-	 * @param observable  the {@link ObservableValue} lifeProp which value changed
+	 * @param observable  the {@code ObservableValue} lifeProp which value changed
 	 * @param oldValue  the old value
 	 * @param newValue  the new value
+	 * @see Frog#addLifeListener(ChangeListener)
 	 */
 	private void updateLifeView(ObservableValue <?extends Number>observable, Number oldValue, Number newValue) {
 
@@ -332,21 +327,25 @@ public enum GameController  {
 		if(life>=0) {
 			for (int i = 3; i > life; i--) 
 				gameView.getLifeArray().get(i-1).setVisible(false);
+		} else {
+			GameController.INSTANCE.handleGameDone(GameOver.LOSE);
 		}
 
 	}
 	
 	/**
-	 * This method simulates the method 'changed' of the {@link 
-	 * ChangeListener} interface and defines the actions to be 
-	 * taken whenever the {@link Frog} object scoreProp changes. 
+	 * This method simulates the method {@code changed} of the 
+	 * {@code ChangeListener} interface and defines the actions 
+	 * to be taken whenever the {@link Frog} object scoreProp 
+	 * changes. 
 	 * 
 	 * In this case, this method defines the actions to update the 
 	 * score digit array displayed on the game screen.  
 	 * 
-	 * @param observable  the {@link ObservableValue} scoreProp which value changed
+	 * @param observable  {@code scoreProp} which value changed
 	 * @param oldValue  the old value
 	 * @param newValue  the new value
+	 * @see Frog#addScoreListener(ChangeListener)
 	 */
 	private void updateScore(ObservableValue <?extends Number>observable, Number oldValue, Number newValue) {
 		gameModel.setScore(newValue.intValue());
@@ -354,9 +353,9 @@ public enum GameController  {
 	
 
 	/**
-	 * This method initializes the header text of the {@link 
+	 * This method initializes the header text of the {@code 
 	 * @Alert} object and show the alert.
-	 * @param string
+	 * @param string  {@code String} to be displayed as header
 	 */
 	private void showAlert(String string) {
 
@@ -366,7 +365,7 @@ public enum GameController  {
 	}
 	
 	/**
-	 * This method initializes this {@link Scene} object
+	 * This method initializes this {@code Scene} object
 	 * and adds event filters which handle key press and 
 	 * key release. Lambda expressions (method reference) 
 	 * are used in this method to simplify it.
@@ -380,48 +379,45 @@ public enum GameController  {
 	}
 	
 	/**
-	 * This method is used to handle key press. This method is
-	 * separate from {@link #handleKeyPress(KeyEvent)} to be 
-	 * able to use method reference in {@link #initGame(Controls)}
-	 * @param event  {@link KeyEvent} generated on key press
+	 * This method is called by the method {@link #initGameScene()} 
+	 * to handle key press. This method is separate from 
+	 * {@link #handleKeyPress(KeyEvent)} to be able to use method 
+	 * reference in the caller method
+	 * @param event  {@code KeyEvent} generated on key press
 	 */
 	private void handleKeyPress(KeyEvent event) {
 		gamePane.handleKey(event, true);
 		event.consume();
 	}
+	
 	/**
-	 * This method is used to handle key release
-	 * @param event  {@link KeyEvent} generated on key release
+	 * This method is called by the method {@link #initGameScene()} 
+	 * to handle key release
+	 * @param event  {@code KeyEvent} generated on key release
 	 */
 	private void handleKeyRelease(KeyEvent event) {
 		gamePane.handleKey(event, false);
 		event.consume();
 	}
 	
-
-	/**
-	 * This method displays an alert message and user scores for each 
-	 * played level in descending order
-	 * @param string  {@link String} of {@link String} objects,
-	 * where string[0] corresponds to title, string[1] to header
-	 * and string[2] to content
-	 */
-	@Deprecated
-	public void displayAlert(String[] string) {
-
-		alert.setTitle(string[0]);
-		alert.setHeaderText(string[1]);
-		alert.setContentText(string[2]);
-		alert.show();
-	}
-
-	
-
 }
 
 
 
-
+///**
+// * This method displays an alert message and user scores for each 
+// * played level in descending order
+// * @param string  {@code String[]} object where string[0] 
+// * corresponds to title, string[1] to header and string[2] to content
+// */
+//@Deprecated
+//public void displayAlert(String[] string) {
+//
+//	alert.setTitle(string[0]);
+//	alert.setHeaderText(string[1]);
+//	alert.setContentText(string[2]);
+//	alert.show();
+//}
 
 ////TEST1
 //Level1 test = new Level1();
