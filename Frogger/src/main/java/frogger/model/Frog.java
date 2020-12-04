@@ -1,8 +1,9 @@
 package frogger.model;
 
 
-import frogger.constant.Direction;
+import frogger.constant.DIRECTION;
 import frogger.constant.FilePath;
+import frogger.constant.FrogDeath;
 import frogger.util.AudioPlayer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -10,10 +11,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
 
 /**
- * Each frog has its own set of images
- * 
- * @author xinji
- *
+ * This class defines a {@link PlayerAvatar} of type Frog
+ * which has properties such as {@link #lifeProp} and 
+ * {@link #scoreProp} and basic functions such as {@link 
+ * #jump(DIRECTION, boolean)}
  */
 
 public class Frog extends PlayerAvatar {
@@ -24,8 +25,7 @@ public class Frog extends PlayerAvatar {
 		NULL;
 	}
 	
-	
-	
+
 	//Frog image initialization
 	private static final int IMG_SIZE = 40;
 	private static final Image imgW1 = new Image(FilePath.FROG_UP, IMG_SIZE, IMG_SIZE, true, true);
@@ -37,44 +37,70 @@ public class Frog extends PlayerAvatar {
 	private static final Image imgS2 = new Image(FilePath.FROG_DOWNJUMP, IMG_SIZE, IMG_SIZE, true, true);
 	private static final Image imgD2 = new Image(FilePath.FROG_RIGHTJUMP, IMG_SIZE, IMG_SIZE, true, true);
 	
+	/** keeps track of the number of lives left */
 	private IntegerProperty lifeProp;
+	
+	/** keeps track of the score of this Frog object throughout a level */
 	private IntegerProperty scoreProp;
 	
-	//type of frog death
-	private FrogDeath frogDeath = FrogDeath.NULL;
-	private boolean isJump = false;
-	private boolean noMove = false; 
+	/** keep track of the score of this frog object before it reaches the swamp */
 	private int tempScore = 0;
+
+	/** type of frog death */
+	private FrogDeath frogDeath = FrogDeath.NULL;
 	
-	//true if frog comes into contact with a swamp containing a fly
-	//private boolean flyBonus;
+	/** flag to determine if frog is mid jump */
+	private boolean isJump = false;
 	
-	//x position of frog when it comes into contact with the fly 
-	private double bonusXPos;
+	/** this determines if frog is able to move or not */
+	private boolean noMove = false; 
+
 	
-	//true if frog is in contact with another moving log/turtle
-	private boolean attached;
-	
-	//horizontal and vertical distances to move when frog is attached
-	private double dx;
-	private double dy;
-	
+	/**
+	 * This method is a public constructor which sets this 
+	 * Frog object and its properties to their starting state,
+	 * and initializes life and score of this Frog object
+	 * 
+	 */
 	public Frog() {
-		setStartFrog();
+		restartFrog();
 		lifeProp = new SimpleIntegerProperty(3);
 		scoreProp = new SimpleIntegerProperty(0);
 	}
-
 	
+	@Override
+	public void act(long now) {
+		
+	}
+	
+
+	/**
+	 * This method sets the property {@link #tempScore} which is 
+	 * the temporary score that this Frog object accumulates 
+	 * while travelling across the screen
+	 * @param i  temporary score of this Frog object
+	 */
 	public void setTempScore(int i) {
 		tempScore=i;
 	}
 	
+	/**
+	 * This method returns the boolean property {@link #noMove}
+	 * which controls if the frog is able to move or not
+	 * @return  true if this Frog object cannot move
+	 */
 	public boolean getNoMove() {
 		return noMove;
 	}
-
-	public void jump(Direction direction, boolean keyPress) {
+	
+	
+	/**
+	 * This method handles the jump visual and audio for this 
+	 * Frog object.
+	 * @param direction  {@link DIRECTION} UP, DOWN, LEFT, RIGHT
+	 * @param keyPress  true if key pressed, false if key released
+	 */
+	public void jump(DIRECTION direction, boolean keyPress) {
 		if (!noMove) {
 			
 			if(!keyPress && isJump) {
@@ -115,12 +141,13 @@ public class Frog extends PlayerAvatar {
 			}	
 			
 			isJump = isJump ? false : true;
-
 		} 
 	}
 
+	
 	/**
-	 * This method resets frog to its starting state
+	 * This method resets this Frog object and its properties
+	 * to its starting state
 	 */
 	public void restartFrog() {
 		setStartFrog();
@@ -130,108 +157,121 @@ public class Frog extends PlayerAvatar {
 	}
 	
 	/**
-	 * This method sets player character in starting mode
+	 * This method sets this Frog object in starting position
 	 */
 	private void setStartFrog() {
 		setImage(imgW1);
 		setX(START_XPOS);
 		setY(START_YPOS);
 	}
-	
+
 	/**
-	 * This method sets the property noMove which controls if
-	 * the frog is able to move or not
-	 * @param bool
+	 * This method sets the property {@link #noMove} which determines if
+	 * the frog is allowed to move or not
+	 * @param bool  true to allow movement, false otherwise
 	 */
 	public void setNoMove(boolean bool) {
 		noMove=bool;
 	}
 
-	@Override
-	/**
-	 * This method is called in each frame to check if this player object goes 
-	 * out of visible bounds or intersects with other game element objects and 
-	 * handles each case accordingly
-	 * 
-	 */
-	
-	public void act(long now) {
-		
-		if(attached) {
-			move(dx, dy);
-			attached=false;
-		}
-//		checkIntersecting();
-//		checkOutOfBounds();
-//		
-//		if (waterDeath || carDeath) { 
-//			handleDeath(now);
-//		}
 
-	}
 	
+	/**
+	 * This method sets the score of this Frog object
+	 * @param i  new score of this Frog object
+	 */
 	public void setScore(int i) {
 		scoreProp.setValue(i);
 	}
 	
+	
+	/**
+	 * This method returns integer value of the score, which is
+	 * {@link #scoreProp} of this Frog object
+	 * object
+	 * @return  integer value of the score of this Frog object
+	 */
 	public int getScore() {
 		return scoreProp.intValue();
 	}
 	
-
-//	public boolean hasFlyBonus() {
-//		if(flyBonus) {
-//			//flyBonus=false;
-//			return true;
-//		}
-//		
-//		else return false;
-//	}
-//	
-	
-	public void setBonusX(double xpos) {
-		bonusXPos = xpos;
-	}
-	
-	public double getBonusX() {
-		return bonusXPos;
-	}
+	/**
+	 * This method adds the given integer amount to the current 
+	 * score, which is {@link #scoreProp} of this Frog object
+	 * @param x  the integer amount of points to be added
+	 */
 	
 	public void addScore(int x) {
 		scoreProp.setValue(scoreProp.intValue()+x);
 	}
 	
+	/**
+	 * This method allows other classes to add listener to 
+	 * the IntegerProperty {@link #scoreProp} which corresponds to the
+	 * score of this Frog object
+	 * @param listener  {@link ChangeListener} for {@link #scoreProp}
+	 * 
+	 */
 	public void addScoreListener(ChangeListener<? super Number> listener) {
 		scoreProp.addListener(listener);
 	}
 	
+	/**
+	 * This method allows other classes to add a {@link ChangeListener}
+	 * which will be notified whenever there is a change in the
+	 * IntegerProperty {@link #lifeProp} which corresponds to the lives
+	 * of this Frog object
+	 * @param listener  {@link ChangeListener} for {@link #lifeProp}
+	 */
 	public void addLifeListener(ChangeListener<? super Number> listener) {
 		lifeProp.addListener(listener);
 	}
 	
-
+	/**
+	 * This method sets the death state {@link #FrogDeath} of 
+	 * this object
+	 * @param death  {@link #FrogDeath} 
+	 */
 	public void setDeath(FrogDeath death) {
 		frogDeath=death;
 	}
 	
+	/**
+	 * This method gets the death state {@link #FrogDeath} of 
+	 * this object
+	 * @return  {@link #FrogDeath} 
+	 */
 	public FrogDeath getDeath() {
 		return frogDeath;
 	}
 	
+	/**
+	 * This method reduces the lives of this Frog object 
+	 * ({@link #lifeProp} by 1
+	 */
 	public void loseLife() {
 		 lifeProp.setValue(lifeProp.intValue()-1);
 		 System.out.println("Life left: " + lifeProp.toString());
 
 	}
 	
+	/**
+	 * This method gets the integer value of the lives left 
+	 * ({@link #lifeProp} of this Frog object 
+	 * @return  integer value of lives left of this Frog object
+	 */
 	public int getLife() {
 		return lifeProp.intValue();
 	}
 	
+	/**
+	 * This method enables this Frog object to 'attach' to 
+	 * another moving character by following their speed
+	 * @param dx  horizontal distance to be moved
+	 * @param dy  vertical distance to be moved
+	 */
 	public void attachFrog(double dx, double dy) {
-		attached = true;
-		this.dx=dx;
-		this.dy=dy;
+		move(dx, dy);
 	}
 	
 
@@ -239,18 +279,34 @@ public class Frog extends PlayerAvatar {
 	/**
 	 * This method changes the x-position, y-position and image
 	 * property of the frog object
-	 * @param dx - horizontal distance to be moved
-	 * @param dy - vertical distance to be moved
-	 * @param value - Image object
+	 * @param dx  horizontal distance to be moved
+	 * @param dy  vertical distance to be moved
+	 * @param value  Image object
 	 */
 	private void moveAnim(double dx, double dy, Image value) {
 		move(dx, dy);
 		setImage(value);
 	}
+
+	/**
+	 * This method is called whenever this Frog object dies so that 
+	 * the points gained is deducted. However, marks gained by other 
+	 * Frog objects will not be affected
+	 */
+	public void resetScore() {
+		addScore(-tempScore);
+		tempScore=0;
+	}
 	
+	
+
+	/**
+	 * This method checks the downward movement of this Frog object
+	 * and deducts marks accordingly
+	 */
 	private void checkDownY() {
-		//frog moving downwards (but above starting pos.)
-		//deducts marks
+		/*frog moving downwards (but above starting pos.)
+		deducts marks*/
 		if (getY() < Frog.START_YPOS && getY() > Frog.LOWER_BOUND+1) { 
 			addScore(-10);
 			tempScore -= 10;
@@ -258,6 +314,10 @@ public class Frog extends PlayerAvatar {
 		
 	}
 
+	/**
+	 * This method checks the upward movement of this Frog object
+	 * and adds marks accordingly
+	 */
 	private void checkUpY() {
 		if(getDeath()==FrogDeath.NULL) {
 			if (getY() < Frog.UPPER_BOUND && getY() > Frog.LOWER_BOUND) {
@@ -268,11 +328,7 @@ public class Frog extends PlayerAvatar {
 
 	}
 
-	public void resetScore() {
-		addScore(-tempScore);
-		tempScore=0;
-	}
-
+	
 
 }
 
