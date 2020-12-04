@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 /**
  * This enum class implements singleton method. It acts as controller
- * for MenuScreen (View) which handles the different actions of the 
+ * for {@link MenuScreen} (View) which handles the different actions of the 
  * menu buttons such as showing selection screen, showing info screen
  * and exiting the application
  * 
@@ -47,7 +47,7 @@ public enum MenuController {
 	 */
 	public void showInfo() {
 		try {
-			FXMLLoader loader = new FXMLLoader((getClass().getResource("/view/info.fxml")));
+			FXMLLoader loader = new FXMLLoader((getClass().getResource(FilePath.INFO_FXML)));
 		    this.pane = loader.load();
 		   
 		    Stage infoStage = new Stage();
