@@ -2,19 +2,23 @@ package frogger.model.npc;
 
 import frogger.model.Actor;
 import frogger.model.World;
-import javafx.scene.input.InputEvent;
 
 /**
  * This class represents all the non-playing characters
- * which has a few properties in common 
+ * which have common properties such as speed and common
+ * functions such as automatic animation ({@link 
+ * #playAnimation(long)})
  */
 
 public abstract class NPC extends Actor {
 	
 	protected double speed; 
-	
-    /**
-     * @param now  the timestamp of the current frame given in nanoseconds.
+
+	/**
+	 * This method will be called by the {@link AnimationTimer}
+	 * in {@link World} class
+	 * @param now  timestamp of the current frame in nanoseconds
+	 * @see World#createMotionTimer()
      */
 	@Override
 	public void act(long now) {
@@ -48,14 +52,14 @@ public abstract class NPC extends Actor {
 	 * @param s  speed of the object
 	 */
 	
-	public void setSpeed(double s) { //TODO test factory
+	public void setSpeed(double s) { 
 		this.speed = s; 
 	}
 
 	
 	/**
 	 * This method returns the speed of the object
-	 * @return speed of object
+	 * @return {@code integer} speed of object
 	 */
 	
 	public double getSpeed() { 
@@ -65,7 +69,7 @@ public abstract class NPC extends Actor {
 	/**
 	 * This method increases the speed of this character
 	 * object by a given amount 
-	 * @param increase  the integer amount of speed to 
+	 * @param increase  the {@code integer} value of speed to 
 	 * increase
 	 */
 	public void increaseSpeed(int increase) {
