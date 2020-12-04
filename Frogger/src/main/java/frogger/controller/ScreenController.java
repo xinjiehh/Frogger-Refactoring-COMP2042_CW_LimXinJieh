@@ -13,24 +13,25 @@ import frogger.controller.SelectionController.Controls;
  */
 public enum ScreenController {
 	INSTANCE;
-	private Stage stage = Main.getPrimaryStage();
-	private Pane pane = new Pane();
 
 	/**
-	 * This method shows the menu screen
+	 * This method initializes the {@code Stage} with the menu screen 
+	 * ({@code Pane} object from {@link MenuScreen}) and starts the 
+	 * menu screen animation before showing the stage
 	 */
 	public void showMenu() {
+		Stage stage = Main.getPrimaryStage();
 		MenuScreen menu = MenuScreen.getInstance();
-		pane = menu.getPane();	
+		
 		menu.startAnim();
-		stage.getScene().setRoot(pane);
+		stage.getScene().setRoot(menu.getPane());
 		stage.show();
 		
 	}
 
 	/**
 	 * This method starts the game and passes on the controls
-	 * to the GameController class.
+	 * to the {@link GameController}.
 	 * @param control  the key control options chosen by the user
 	 */
 	public void startGame(Controls control) {
