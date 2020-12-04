@@ -27,8 +27,8 @@ public class ScoreScreenController {
 	/**
 	 * This is the entrance method used to initialize the data displayed
 	 * on the score view
-	 * @param levelData
-	 * @param scoreData
+	 * @param levelData  {@code List<String>} which contain levels arranged according to scores
+	 * @param scoreData  {@code List<String>} which contain scores arranged in user specified order
 	 */
 	public void initView(List<String> levelData, List<String> scoreData) {
 		initData(levelData, scoreData);
@@ -39,8 +39,8 @@ public class ScoreScreenController {
 	/**
 	 * This method initializes the field {@link #levels} and {@link #scores}
 	 * with data obtained from the caller method
-	 * @param levelData  the levels corresponding to the scores
-	 * @param scoreData  the scores obtained arranged in order specified
+	 * @param levelData  {@code List<String>} which contain levels arranged according to scores
+	 * @param scoreData  {@code List<String>} which contain scores arranged in user specified order
 	 * by developer
 	 */
 	private void initData(List<String> levelData, List<String> scoreData) {
@@ -52,9 +52,9 @@ public class ScoreScreenController {
 	
 	
 	/**
-	 * This method initializes the {@link ListView} objects with data that
-	 * is in the form of {@link String} objects
-	 * @param stringList  data in the form of a list of strings 
+	 * This method initializes the {@code ListView} objects with data that
+	 * is in the form of {@code String} objects
+	 * @param stringList  {@code List<String>} which contain the data to be inserted
 	 * @param listView  the {@link ListView} to be initialized
 	 */
 	private void initListView(List<String> stringList, ListView<String> listView) {
@@ -67,10 +67,11 @@ public class ScoreScreenController {
 
 	/**
 	 * This method simulates the argument type of the calling method,
-	 * which is a {@link Callback} that takes in a {@link ListView} of
-	 * {@link String} objects and returns a {@link ListCell} of the same
-	 * {@link String} objects
-	 * @param param  this {@link ListView<String>} object
+	 * which is a {@code Callback} that takes in a {@code ListView} of
+	 * {@code String} objects and returns a {@code ListCell} of the same
+	 * {@code String} objects
+	 * 
+	 * @param param  this {@code ListView<String>} object
 	 * @return cell factory to use in this ListView
 	 * @see ListView#setCellFactory(Callback)
 	 * @see <a href="https://stackoverflow.com/questions/25246496/
