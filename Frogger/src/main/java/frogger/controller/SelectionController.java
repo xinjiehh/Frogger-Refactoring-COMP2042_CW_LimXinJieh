@@ -59,15 +59,10 @@ public class SelectionController {
   private void initFont() {
 	  Font font;
 		
-		try {
-			
-			font = Font.loadFont(new FileInputStream(FilePath.DEFAULT_FONT), 20);
-
-		} catch (FileNotFoundException e){
-			
+		try {font = Font.loadFont(new FileInputStream(FilePath.DEFAULT_FONT), 20);} 
+		catch (FileNotFoundException e){
 			System.out.println("Error loading font for selection");
 			font = Font.font("Sans Serif", 20);
-
 		}
 	
 	  mode.setFont(font);
@@ -78,7 +73,7 @@ public class SelectionController {
 
   /**
    * This method allows users to switch between different playing 
-   * modes 
+   * modes (to be implemented)
    */
   @FXML
   public void switchMode() {
@@ -86,7 +81,8 @@ public class SelectionController {
 
   
   /**
-   * This method allows users to select their key controls
+   * This method is responsible for updating the view to 
+   * allow users to select their key controls
    */
   @FXML
   public void switchControls() {
@@ -104,7 +100,8 @@ public class SelectionController {
   }
 
   /**
-   * This method starts the game
+   * This method starts the game by calling {@link 
+   * ScreenController#startGame(Controls)}
    */
   @FXML
   public void startGame() {
