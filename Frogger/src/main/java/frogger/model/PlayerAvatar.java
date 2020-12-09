@@ -75,25 +75,26 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 		lifeProp = new SimpleIntegerProperty(3);
 		scoreProp = new SimpleIntegerProperty(0);
 		addEvent("life"); 
+		
 	}
 	
-	public List<Image> getDeathImg(DEATH death){
-		if(death==DEATH.CAR)
-			return carDeath;
-		else if(death==DEATH.WATER)
-			return waterDeath;
-		return null;
-	}
 	
+	/**
+	 * This method initializes the {@link SpriteAnimation} for {@link DEATH} 
+	 * type {@code DEATH#WATER} and {@code DEATH#CAR} and insert them 
+	 * into a {@code HashMap} with the {@code DEATH} type as key for 
+	 * easy access
+	 */
 	protected void initAnim() {
 		animMap.put(DEATH.WATER, new SpriteAnimation(this, waterDeath));
 		animMap.put(DEATH.CAR, new SpriteAnimation(this, carDeath));
 	}
-	
-	protected SpriteAnimation getDeathAnim(DEATH death) {
-		return animMap.get(death);
-	}
-	
+
+	/**
+	 * This method gets the {@link SpriteAnimation} to which
+	 * the given {@link DEATH} key is mapped in {@link #animMap}
+	 * @param death  {@code DEATH} type of {@code PlayerAvatar}  
+	 */
 	public void playDeathAnim(DEATH death) {
 		animMap.get(death).play();
 		System.out.println("play");
@@ -102,10 +103,8 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	
 	/**
 	 * This method should be overriden by subclass to initialize
-	 * {@code imgW1}, {@code imgA1}, {@code imgS1}, {@code imgD1},
-	 * {@code imgW2}, {@code imgA2}, {@code imgS2}, {@code imgD2},
-	 * {@link #carDeath} and {@link #waterDeath} of the {@code
-	 * PlayerAvatar} object
+	 * {@code imgW1}, {@code imgW2}, {@link #carDeath} and {@link 
+	 * #waterDeath} of this {@code PlayerAvatar} object
 	 */
 	protected abstract void initImages();
 	
