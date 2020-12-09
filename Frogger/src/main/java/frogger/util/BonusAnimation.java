@@ -3,25 +3,27 @@ import javafx.animation.Transition;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class BonusAnimation {
-	private Transition animation;
+/**
+ * This class is responsible for showing and hiding the bonus once
+ * {@link PlayerAvatar} object touches {@link Swamp} object which
+ * contains a fly
+ *
+ */
+public class BonusAnimation extends MyAnimation {
+	
 	private ImageView bonus;
 
-
 	public BonusAnimation(ImageView bonus) {
-		initImages();
+		super();
 		this.bonus=bonus;
-		
 
 	}
-	
-	
-	public void initImages() {
-		
-	
+
+	@Override
+	protected void initAnimation() {
 		animation = new Transition() {
 		    {
-		        setCycleDuration(Duration.millis(500)); // total time for animation
+		        setCycleDuration(Duration.millis(1000)); // total time for animation
 		    }
 
 		    @Override
@@ -32,15 +34,9 @@ public class BonusAnimation {
 
 		animation.setOnFinished(e->{
 			bonus.setVisible(false);
+			donePlaying = true;
 		});
 		
-	}
-	public void start() {
-		animation.play();
-	}
-	
-	public void stop() {
-		animation.stop();
 	}
 
 
