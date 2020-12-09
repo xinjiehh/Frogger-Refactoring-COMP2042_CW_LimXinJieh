@@ -24,7 +24,7 @@ public abstract class Actor extends ImageView {
 		checkOutOfBounds();
 	}
 	/**
-	 * This method will be called by the {@link AnimationTimer}
+	 * This method will be called by the {@code AnimationTimer}
 	 * in {@link World} class
 	 * @param now  timestamp of the current frame in nanoseconds
 	 * @see World#createMotionTimer()
