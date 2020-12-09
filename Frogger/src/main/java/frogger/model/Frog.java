@@ -1,8 +1,11 @@
 package frogger.model;
 
 
+import frogger.constant.DIRECTION;
 import frogger.constant.FilePath;
 import javafx.scene.image.Image;
+
+import java.util.ArrayList;
 
 /**
  * This class defines a {@link PlayerAvatar} of type {@code Frog}
@@ -13,21 +16,32 @@ import javafx.scene.image.Image;
 
 public class Frog extends PlayerAvatar {
 	
-	//Frog image initialization
+
 	private static final int IMG_SIZE = 40;
 	
 	@Override
 	protected void initImages() {
 		imgW1 = new Image(FilePath.FROG_UP, IMG_SIZE, IMG_SIZE, true, true);
-		imgA1 = new Image(FilePath.FROG_LEFT, IMG_SIZE, IMG_SIZE, true, true);
-		imgA1 = new Image(FilePath.FROG_LEFT, IMG_SIZE, IMG_SIZE, true, true);
-		imgS1 = new Image(FilePath.FROG_DOWN, IMG_SIZE, IMG_SIZE, true, true);
-		imgD1 = new Image(FilePath.FROG_RIGHT, IMG_SIZE, IMG_SIZE, true, true);
 		imgW2 = new Image(FilePath.FROG_UPJUMP, IMG_SIZE, IMG_SIZE, true, true);
-		imgA2 = new Image(FilePath.FROG_LEFTJUMP, IMG_SIZE, IMG_SIZE, true, true);
-		imgS2 = new Image(FilePath.FROG_DOWNJUMP, IMG_SIZE, IMG_SIZE, true, true);
-		imgD2 = new Image(FilePath.FROG_RIGHTJUMP, IMG_SIZE, IMG_SIZE, true, true);
+		carDeath = new ArrayList<>() {
+			{
+				for(int i=1;i<4;i++)
+				add(new Image("file:src/main/resources/death/cardeath" + i + ".png", IMG_SIZE, IMG_SIZE, true, true));
+			}
+		};
+		
+		
+		waterDeath = new ArrayList<>(){
+			{
+				for(int i=1;i<5;i++)
+				add(new Image("file:src/main/resources/death/waterdeath" + i + ".png", IMG_SIZE, IMG_SIZE, true, true));
+			}
+		};
+	
 	}
+
+
+
 }
 
 
