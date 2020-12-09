@@ -1,20 +1,30 @@
 package frogger.model;
 
-import frogger.constant.DIRECTION;
 import frogger.constant.DEATH;
+import frogger.constant.DIRECTION;
 import frogger.util.AudioPlayer;
+import frogger.util.SpriteAnimation;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * This class implements template method, which allows subclasses
- * to create different kind of player avatar
- * @author Lim Xin Jieh (20082200)
- *
+ * to create different kind of player avatar. This class is also
+ * part of the Observer pattern by implementing the {@link Subject}
+ * interface. 
+ * 
+ * Besides implementing {@link Observer} interface, interested classes can also
+ * implement {@code ChangeListener}, and register itself using the {@link 
+ * #addLifeListener(ChangeListener)} and/or {@link #addScoreListener(ChangeListener)}
  */
-public abstract class PlayerAvatar extends Actor {
+public abstract class PlayerAvatar extends Actor implements Subject {
 
 	protected static final double START_YPOS = 706.467;//679.8 + FrogModel.movement;
 	protected static final double START_XPOS = 300;
@@ -26,28 +36,9 @@ public abstract class PlayerAvatar extends Actor {
 	/** the image for up movement */
 	protected Image imgW1;
 	
-	/** the image for left movement */
-	protected Image imgA1;
-	
-	/** the image for down movement */
-	protected Image imgS1;
-	
-	/** the image for right movement */
-	protected Image imgD1;
-	
 	/** the image for up jump movement */
 	protected Image imgW2;
-	
-	/** the image for left jump movement */
-	protected Image imgA2;
-	
-	/** the image for down jump movement */
-	protected Image imgS2;
-	
-	/** the image for right jump movement */
-	protected Image imgD2;
 
-	
 	/** keeps track of the number of lives left */
 	protected IntegerProperty lifeProp;
 	
@@ -65,6 +56,10 @@ public abstract class PlayerAvatar extends Actor {
 	
 	/** this determines if this {@code PlayerAvatar} object is able to move or not */
 	protected boolean noMove = false; 
+	
+	protected List<Image> carDeath = new ArrayList<>();
+	protected List<Image> waterDeath = new ArrayList<>();
+	protected Map<DEATH, SpriteAnimation> animMap = new HashMap<DEATH, SpriteAnimation>();
 
 	
 	/**
@@ -75,17 +70,51 @@ public abstract class PlayerAvatar extends Actor {
 	 */
 	public PlayerAvatar() {
 		initImages();
+		initAnim();
 		restartPlayer();
 		lifeProp = new SimpleIntegerProperty(3);
 		scoreProp = new SimpleIntegerProperty(0);
+		addEvent("life"); 
 	}
+	
+	public List<Image> getDeathImg(DEATH death){
+		if(death==DEATH.CAR)
+			return carDeath;
+		else if(death==DEATH.WATER)
+			return waterDeath;
+		return null;
+	}
+	
+	protected void initAnim() {
+		animMap.put(DEATH.WATER, new SpriteAnimation(this, waterDeath));
+		animMap.put(DEATH.CAR, new SpriteAnimation(this, carDeath));
+	}
+	
+	protected SpriteAnimation getDeathAnim(DEATH death) {
+		return animMap.get(death);
+	}
+	
+	public void playDeathAnim(DEATH death) {
+		animMap.get(death).play();
+		System.out.println("play");
+	}
+	
+	
+	/**
+	 * This method should be overriden by subclass to initialize
+	 * {@code imgW1}, {@code imgA1}, {@code imgS1}, {@code imgD1},
+	 * {@code imgW2}, {@code imgA2}, {@code imgS2}, {@code imgD2},
+	 * {@link #carDeath} and {@link #waterDeath} of the {@code
+	 * PlayerAvatar} object
+	 */
+	protected abstract void initImages();
+	
 	
 	@Override
 	public void act(long now) {
 		
 	}
 	
-
 	/**
 	 * This method sets the property {@link #tempScore} which is 
 	 * the temporary score that this {@code PlayerAvatar} object 
@@ -117,7 +146,7 @@ public abstract class PlayerAvatar extends Actor {
 	 */
 	public void jump(DIRECTION direction, boolean keyPress) {
 		if (!noMove) {
-			
+
 			if(!keyPress && isJump) {
 				isJump = false;
 			} 
@@ -125,37 +154,36 @@ public abstract class PlayerAvatar extends Actor {
 			if(keyPress) {
 				AudioPlayer.INSTANCE.hopSound();
 			}
-		
 			
-			Image img;
+			setImage(isJump? imgW2 : imgW1);
 			switch (direction) {
 			case UP:
-				img = isJump ?  imgW2 : imgW1;
-				moveAnim(0, MOVEMENT, img);
+				setRotate(0);
+				move(0, -MOVEMENT);
 				if(!keyPress) checkUpY();
 				break;
 
 			case LEFT:
-				img = isJump ? imgA2 : imgA1;
-				moveAnim(MOVEMENT_X, 0, img);
+				setRotate(-90);
+				move(-MOVEMENT_X, 0);
 				break;
 
 			case DOWN:
-				img = isJump ? imgS2 : imgS1;
-				moveAnim(0, MOVEMENT, img);
+				setRotate(180);
+				move(0, MOVEMENT);
 				if(!keyPress) checkDownY();
 				break;
 
 			case RIGHT:
-				img = isJump ? imgD2 : imgD1;
-				moveAnim(MOVEMENT_X, 0, img);
+				setRotate(90);
+				move(MOVEMENT_X, 0);
 				break;
 			default:
 				break;
 
 			}	
 			
-			isJump = isJump ? false : true;
+			isJump = !isJump;
 		} 
 	}
 
@@ -222,6 +250,7 @@ public abstract class PlayerAvatar extends Actor {
 	 */
 	public void addScoreListener(ChangeListener<? super Number> listener) {
 		scoreProp.addListener(listener);
+		
 	}
 	
 	/**
@@ -236,7 +265,7 @@ public abstract class PlayerAvatar extends Actor {
 	}
 	
 	/**
-	 * This method sets the death state {@link #DEATH} of 
+	 * This method sets the death state {@link DEATH} of
 	 * this object
 	 * @param death  {@code #DEATH} representing the death type
 	 * of this {@code PlayerAvatar} object
@@ -248,7 +277,7 @@ public abstract class PlayerAvatar extends Actor {
 	/**
 	 * This method gets the death state of this {@code PlayerAvatar} 
 	 * object
-	 * @return  {@link #DEATH} representing the death state
+	 * @return  {@link DEATH} representing the death state
 	 */
 	public DEATH getDeath() {
 		return deathState;
@@ -259,8 +288,9 @@ public abstract class PlayerAvatar extends Actor {
 	 * ({@link #lifeProp} by 1
 	 */
 	public void loseLife() {
-		 lifeProp.setValue(lifeProp.intValue()-1);
-		 System.out.println("Life left: " + lifeProp.toString());
+		lifeProp.setValue(lifeProp.intValue()-1);
+		notify("life", this);
+		System.out.println("Life left: " + lifeProp.toString());
 
 	}
 	
@@ -284,12 +314,7 @@ public abstract class PlayerAvatar extends Actor {
 		tempScore=0;
 	}
 	
-	/**
-	 * This method has to be overriden by subclass to initialize
-	 * the looks of the {@code PlayerAvatar} object
-	 */
-	protected abstract void initImages();
-	
+
 	
 	/**
 	 * This method checks if this player object is out of visible 
@@ -315,20 +340,6 @@ public abstract class PlayerAvatar extends Actor {
 		setX(START_XPOS);
 		setY(START_YPOS);
 	}
-
-	
-	/**
-	 * This method changes the x-position, y-position and image
-	 * property of this {@code PlayerAvatar} object
-	 * @param dx  horizontal distance to be moved
-	 * @param dy  vertical distance to be moved
-	 * @param value  Image object
-	 */
-	private void moveAnim(double dx, double dy, Image value) {
-		move(dx, dy);
-		setImage(value);
-	}
-	
 
 
 	/**
