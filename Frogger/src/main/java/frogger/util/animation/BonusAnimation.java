@@ -1,4 +1,4 @@
-package frogger.util;
+package frogger.util.animation;
 import javafx.animation.Transition;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -9,7 +9,7 @@ import javafx.util.Duration;
  * contains a fly
  *
  */
-public class BonusAnimation extends MyAnimation {
+public class BonusAnimation extends SpriteAnimationTemplate {
 	
 	private ImageView bonus;
 
