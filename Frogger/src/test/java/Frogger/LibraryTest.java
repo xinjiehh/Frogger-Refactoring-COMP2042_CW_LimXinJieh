@@ -3,8 +3,10 @@
  */
 package Frogger;
 
+import frogger.constant.Library;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertTrue;
 
 public class LibraryTest {
     @Test public void testSomeLibraryMethod() {
