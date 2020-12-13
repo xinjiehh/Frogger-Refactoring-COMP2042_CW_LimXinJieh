@@ -6,17 +6,17 @@ package frogger.constant;
  *
  */
 
-public enum OBSTACLE_TYPE {
+public enum OBSTACLE_TYPE implements NPCType {
 	
 	TRUCK1(FilePath.TRUCK1, 120),
 	TRUCK2(FilePath.TRUCK2, 200),
 	CAR(FilePath.CAR, 50);
 	
 	/** the file path for the corresponding obstacle */
-	private String url; 
+	private final String url; 
 	
 	/** the size of the corresponding obstacle */
-	private int size;
+	private final int size;
 	
 	/** 
 	 * This method returns the {@code String} that is the file path
@@ -41,8 +41,14 @@ public enum OBSTACLE_TYPE {
 	 * @param url  {@code String} corresponding to the image url
 	 * @param size  {@code integer} value corresponding to image size
 	 */
-	private OBSTACLE_TYPE(String url, int size) {
+	OBSTACLE_TYPE(String url, int size) {
 		this.url = url;
 		this.size = size;
+	}
+
+	@Override
+	public String getType() {
+		
+		return "obstacle";
 	}
 }
