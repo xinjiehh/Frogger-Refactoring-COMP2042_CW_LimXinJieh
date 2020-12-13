@@ -46,9 +46,4 @@ public enum OBSTACLE_TYPE implements NPCType {
 		this.size = size;
 	}
 
-	@Override
-	public String getType() {
-		
-		return "obstacle";
-	}
 }

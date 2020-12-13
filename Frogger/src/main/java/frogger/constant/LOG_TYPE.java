@@ -47,9 +47,5 @@ public enum LOG_TYPE implements NPCType {
 		this.size=size;
 	}
 
-	@Override
-	public String getType() {
-		return "log";
-	}
 	
 }
