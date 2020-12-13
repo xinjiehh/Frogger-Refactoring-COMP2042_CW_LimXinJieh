@@ -79,21 +79,19 @@ public class ScoreScreenController {
 	 * question</a>
 	 */
 	private ListCell<String> newCellFactory(ListView<String>param){
-		
-		ListCell<String> cell = new ListCell<String>() {
+
+		return new ListCell<String>() {
 			@Override
 	  		public void updateItem(String item, boolean empty) {
-	  			
+
 	  			super.updateItem(item, empty);
-	  			
-	  			if (item==null || empty) 
+
+	  			if (item==null || empty)
 	  				setText(null);
-	  			else 
+	  			else
 	  				setText(item);
 		    }
 		  };
-	
-		  return cell;
 	  }
 
 }
