@@ -140,6 +140,43 @@ public class MenuScreen {
 		menuPane.getChildren().add(menuBackground);
 
 	}
+	/**
+	 * This method creates the {@code AnimationTimer}
+	 * for frog animation
+	 */
+	private void createAnim() {
+		Frog frog = new Frog(300, 706.467);
+		frog.setY(700);
+		timer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				if (now % 23 == 0) {
+					if (frog.getX()>=555) {
+						right=false;
+					} else if(frog.getX()<=10){
+			            	  right=true;
+					}
+			        
+					if(right) {
+						frog.jump(DIRECTION.RIGHT, true);
+			        } else  {
+			            frog.jump(DIRECTION.LEFT, true);
+			        }
+				}
+			}
+
+		};
+		menuPane.getChildren().add(frog);
+		
+	}
+	
+	/**
+	 * This method starts the frog animation on the menu
+	 * by starting the {@link #timer}
+	 */
+	public void startAnim() {
+		timer.start();
+	}
 
 
 	/**
