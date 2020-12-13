@@ -1,33 +1,40 @@
 package frogger.model.npc;
 
 import frogger.constant.LOG_TYPE;
-import javafx.scene.image.Image;
+import frogger.constant.RiverSprite;
+import frogger.model.PlayerAvatar;
 
 /**
- * This class is the model for log
+ * Objects of this class acts as a platform for {@link PlayerAvatar} 
+ * to hop on
+ * 
+ * @see CollisionDetector
  */
-public class Log extends NPC {
+public class Log extends NPC implements RiverSprite {
+
+	private LOG_TYPE type;
+	
+	public Log(LOG_TYPE log) {
+		super(log);
+		this.type = log;
+
+	}
+
+	@Override
+	public NPC clone() {
+		return new Log(this.type);
+	}
+
+
 
 	
-	public Log(LOG_TYPE name) {
-		int size = name.getSize();
-		setImage(new Image(name.getURL(), size, size, true, true));
-
-	}
-
-	@Override
-	protected void checkOutOfBounds() {
-		if (getX()>600 && speed>0)
-			setX(-180);
-		if (getX()<-300 && speed<0)
-			setX(700);
-		
-	}
-
-	@Override
-	protected void playAnimation(long now) {
-		
-	}
-
+//	@Override
+//	protected void checkOutOfBounds() {
+//		if (getX()>600 && speed>0)
+//			setX(-180);
+//		if (getX()<-size && speed<0)
+//			setX(600); //300,225,150
+//		
+//	}
 	
 }
