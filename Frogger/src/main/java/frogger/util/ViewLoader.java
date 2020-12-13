@@ -24,6 +24,9 @@ public enum ViewLoader {
 	
 	private FXMLLoader loader;
 	
+	/**
+	 * This method loads the selection view
+	 */
 	public void loadSelection() {
 		loadFXML(FilePath.VIEW_SELECT);
 		mainStage.getScene().setRoot(pane);
@@ -32,7 +35,9 @@ public enum ViewLoader {
 	}
 	
 	
-	
+	/**
+	 * This method loads the info view
+	 */
 	public void loadInfo() {
 		loadFXML(FilePath.INFO_FXML);
 		initNewStage("Info");
