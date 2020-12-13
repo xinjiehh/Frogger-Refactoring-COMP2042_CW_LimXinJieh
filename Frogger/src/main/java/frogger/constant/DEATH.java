@@ -6,5 +6,5 @@ package frogger.constant;
 public enum DEATH {
 	WATER,
 	CAR,
-	NULL;
+	NULL
 }
