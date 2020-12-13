@@ -1,78 +1,72 @@
 package frogger.controller;
 
 
-/* Model holds persistent data
- * Get, set, manipulate data here
- * Main pane TODO getURL path
- */
-/*
- * view model observer relationship
- * view registers to model 
- * model calls back to view when it has changed
- * view redisplay
- * 
- */
+import java.util.List;
 
+import frogger.Main;
+import frogger.constant.DEATH;
+import frogger.constant.GameOver;
 import frogger.controller.SelectionController.Controls;
+import frogger.model.GameModel;
+import frogger.model.PlayerAvatar;
+import frogger.model.World;
+import frogger.model.npc.Swamp;
+import frogger.util.AudioPlayer;
+import frogger.util.CollisionHandler;
+import frogger.util.HighScoreFile;
+import frogger.util.ViewLoader;
+import frogger.view.GameScreen;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogEvent;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import frogger.model.Frog;
-import frogger.model.GameModel;
-import frogger.model.World;
-import frogger.model.npc.Swamp;
-import frogger.util.AudioPlayer;
-import frogger.util.HighScoreFile;
-import frogger.view.GameScreen;
-import frogger.view.ScoreStageLoader;
-import frogger.Main;
-import frogger.constant.GameOver;
-
-import java.util.List;
 
 
 /**
  * This class implements the singleton method using enum.
  * Following the MVC pattern, this class acts as Controller for
- * GameScreen (View) and GameModel (Model). This class acts as 
- * a medium between the View and the Model by providing methods
- * for the View to update the Model and vice versa. GameScreen 
- * and GameModel do not interact with each other directly. This
- * class creates a GameScreen and GameModel object. To reduce 
- * redundancy, only a new GameModel is created for each new
- * level as it contains the NPC for each level which have 
- * different properties
+ * {@link GameScreen} (View) and {@link GameModel} (Model). 
+ * 
+ * This class acts as a medium for the interaction of other classes
+ * with the {@code GameScreen} and/or {@code GameModel}. 
+ * 
+ * <p>
+ * 
+ * This class creates a GameScreen and GameModel object. Then, this
+ * class receives input/changes from external sources (classes), and 
+ * informs the view ({@code GameScreen}) and/or model ({@code GameModel}) to 
+ * change accordingly. 
+ *  
+ * <p>
+ * To reduce redundancy, only a new GameModel is created for each new
+ * level as it contains the NPC which varies in each level.   
+ * 
  */
 
 public enum GameController  {
 
 	INSTANCE;
 	
-	private static Stage mainStage = Main.getPrimaryStage();
+	private static final Stage mainStage = Main.getPrimaryStage();
 	private static boolean pause = false;
 	private int levelNum = 0; 
-	private Frog frog; 
-	private String scoreString = "";
+	private PlayerAvatar player; 
 	private World gamePane;
 	private GameScreen gameView;
 	private Scene scene;
 	private GameModel gameModel;
 	private Alert alert;
-	private ImageView bonus;
 	
 	/**
 	 * This method initializes the game properties such as 
 	 * the controls chosen by user (WASD or arow keys), the 
-	 * {@link World} (gamePane), {@link bonus}, and {@code Alert}
+	 * {@link World} (gamePane) and {@code Alert}
 	 * @param control  the key control options ({@link Controls}) 
 	 * chosen by user
 	 */
@@ -80,7 +74,6 @@ public enum GameController  {
 
 		gameView = new GameScreen(control); 
 		gamePane = gameView.getPane();
-		bonus = gameView.getBonus();
 		alert = gameView.getAlert();
 		
 		
@@ -102,7 +95,7 @@ public enum GameController  {
 		gameView.setLevelText(levelNum);
 		gameModel = new GameModel(levelNum);
 		Swamp.resetCtr();
-		initFrog();
+		initPlayer();
 	    startGame();
 		System.out.println("This is level "+ levelNum);
 	}
@@ -111,8 +104,8 @@ public enum GameController  {
 	 * This method (called by {@link CollisionHandler}) invokes the 
 	 * GameModel object to update its properties when 
 	 * <u1> 
-	 * <li> all five Frogs have reached the swamp, or</li>
-	 * <li> the Frog object dies and loses all its lives</li>
+	 * <li> all five {@link PlayerAvatar} objects have reached the swamp, or</li>
+	 * <li> the {@link PlayerAvatar} object dies and loses all its lives</li>
 	 * </u1>
 	 * <p>
 	 * @param state  {@code GameOver.NEXT} for next level,
@@ -129,8 +122,9 @@ public enum GameController  {
 	 * 
 	 */
 	public void showScoreDisplay() {
-		ScoreStageLoader.INSTANCE.initScoreView(gameModel.getLevel(), gameModel.getScores());
-		ScoreStageLoader.INSTANCE.showStage();
+//		ScoreStageLoader.INSTANCE.initScoreView(gameModel.getLevel(), gameModel.getScores());
+//		ScoreStageLoader.INSTANCE.showStage();
+		ViewLoader.INSTANCE.loadScore(gameModel.getLevel(), gameModel.getScores());
 	 }
 	
 
@@ -156,12 +150,12 @@ public enum GameController  {
 		Swamp.resetCtr();
 		
 		if(gameModel.getState()==GameOver.NEXT) {
-			frog.setScore(0);
+			player.setScore(0);
 			nextLevel();
 					
 		} else {
 			ScreenController.INSTANCE.showMenu();
-			new HighScoreFile(scoreString);
+			new HighScoreFile(gameModel.getScoreString());
 			levelNum=0;
 		}
 		
@@ -244,14 +238,6 @@ public enum GameController  {
 		}
 	}
 	
-	
-	/*
-	 * v2: enable flyBonus=false in Frog hasFlyBonus()
-	 * method 1: bonus animation
-	 * method 2: call model to play animation 
-	 * (if 2 deleted, delete setBonusVisible())
-	 */
-	
 	/**
 	 * This method calls this {@link GameModel} object to play the bonus
 	 * animation as the animation logic is contained inside the 
@@ -259,34 +245,24 @@ public enum GameController  {
 	 * will be refactored and moved into its own class.
 	 * 
 	 * @param bonusX  the x position of the {@link Swamp} class 
-	 * where the Frog object caught the fly.
+	 * where the {@link PlayerAvatar} object caught the fly.
 	 */
 	public void showBonus(double bonusX) {
-		ImageView bonus = gameView.getBonus();
-		bonus.setX(bonusX);
-		gameModel.playBonus(); //method 2
+		System.out.println("gc show bonus");
+		gameView.playBonusAnim(bonusX);
 
 	}
 	
-
-	/**
-	 * This method is called to update the visibility of {@link #bonus}
-	 * in this GameView object (MVC pattern)
-	 * @param bool  true to make {@code bonus} visible
-	 */
-	public void setBonusVisible(boolean bool) {
-		bonus.setVisible(bool);
-	}
 	
 	/**
-	 * This method initializes this {@link Frog} object and its
+	 * This method initializes this {@link PlayerAvatar} object and its
 	 * properties.
 	 */
-	private void initFrog() {
-		this.frog = gameModel.getFrog();
-		frog.setNoMove(false);
-		frog.addScoreListener(this::updateScore);
-	    frog.addLifeListener(this::updateLifeView);
+	private void initPlayer() {
+		this.player = gameModel.getPlayer();
+		player.setNoMove(false);
+		player.addScoreListener(this::updateScore);
+	    //player.addLifeListener(this::updateLifeView);
 
 	}
 	
@@ -295,7 +271,8 @@ public enum GameController  {
 		AudioPlayer.INSTANCE.playMusic();
 		gamePane.startMotion();
 		gameModel.continueAllTimer();
-		frog.setNoMove(false);
+		if(player.getDeath()==DEATH.NULL)
+			player.setNoMove(false);
 	}
 	
 	/** This method calls all necessary methods to stop the game. */
@@ -303,40 +280,15 @@ public enum GameController  {
 		AudioPlayer.INSTANCE.stopMusic();
 		gamePane.stopMotion();
 		gameModel.pauseAllTimer();
-		frog.setNoMove(true);
+		player.setNoMove(true);
 	}
 	
-	
-	/**
-	 * This method simulates the method 'changed' of the {@code 
-	 * ChangeListener} interface and defines the actions to be 
-	 * taken whenever the {@link Frog} object {@code lifeProp} changes. 
-	 * 
-	 * In this case, this method defines the actions to update the life 
-	 * array displayed on the game screen.  
-	 * 
-	 * @param observable  the {@code ObservableValue} lifeProp which value changed
-	 * @param oldValue  the old value
-	 * @param newValue  the new value
-	 * @see Frog#addLifeListener(ChangeListener)
-	 */
-	private void updateLifeView(ObservableValue <?extends Number>observable, Number oldValue, Number newValue) {
 
-		int life = newValue.intValue();
-		
-		if(life>=0) {
-			for (int i = 3; i > life; i--) 
-				gameView.getLifeArray().get(i-1).setVisible(false);
-		} else {
-			GameController.INSTANCE.handleGameDone(GameOver.LOSE);
-		}
-
-	}
 	
 	/**
 	 * This method simulates the method {@code changed} of the 
 	 * {@code ChangeListener} interface and defines the actions 
-	 * to be taken whenever the {@link Frog} object scoreProp 
+	 * to be taken whenever the {@link PlayerAvatar} object scoreProp 
 	 * changes. 
 	 * 
 	 * In this case, this method defines the actions to update the 
@@ -345,13 +297,14 @@ public enum GameController  {
 	 * @param observable  {@code scoreProp} which value changed
 	 * @param oldValue  the old value
 	 * @param newValue  the new value
-	 * @see Frog#addScoreListener(ChangeListener)
+	 * @see PlayerAvatar#addScoreListener(ChangeListener)
 	 */
 	private void updateScore(ObservableValue <?extends Number>observable, Number oldValue, Number newValue) {
 		gameModel.setScore(newValue.intValue());
 	}
 	
-
+	
+	
 	/**
 	 * This method initializes the header text of the {@code 
 	 * @Alert} object and show the alert.
@@ -381,7 +334,7 @@ public enum GameController  {
 	/**
 	 * This method is called by the method {@link #initGameScene()} 
 	 * to handle key press. This method is separate from 
-	 * {@link #handleKeyPress(KeyEvent)} to be able to use method 
+	 * {@link #handleKeyRelease(KeyEvent)} to be able to use method
 	 * reference in the caller method
 	 * @param event  {@code KeyEvent} generated on key press
 	 */
