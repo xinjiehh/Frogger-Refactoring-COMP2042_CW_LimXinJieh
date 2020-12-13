@@ -1,12 +1,12 @@
 package frogger.controller;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import frogger.constant.FilePath;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * This class is the controller for the selection view
@@ -27,7 +27,7 @@ public class SelectionController {
 	  /**WASD*/
 	  A, 
 	 /**ARROW KEYS*/
-	  B; 
+	  B
   }
   
   /**
@@ -37,7 +37,7 @@ public class SelectionController {
    */
   public enum Mode {
 	  SINGLE,
-	  DOUBLE;
+	  DOUBLE
   }
 
   
@@ -82,16 +82,16 @@ public class SelectionController {
    */
   @FXML
   public void switchControls() {
-	  switch ((Controls) controls.getUserData()) {
-	  case A:
-		  controls.setUserData(Controls.B);
-		  controls.setText("< ARROW KEYS >");
-		  break;
-	  case B:
-		  controls.setUserData(Controls.A);
-		  controls.setText("<    WASD    >");
-		  break;
-	  } 
+      switch ((Controls) controls.getUserData()) {
+          case A -> {
+              controls.setUserData(Controls.B);
+              controls.setText("< ARROW KEYS >");
+          }
+          case B -> {
+              controls.setUserData(Controls.A);
+              controls.setText("<    WASD    >");
+          }
+      }
 	  
   }
 
