@@ -1,18 +1,20 @@
 package frogger.model;
 
-import frogger.constant.DEATH;
-import frogger.constant.DIRECTION;
-import frogger.util.AudioPlayer;
-import frogger.util.SpriteAnimation;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import frogger.constant.DEATH;
+import frogger.constant.DIRECTION;
+import frogger.constant.GameOver;
+import frogger.controller.GameController;
+import frogger.util.AudioPlayer;
+import frogger.util.animation.DeathAnimation;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.scene.image.Image;
 
 /**
  * This class implements template method, which allows subclasses
@@ -26,12 +28,13 @@ import java.util.Map;
  */
 public abstract class PlayerAvatar extends Actor implements Subject {
 
-	protected static final double START_YPOS = 706.467;//679.8 + FrogModel.movement;
-	protected static final double START_XPOS = 300;
+	
 	protected static final double LOWER_BOUND = 173.13;
 	protected static final double UPPER_BOUND = 800;
 	protected static final double MOVEMENT = 13.3333333 * 2;
 	protected static final double MOVEMENT_X = 10.666666 * 2;
+	protected final double START_YPOS;
+	protected final double START_XPOS;
 	
 	/** the image for up movement */
 	protected Image imgW1;
@@ -59,7 +62,7 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	
 	protected List<Image> carDeath = new ArrayList<>();
 	protected List<Image> waterDeath = new ArrayList<>();
-	protected Map<DEATH, SpriteAnimation> animMap = new HashMap<DEATH, SpriteAnimation>();
+	protected Map<DEATH, DeathAnimation> animMap = new HashMap<DEATH, DeathAnimation>();
 
 	
 	/**
@@ -68,7 +71,9 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	 * state, and initializes life and score of this {@code PlayerAvatar} 
 	 * object
 	 */
-	public PlayerAvatar() {
+	public PlayerAvatar(double startX, double startY) {
+		this.START_XPOS=startX;
+		this.START_YPOS=startY;
 		initImages();
 		initAnim();
 		restartPlayer();
@@ -80,26 +85,54 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	
 	
 	/**
-	 * This method initializes the {@link SpriteAnimation} for {@link DEATH} 
+	 * This method initializes the {@link DeathAnimation} for {@link DEATH} 
 	 * type {@code DEATH#WATER} and {@code DEATH#CAR} and insert them 
 	 * into a {@code HashMap} with the {@code DEATH} type as key for 
 	 * easy access
 	 */
 	protected void initAnim() {
-		animMap.put(DEATH.WATER, new SpriteAnimation(this, waterDeath));
-		animMap.put(DEATH.CAR, new SpriteAnimation(this, carDeath));
+		animMap.put(DEATH.WATER, new DeathAnimation(this, waterDeath));
+		animMap.put(DEATH.CAR, new DeathAnimation(this, carDeath));
 	}
 
 	/**
-	 * This method gets the {@link SpriteAnimation} to which
+	 * This method gets the {@link DeathAnimation} to which
 	 * the given {@link DEATH} key is mapped in {@link #animMap}
 	 * @param death  {@code DEATH} type of {@code PlayerAvatar}  
 	 */
-	public void playDeathAnim(DEATH death) {
+	private void playDeathAnim(DEATH death) {
+		setNoMove(true);
+		playAudio(death);
 		animMap.get(death).play();
-		System.out.println("play");
+		
+	}
+	/**
+	 * This method handles the death of this {@code PlayerAvatar}
+	 * by playing the corresponding audio and animation, and
+	 * resetting this {@code PlayerAvatar} state and properties
+	 * @param death  {@link DEATH} state of {@code PlayerAvatar}
+	 */
+	public void handleDeath(DEATH death) {
+		if(this.deathState==DEATH.NULL) {
+			System.out.println("One life lost");
+			resetScore();
+			playDeathAnim(death);
+			setDeath(death);
+			loseLife();
+		}
+		
 	}
 	
+	/**
+	 * This method plays death audio according to the type of death
+	 * @param death  {@link DEATH} state
+	 */
+	private void playAudio(DEATH death) {
+		if(death==DEATH.CAR)
+			AudioPlayer.INSTANCE.squashSound();
+		else if(death==DEATH.WATER)
+			AudioPlayer.INSTANCE.plunkSound();
+	}
 	
 	/**
 	 * This method should be overriden by subclass to initialize
@@ -286,11 +319,18 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	 * This method reduces the lives of this {@code PlayerAvatar} object 
 	 * ({@link #lifeProp} by 1
 	 */
-	public void loseLife() {
+	private void loseLife() {
 		lifeProp.setValue(lifeProp.intValue()-1);
 		notify("life", this);
 		System.out.println("Life left: " + lifeProp.toString());
+		if(lifeProp.intValue()==-1) {
+			GameController.INSTANCE.handleGameDone(GameOver.LOSE);
+		}
 
+	}
+	
+	public int getLife() {
+		return lifeProp.intValue();
 	}
 	
 	/**
