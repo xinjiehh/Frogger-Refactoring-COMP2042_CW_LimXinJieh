@@ -7,14 +7,14 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+
 /**
- * constructor initializes fixed button width, height, font, with customizable text
- * removed xPos yPos from constructor
+ * This class defines {@code Button} object used in {@link GameScreen}
+ * for leaving the game (goes back to main menu)
+ *
  */
-//<%=outterBoxWidth;%>
-
 public class ExitButton extends Button {
-
+	/** inline css style of this {@code Button} */
 	private static final String BUTTON_STYLE = "-fx-background-color: transparent;" + 
 											   "-fx-background-size: cover;" + 
 											   "-fx-background-image: url(\"" + FilePath.BUTTON_PATH ;
@@ -22,17 +22,22 @@ public class ExitButton extends Button {
 	private static final String BUTTON = BUTTON_STYLE + "exitLeft.png" + "\");";
 
 	
+	/**
+	 * This public constructor initalizes the preferred width, height,
+	 * style and listeners of this {@code ExitButton} object
+	 */
 	public ExitButton () {
 		setPrefWidth(60);
 		setPrefHeight(70);
 		setStyle(BUTTON);
-		initialiseButtonListeners(); 
+		initListeners(); 
 		
 	}
 		
 
 	/**
-	 * This method sets the style for a pressed button
+	 * This method sets the preferred height and layout 
+	 * for a pressed button
 	 */
 	private void setButtonPressedStyle() {
 		setPrefHeight(68);
@@ -41,7 +46,8 @@ public class ExitButton extends Button {
 	}
 	
 	/**
-	 * This method sets the style for a released button
+	 * This method sets the preferred height and layout 
+	 * for a released button
 	 */
 	
 	private void setButtonReleasedStyle() {
@@ -57,7 +63,7 @@ public class ExitButton extends Button {
 	 * (pressed / released) on this object.
 	 */
 
-	private void initialiseButtonListeners() {
+	private void initListeners() {
 
 		setOnMousePressed(this::handleMouseEvent);
 		setOnMouseReleased(this::handleMouseEvent);

@@ -1,8 +1,5 @@
 package frogger.util.buttons;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import frogger.constant.FilePath;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -10,11 +7,13 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
-/**
- * constructor initializes fixed button width, height, font, with customizable text
- * removed xPos yPos from constructor
- */
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
+/**
+ * This class defines {@code Button} object used in {@link MenuScreen}
+ *
+ */
 public class MenuButton extends Button {
 	private static final String FONT_PATH =  FilePath.DEFAULT_FONT; 
 	
@@ -26,30 +25,27 @@ public class MenuButton extends Button {
 	private String BUTTON_PRESSED = BUTTON_STYLE + "button_pressed.png" + "\");";
 	private String BUTTON_UP = BUTTON_STYLE + "button.png" + "\");";
 
-	
+	/**
+	 * This public constructor initalizes the text, font, 
+	 * preferred width, height, style and listeners of this 
+	 * {@code ExitButton} object
+	 * 
+	 * @param text  {@code String} to be displayed in this 
+	 * {@code Button}
+	 */
 	public MenuButton (String text) {
 		setText(text);
 		setButtonFont();
 		setPrefWidth(190);
 		setPrefHeight(49);
 		setStyle(BUTTON_UP);
-		initialiseButtonListeners(); 
+		initListeners(); 
 		
 	}
 	
-	//test
-	public MenuButton () {
-		setButtonFont();
-		setPrefWidth(190);
-		setPrefHeight(49);
-		setStyle(BUTTON_UP);
-		initialiseButtonListeners(); 
-		
-	}
-		
 
-	/**
-	 * This method sets the default font for button text
+	/*
+	 * This method loads and sets the default font for button text
 	 */
 	
 	private void setButtonFont() {
@@ -64,8 +60,10 @@ public class MenuButton extends Button {
 			
 		}
 	}
+	
 	/**
-	 * This method sets the style for a pressed button
+	 * This method sets the style, preferred height and {@code layoutY}
+	 * property for a pressed button
 	 */
 	private void setButtonPressedStyle() {
 		setStyle(BUTTON_PRESSED);
@@ -75,7 +73,8 @@ public class MenuButton extends Button {
 	}
 	
 	/**
-	 * This method sets the style for a released button
+	 * This method sets the style, preferred height and {@code layoutY}
+	 * property for a released button
 	 */
 	
 	private void setButtonReleasedStyle() {
@@ -92,7 +91,7 @@ public class MenuButton extends Button {
 	 * (pressed / released) on this object.
 	 */
 	
-	private void initialiseButtonListeners() {
+	private void initListeners() {
 		
 		setOnMousePressed(this::handleMouseEvent);
 		setOnMouseReleased(this::handleMouseEvent);
