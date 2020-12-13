@@ -2,17 +2,13 @@ package frogger.constant;
 
 /**
  * This class contains all the paths for the media files used in
- * this project for easy modification. This eliminates the need 
- * for user to manually find and modify each reference of the media 
- * file when media file name/location is changed
+ * this project for easy modification. 
  */
 
 public class FilePath {
 	
 	public static final String RESOURCE_PATH = "src/main/resources/";
-	
 	public static final String BONUS = "/misc/100.png";
-	
 	//BACKGROUND
 	public static final String BG_PATH = "/background/";
 	public static final String GAMEBACKGROUND = BG_PATH + "GameBackground2.png";
@@ -20,7 +16,17 @@ public class FilePath {
 	
 	public static final String INFO_FXML = "/view/info.fxml";
 	
+	
+	//NPC
 	public static final String NPC_PATH = "/npc/";
+	
+	//NPC: SWAMP
+	public static final String SWAMP_PATH = "/npc/swamp/";
+	public static final String S_FLY = FilePath.SWAMP_PATH + "FlyEnd.png";
+	public static final String SWAMP = FilePath.SWAMP_PATH + "End.png";
+	public static final String S_CROC1 = FilePath.SWAMP_PATH + "CrocEnd1.png";
+	public static final String S_CROC2 = FilePath.SWAMP_PATH + "CrocEnd2.png";
+	public static final String S_FROG = FilePath.SWAMP_PATH + "FrogEnd.png";
 	
 	//NPC: LOG
 	public static final String L_LOG = NPC_PATH +  "logLong.png";
@@ -44,26 +50,26 @@ public class FilePath {
 	//FROG
 	public static final String FROG_PATH = "/frog/";
 	public static final String FROG_UP = FROG_PATH + "froggerUp.png";
-	public static final String FROG_LEFT = FROG_PATH + "froggerLeft.png";
-	public static final String FROG_DOWN = FROG_PATH + "froggerDown.png";
-	public static final String FROG_RIGHT = FROG_PATH + "froggerRight.png";
+//	public static final String FROG_LEFT = FROG_PATH + "froggerLeft.png";
+//	public static final String FROG_DOWN = FROG_PATH + "froggerDown.png";
+//	public static final String FROG_RIGHT = FROG_PATH + "froggerRight.png";
 	public static final String FROG_UPJUMP = FROG_PATH + "froggerUpJump.png";
-	public static final String FROG_LEFTJUMP = FROG_PATH + "froggerLeftJump.png";
-	public static final String FROG_DOWNJUMP = FROG_PATH + "froggerDownJump.png";
-	public static final String FROG_RIGHTJUMP = FROG_PATH + "froggerRightJump.png";
+//	public static final String FROG_LEFTJUMP = FROG_PATH + "froggerLeftJump.png";
+//	public static final String FROG_DOWNJUMP = FROG_PATH + "froggerDownJump.png";
+//	public static final String FROG_RIGHTJUMP = FROG_PATH + "froggerRightJump.png";
 	
 		
 	//FONT
 	public static final String FONT_PATH = RESOURCE_PATH + "font/";
-	
 	public static final String DEFAULT_FONT = FONT_PATH + "JoystixMonospace.ttf";
-	
 	public static final String BUTTON_PATH = "button/";
-	public static final String SWAMP_PATH = "/npc/swamp/";
+	
+	
 	public static final String DIGIT_PATH = "/digit/";
 	
 	//FXML
 	public static final String VIEW_SELECT = "/view/selection.fxml";
+	public static final String VIEW_SCORE = "/view/scoreview.fxml";
 	
 	//AUDIO
 	public static final String AUDIO_PREFIX = "src/main/resources/audio/";
@@ -72,11 +78,6 @@ public class FilePath {
 	public static final String WATERDEATH_AUDIO = AUDIO_PREFIX + "plunk.wav";
 	public static final String CARDEATH_AUDIO = AUDIO_PREFIX + "squash.wav";
 	
-	//SWAMP
-	public static final String S_FLY = FilePath.SWAMP_PATH + "FlyEnd.png";
-	public static final String SWAMP = FilePath.SWAMP_PATH + "End.png";
-	public static final String S_CROC1 = FilePath.SWAMP_PATH + "CrocEnd2.png";
-	public static final String S_CROC2 = FilePath.SWAMP_PATH + "CrocEnd2.png";
-	public static final String S_FROG = FilePath.SWAMP_PATH + "FrogEnd.png";
+	
 			
 }
