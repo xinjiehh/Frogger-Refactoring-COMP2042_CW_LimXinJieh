@@ -19,6 +19,11 @@ public class Frog extends PlayerAvatar {
 
 	private static final int IMG_SIZE = 40;
 	
+	public Frog(double startX, double startY) {
+		super(startX,startY);
+		 
+	}
+	
 	@Override
 	protected void initImages() {
 		imgW1 = new Image(FilePath.FROG_UP, IMG_SIZE, IMG_SIZE, true, true);
