@@ -1,15 +1,15 @@
 package frogger.model.npc;
 
 import frogger.constant.FilePath;
-import frogger.model.Actor;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * This is the model for digit that is shown on the game
  * screen
  *
  */
-public class Digit extends Actor {
+public class Digit extends ImageView {
 	
 	private static final int WIDTH = 30;
 	private static final int HEIGHT = 30;
@@ -25,15 +25,6 @@ public class Digit extends Actor {
 		setX(x);
 		setY(y);
 	}
-	
-	@Override
-	public void act(long now) {
-	}
-	
-	@Override
-	protected void checkOutOfBounds() {
-	}
-	
 
 	
 }
