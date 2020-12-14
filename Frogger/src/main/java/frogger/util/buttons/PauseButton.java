@@ -2,6 +2,7 @@ package frogger.util.buttons;
 
 
 import frogger.constant.FilePath;
+import frogger.view.GameScreen;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
@@ -22,7 +23,7 @@ public class PauseButton extends Button {
 	private static final String PAUSE_BUTTON = BUTTON_STYLE + "pause.png" + "\");";
 	
 	/**
-	 * This public constructor initalizes the id, preferred width, height,
+	 * This public constructor initializes the id, preferred width, height,
 	 * style and listeners of this {@code ExitButton} object
 	 */
 	public PauseButton () {
@@ -52,8 +53,8 @@ public class PauseButton extends Button {
 	 * preferred height and layout for a released button
 	 */
 	public void setButtonReleasedStyle() {
-		setStyle(getId() == "pause"? PLAY_BUTTON : PAUSE_BUTTON);
-		setId(getId() == "pause"? "play" : "pause");
+		setStyle(getId().equals("pause") ? PLAY_BUTTON : PAUSE_BUTTON);
+		setId(getId().equals("pause") ? "play" : "pause");
 		setPrefHeight(60);
 		setLayoutY(getLayoutY()-4);
 		
