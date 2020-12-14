@@ -10,7 +10,7 @@ import javafx.animation.Transition;
  * has the same behaviour: to subscribe to {@link GameModel} game
  * state (pause or play) and handle it accordingly.
  * 
- * For animations that are not continous, the flag {@link #donePlaying}
+ * For animations that are not continuous, the flag {@link #donePlaying}
  * must be set to true once animation ends so it will not be played
  * again if the game state changes from pause to play. 
  * 
@@ -23,7 +23,7 @@ public abstract class SpriteAnimationTemplate implements Observer {
 	
 	public SpriteAnimationTemplate() {
 		initAnimation();
-		Subject.subscribe("pause", this);
+		Subject.subscribe(this,"pause");
 		
 
 	}
@@ -51,7 +51,7 @@ public abstract class SpriteAnimationTemplate implements Observer {
 	}
 	
 	/**
-	 * This method has to be overriden by subclasses to initialize 
+	 * This method has to be overridden by subclasses to initialize
 	 * the field {@code animation} which is a {@code Transition} object 
 	 */
 	protected abstract void initAnimation();
