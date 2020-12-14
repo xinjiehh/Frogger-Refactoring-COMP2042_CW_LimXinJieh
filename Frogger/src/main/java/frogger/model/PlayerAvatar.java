@@ -7,7 +7,7 @@ import java.util.Map;
 
 import frogger.constant.DEATH;
 import frogger.constant.DIRECTION;
-import frogger.constant.GameOver;
+import frogger.constant.EndGame;
 import frogger.controller.GameController;
 import frogger.util.AudioPlayer;
 import frogger.util.animation.DeathAnimation;
@@ -178,7 +178,7 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	 */
 	public void jump(DIRECTION direction, boolean keyPress) {
 		if (!noMove) {
-
+			
 			if(!keyPress && isJump) {
 				isJump = false;
 			} 
@@ -324,7 +324,7 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 		notify("life", this);
 		System.out.println("Life left: " + lifeProp.toString());
 		if(lifeProp.intValue()==-1) {
-			GameController.INSTANCE.handleGameDone(GameOver.LOSE);
+			GameController.INSTANCE.handleGameDone(EndGame.LOSE);
 		}
 
 	}
