@@ -55,11 +55,11 @@ public abstract class NPC extends Actor {
 	 */
 	protected void playAnimation(long now) {
 		
-	};
-	
+	}
+
 	/**
 	 * This method is the implementation of PROTOTYPE
-	 * method. This method has to be overriden by concrete 
+	 * method. This method has to be overridden by concrete
 	 * subclasses to return the subclass object
 	 */
 	public abstract NPC clone();
@@ -104,16 +104,6 @@ public abstract class NPC extends Actor {
 	
 	public double getSpeed() { 
 		return this.speed;
-	}
-	
-	/**
-	 * This method increases the speed of this character
-	 * object by a given amount 
-	 * @param increase  the {@code integer} value of speed to 
-	 * increase
-	 */
-	public void increaseSpeed(int increase) {
-		this.speed+=increase;
 	}
 	
     /**
