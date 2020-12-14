@@ -14,9 +14,9 @@ import javafx.scene.image.Image;
  * Sinkable} that has the property {@code sunk} that is useful in 
  * {@link CollisionDetector} to easily determine if an {@link NPC} 
  * is sunken. There is also an option to define animation without
- * using {@link SpriteAnimationTemplate} using the {@link #playAnimation()}
- * which changes the {@code Image} of this object based on the time
- * frame passed
+ * using {@link SpriteAnimationTemplate} by overriding the
+ * {@link NPC#playAnimation(long)} which changes the {@code Image}
+ * of this object based on the time frame passed
  *
  */
 public class WetTurtle extends NPC implements Sinkable, RiverSprite {
@@ -27,19 +27,25 @@ public class WetTurtle extends NPC implements Sinkable, RiverSprite {
 	private static final Image turtle3 = new Image(FilePath.TURTLE3_WET,SIZE,SIZE,true,true);
 	private static final Image turtle4 = new Image(FilePath.TURTLE4_WET,SIZE,SIZE,true,true);
 	private boolean isSunk;
-	ArrayList<Image> images = new ArrayList<Image>() {
-		{
-			add(turtle1);
-			add(turtle2);
-			add(turtle3);
-			add(turtle4);
-		}
 
-	};
 
 	public WetTurtle() {
 		super();
 		setImage(turtle2);
+		initAnimation();
+	}
+
+	private void initAnimation() {
+		ArrayList<Image> images = new ArrayList<Image>() {
+			{
+				add(turtle1);
+				add(turtle2);
+				add(turtle3);
+				add(turtle4);
+			}
+
+		};
+		
 		NPCAnimation anim = new NPCAnimation(this, images);
 		anim.play();
 	}
