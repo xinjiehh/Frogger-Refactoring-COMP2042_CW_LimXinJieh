@@ -48,7 +48,7 @@ public enum ViewLoader {
 	/**
 	 * This method loads the score view layout from the scoreview FXML file 
 	 * and initializes this Pane object with the loaded object hierarchy. This
-	 * method also calls the related controller to initalize the data to be
+	 * method also calls the related controller to initialize the data to be
 	 * shown in the view.
 	 * 
 	 * @param levelData  list of levels played
