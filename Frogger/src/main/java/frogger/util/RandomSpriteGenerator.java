@@ -26,7 +26,7 @@ public enum RandomSpriteGenerator {
 	/**This enum represents the type of river {@link NPC} there are */
 	enum RiverSprite {
 		LOG,
-		TURTLE;
+		TURTLE
 	}
 	
 	private static final OBSTACLE_TYPE[] OBSTACLES = OBSTACLE_TYPE.values();
@@ -52,15 +52,11 @@ public enum RandomSpriteGenerator {
 		RiverSprite[] sprites = RiverSprite.values();
 		Random rand = new Random();
 		RiverSprite sprite = sprites[rand.nextInt(sprites.length)];
-		
-		switch(sprite) {
-		case LOG:
-			return getRandomLog();
-		case TURTLE:
-			return getRandomTurtle();
-		default: 
-			return null;
-		} 
+
+		return switch (sprite) {
+			case LOG -> getRandomLog();
+			case TURTLE -> getRandomTurtle();
+		};
 		
 	}
 	
