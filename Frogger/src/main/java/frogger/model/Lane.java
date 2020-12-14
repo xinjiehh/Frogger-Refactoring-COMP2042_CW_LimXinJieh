@@ -30,7 +30,7 @@ import frogger.util.RandomSpriteGenerator;
  * <p>
  * This follows original Frogger implementation where type of {@code NPC} for each lane 
  * is fixed. However, one can easily modify this by tweaking  {@link #initLaneElement} and 
- * using {@link RandomSpriteGenerator} as shown in the method {@link #initRandomLaneElement()}
+ * using {@link RandomSpriteGenerator} as shown in the method {@link #initRandomLaneElement}
  * 
  * Switch cases are used to instantiate a new object based on the lane number passed, 
  * then {@link #createNPC()} is called to create clones of that object using the 
@@ -125,10 +125,10 @@ public final class Lane {
 	
 	public void initRandomLaneElement(String str) {
 		
-		if(str=="river") {
+		if(str.equals("river")) {
 			npc = RandomSpriteGenerator.INSTANCE.getRandomRoadSprite();
 			
-		} else if (str=="road") {
+		} else if (str.equals("road")) {
 			npc = RandomSpriteGenerator.INSTANCE.getRandomRiverSprite();
 		}
 		
