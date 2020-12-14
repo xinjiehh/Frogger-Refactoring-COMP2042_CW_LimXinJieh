@@ -2,6 +2,7 @@ package frogger.util.buttons;
 
 
 import frogger.constant.FilePath;
+import frogger.view.GameScreen;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
@@ -23,7 +24,7 @@ public class ExitButton extends Button {
 
 	
 	/**
-	 * This public constructor initalizes the preferred width, height,
+	 * This public constructor initializes the preferred width, height,
 	 * style and listeners of this {@code ExitButton} object
 	 */
 	public ExitButton () {

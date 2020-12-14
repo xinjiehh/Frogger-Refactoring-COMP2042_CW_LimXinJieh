@@ -1,4 +1,6 @@
 package frogger.util.animation;
+import frogger.model.PlayerAvatar;
+import frogger.model.npc.Swamp;
 import javafx.animation.Transition;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -11,7 +13,7 @@ import javafx.util.Duration;
  */
 public class BonusAnimation extends SpriteAnimationTemplate {
 	
-	private ImageView bonus;
+	private final ImageView bonus;
 
 	public BonusAnimation(ImageView bonus) {
 		super();

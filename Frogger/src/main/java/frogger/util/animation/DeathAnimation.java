@@ -22,7 +22,7 @@ import javafx.util.Duration;
  * <li> auto animation for {@link NPC}
  * <li> death animation for {@link PlayerAvatar}
  * <li> sinkable animation for {@link Sinkable}
- * @see {@link BonusAnimation} for example of non-sprite animation
+ * @see BonusAnimation for example of non-sprite animation
  *
  */
 public class DeathAnimation extends SpriteAnimationTemplate {
@@ -51,7 +51,7 @@ public class DeathAnimation extends SpriteAnimationTemplate {
 		    @Override
 		    protected void interpolate(double fraction) {
 		        int index = (int) (fraction*(images.size()));
-		        index = index > images.size()-1 ? images.size()-1 : index;
+		        index = Math.min(index, images.size() - 1);
 		        player.setImage(images.get(index)); 
 		        
 
