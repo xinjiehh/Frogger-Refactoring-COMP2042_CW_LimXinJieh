@@ -42,7 +42,7 @@ import javafx.scene.text.Text;
  * pattern. This class subscribes to the "life" event which
  * is updated by the {@link GameModel} through the {@link 
  * Subject} interface. This class receives and handles the 
- * update via {@link Observer#update()} method. This reduces
+ * update via {@link Observer#update} method. This reduces
  * the need to constantly check for updates in every frame
  * using the {@code AnimationTimer} like in the original
  * code.
@@ -57,7 +57,7 @@ public class GameScreen implements Observer {
 	private PauseButton pauseButton = new PauseButton();
 	private ImageView bonus = new ImageView();
 	private ExitButton exitButton = new ExitButton();
-	private Slider slider;
+
 	private World gamePane;
 	private BonusAnimation bonusAnim;
 	
@@ -66,10 +66,7 @@ public class GameScreen implements Observer {
 	public GameScreen(Controls control) {
 		gamePane = new World(control);
 		createLayout();
-		Subject.subscribe("life", this);
-		Subject.subscribe("sprite", this);
-		Subject.subscribe("score", this);
-	
+		Subject.subscribe(this, "life","score","sprite","level");
 	}
 	
 	/**
@@ -81,14 +78,6 @@ public class GameScreen implements Observer {
 	}
 	
 
-	/**
-	 * Public method that allows access to frog life array
-	 * @return ArrayList<Node> of frog
-	 */
-	public ArrayList<Node> getLifeArray() {
-		return lifeArray;
-	}
-	
 	/**
 	 * Public method that sets level text shown on screen
 	 * @param i current level number
@@ -236,7 +225,7 @@ public class GameScreen implements Observer {
 	 * slider to update game volume, then adds it to pane
 	 */
 	private void initVolumeSlider() {
-		slider = new Slider(0, 1, AudioPlayer.INSTANCE.getVolume());
+		Slider slider = new Slider(0, 1, AudioPlayer.INSTANCE.getVolume());
 		slider.setLayoutX(300);
 		slider.setLayoutY(75);
 		
@@ -249,10 +238,12 @@ public class GameScreen implements Observer {
 	/**
 	 * This method shows the bonus image above the {@link Swamp} 
 	 * object where the {@link PlayerAvatar} object touches a fly.
-	 * It is shown for 1000 miliseconds before being hidden until
+	 * It is shown for 1000 milliseconds before being hidden until
 	 * a fly is caught again. 
 	 * @param bonusX  the x-position of the {@code Swamp} where
 	 * the {@code PlayerAvatar} caught the fly
+	 *
+	 * @see BonusAnimation
 	 */
 	public void playBonusAnim(double bonusX) {
 		bonus.setX(bonusX);
@@ -272,18 +263,20 @@ public class GameScreen implements Observer {
 	@Override
 	public void update(String eventType, Subject s) {
 		
-		if(eventType=="life") {
+		if(eventType.equals("life")) {
 			int life = ((PlayerAvatar)s).getLife();
 			if(life>=0) {
 				for (int i = 3; i > life; i--) 
 					lifeArray.get(i-1).setVisible(false);
 			}
 			
-		} else if (eventType=="sprite") {
+		} else if (eventType.equals("sprite")) {
 			List<Node> list = ((GameModel)s).getList();
 			gamePane.addAll(list);
 			
-		} 
+		} else if(eventType.equals("level")) {
+			text.setText("Level " + ((GameModel)s).getLevel());
+		}
 	}
 
 
