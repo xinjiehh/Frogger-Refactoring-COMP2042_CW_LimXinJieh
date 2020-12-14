@@ -63,6 +63,7 @@ public enum ScreenController {
 	 */
 	public void showMenu() {
 		MenuScreen menu = MenuScreen.getInstance();
+		menu.playAnim();
 		scene.setRoot(menu.getPane());
 		stage.show();	
 	}
