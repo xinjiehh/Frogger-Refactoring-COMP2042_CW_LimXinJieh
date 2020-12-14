@@ -34,8 +34,8 @@ public class Swamp extends NPC {
 	private boolean hasFly = false;
 	private boolean hasCroc = false;
 	private boolean activated = false;
-	private FlyAnimation flyAnim = new FlyAnimation();
-	private CrocAnimation crocAnim = new CrocAnimation();
+	private final FlyAnimation flyAnim = new FlyAnimation();
+	private final CrocAnimation crocAnim = new CrocAnimation();
 
 	
 
@@ -234,7 +234,7 @@ public class Swamp extends NPC {
 	private class CrocAnimation extends SpriteAnimationTemplate {
 		private final Image CROC_END2 = new Image(FilePath.S_CROC2, WIDTH, HEIGHT, false, true);
 		private final Image CROC_END1 = new Image(FilePath.S_CROC1, WIDTH, HEIGHT, false, true);
-		private ArrayList<Image> crocImages = new ArrayList<Image>() {
+		private final ArrayList<Image> crocImages = new ArrayList<Image>() {
 			{
 				add(CROC_END2);
 				add(CROC_END1);
@@ -254,7 +254,7 @@ public class Swamp extends NPC {
 				@Override
 				protected void interpolate(double frac) {
 					int index = (int) (frac*(crocImages.size()-1));
-			        index = index > crocImages.size()-1 ? crocImages.size()-1 : index;
+			        index = Math.min(index, crocImages.size() - 1);
 			        setImage(crocImages.get(index)); 
 					
 				}

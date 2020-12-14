@@ -1,5 +1,7 @@
 package frogger.model.npc;
 
+import frogger.util.CollisionDetector;
+
 /**
  * This class is useful for extension. It ties all the {@link NPC} 
  * objects with sinking abilities together. Currently there is only 
@@ -10,9 +12,9 @@ package frogger.model.npc;
  */
  public interface Sinkable {
 	
-	public boolean isSunk();
+ 	boolean isSunk();
 	
-	public void setSunk(boolean b);
+ 	void setSunk(boolean b);
 
 
 }
