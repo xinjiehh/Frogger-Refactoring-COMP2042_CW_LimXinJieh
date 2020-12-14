@@ -3,6 +3,7 @@ package frogger.model.npc;
 import frogger.constant.LOG_TYPE;
 import frogger.constant.RiverSprite;
 import frogger.model.PlayerAvatar;
+import frogger.util.CollisionDetector;
 
 /**
  * Objects of this class acts as a platform for {@link PlayerAvatar} 
@@ -12,7 +13,7 @@ import frogger.model.PlayerAvatar;
  */
 public class Log extends NPC implements RiverSprite {
 
-	private LOG_TYPE type;
+	private final LOG_TYPE type;
 	
 	public Log(LOG_TYPE log) {
 		super(log);

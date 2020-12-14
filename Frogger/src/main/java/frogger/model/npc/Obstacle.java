@@ -1,6 +1,8 @@
 package frogger.model.npc;
 
 import frogger.constant.OBSTACLE_TYPE;
+import frogger.model.PlayerAvatar;
+import frogger.util.CollisionDetector;
 
 /**
  * Objects of this class will cause {@link PlayerAvatar} object to lose
@@ -11,7 +13,7 @@ import frogger.constant.OBSTACLE_TYPE;
  */
 public class Obstacle extends NPC {
 	
-	private OBSTACLE_TYPE type;
+	private final OBSTACLE_TYPE type;
 
 	public Obstacle(OBSTACLE_TYPE obstacle) {
 		super(obstacle);
