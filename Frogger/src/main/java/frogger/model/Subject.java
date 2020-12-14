@@ -39,19 +39,21 @@ public interface Subject {
     	
     }
     //add listener to different properties
-    static void subscribe(String eventType, Observer listener) {
+    static void subscribe(Observer listener, String... eventTypes) {
+    	for(String eventType : eventTypes) {
+    		if(!listeners.containsKey(eventType)) {
+        		ArrayList<Observer> list = new ArrayList<Observer>();
+        		list.add(listener);
+        		listeners.put(eventType, list);
+        		
+    		} else {
+    			
+    			List<Observer> users = listeners.get(eventType);
+    			if(!users.contains(listener)) 
+    	        	   users.add(listener);
+    		}
+    	}
     	
-    	if(!listeners.containsKey(eventType)) {
-    		ArrayList<Observer> list = new ArrayList<Observer>();
-    		list.add(listener);
-    		listeners.put(eventType, list);
-    		
-		} else {
-			
-			List<Observer> users = listeners.get(eventType);
-			if(!users.contains(listener)) 
-	        	   users.add(listener);
-		}
     }
     
     //unsubscribe
