@@ -1,18 +1,15 @@
 package frogger.view;
 
 
-import frogger.Main;
-import frogger.constant.DIRECTION;
+import java.util.ArrayList;
+
 import frogger.constant.FilePath;
 import frogger.controller.MenuController;
+import frogger.model.Background;
 import frogger.model.Frog;
+import frogger.util.animation.MenuAnimation;
 import frogger.util.buttons.MenuButton;
-import javafx.animation.AnimationTimer;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
 
 
 /**
@@ -24,12 +21,8 @@ public class MenuScreen {
 	private static final int BUTTON_START_YPOS = 200;
 	private Pane menuPane;
 	private ArrayList<MenuButton> menuButtonList;
-	private MenuButton startButton;
-	private MenuButton infoButton;
-	private MenuButton exitButton;
-	private boolean right = true;
-	private AnimationTimer timer;
-	
+
+	private MenuAnimation anim;
 	/**
 	 * This method ensures only one instance of this {@link 
 	 * MenuScreen} object is created
@@ -44,13 +37,13 @@ public class MenuScreen {
 	
 	/**
 	 * This private constructor initializes {@link #menuPane}
-	 * and {@link #timer} and starts the animation
+	 * and {@link MenuAnimation} and starts the animation
 	 */
 	private MenuScreen() {
 		menuButtonList = new ArrayList<MenuButton>();
 		initializeMenuPane();
-		createAnim();
-		//startAnim();
+		initAnim();
+		playAnim();
 
 	}
 	
@@ -94,12 +87,12 @@ public class MenuScreen {
 	 * to show the selection screen
 	 */
 	private void createStartButton() {
-		startButton = new MenuButton("play");
+		MenuButton startButton = new MenuButton("play");
 		startButton.setDefaultButton(true);
 		addMenuButton(startButton);
 		startButton.setOnAction((e)-> {
 			MenuController.INSTANCE.viewSelection();
-			timer.stop();
+			anim.stop();
 		});
 
 	}
@@ -111,7 +104,7 @@ public class MenuScreen {
 	 */
 	private void createInfoButton() {
 		
-		infoButton = new MenuButton("info");
+		MenuButton infoButton = new MenuButton("info");
 		addMenuButton(infoButton);
 		infoButton.setOnAction((e)-> MenuController.INSTANCE.showInfo());
 		
@@ -123,7 +116,7 @@ public class MenuScreen {
 	 * to exit the application
 	 */
 	private void createExitButton() {
-		exitButton = new MenuButton("exit");
+		MenuButton exitButton = new MenuButton("exit");
 		addMenuButton(exitButton);
 		exitButton.setCancelButton(true);
 		exitButton.setOnAction((e)-> MenuController.INSTANCE.exit());
@@ -135,47 +128,29 @@ public class MenuScreen {
 	 * that acts as background
 	 */
 	private void createMenuBackground() {
-		
-		ImageView menuBackground = new ImageView(new Image(FilePath.MENUBACKGROUND,Main.STAGE_W, Main.STAGE_H, false, true));
-		menuPane.getChildren().add(menuBackground);
+		Background background = new Background(FilePath.MENUBACKGROUND);
+		menuPane.getChildren().add(background);
 
 	}
+	
 	/**
-	 * This method creates the {@code AnimationTimer}
-	 * for frog animation
+	 * This method creates a {@link Frog} object, add it to {@code Pane}
+	 * and pass the {@code Frog} to {@link MenuAnimation} for animation
 	 */
-	private void createAnim() {
-		Frog frog = new Frog(300, 706.467);
-		frog.setY(700);
-		timer = new AnimationTimer() {
-			@Override
-			public void handle(long now) {
-				if (now % 23 == 0) {
-					if (frog.getX()>=555) {
-						right=false;
-					} else if(frog.getX()<=10){
-			            	  right=true;
-					}
-			        
-					if(right) {
-						frog.jump(DIRECTION.RIGHT, true);
-			        } else  {
-			            frog.jump(DIRECTION.LEFT, true);
-			        }
-				}
-			}
-
-		};
+	private void initAnim() {
+		Frog frog = new Frog(555,706);
+		frog.setRotate(-90);
 		menuPane.getChildren().add(frog);
+		anim = new MenuAnimation(frog);
 		
 	}
 	
 	/**
 	 * This method starts the frog animation on the menu
-	 * by starting the {@link #timer}
+	 * by playing the {@link MenuAnimation} object
 	 */
-	public void startAnim() {
-		timer.start();
+	public void playAnim() {
+		anim.play();
 	}
 
 
@@ -195,6 +170,39 @@ public class MenuScreen {
 	
 
 }
+
+///**
+// * This method creates the {@code AnimationTimer}
+// * for frog animation
+// */
+//private void createAnim() {
+//	Frog frog = new Frog(555,706);
+//	menuPane.getChildren().add(frog);
+//	anim = new MenuAnimation(frog);
+//	Frog frog = new Frog(300, 706.467);
+//	frog.setY(700);
+//	timer = new AnimationTimer() {
+//		@Override
+//		public void handle(long now) {
+//			if (now % 23 == 0) {
+//				if (frog.getX()>=555) {
+//					right=false;
+//				} else if(frog.getX()<=10){
+//		            	  right=true;
+//				}
+//		        
+//				if(right) {
+//					frog.jump(DIRECTION.RIGHT, true);
+//		        } else  {
+//		            frog.jump(DIRECTION.LEFT, true);
+//		        }
+//			}
+//		}
+//
+//	};
+//	menuPane.getChildren().add(frog);
+//
+//}
 
 //Transition animation = new Transition() {
 //    {
