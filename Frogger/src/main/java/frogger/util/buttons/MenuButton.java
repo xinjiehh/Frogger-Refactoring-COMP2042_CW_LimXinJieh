@@ -1,6 +1,7 @@
 package frogger.util.buttons;
 
 import frogger.constant.FilePath;
+import frogger.view.MenuScreen;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
@@ -22,11 +23,11 @@ public class MenuButton extends Button {
 			"-fx-background-image: url(\"" + FilePath.BUTTON_PATH;
 	
 	
-	private String BUTTON_PRESSED = BUTTON_STYLE + "button_pressed.png" + "\");";
-	private String BUTTON_UP = BUTTON_STYLE + "button.png" + "\");";
+	private final String BUTTON_PRESSED = BUTTON_STYLE + "button_pressed.png" + "\");";
+	private final String BUTTON_UP = BUTTON_STYLE + "button.png" + "\");";
 
 	/**
-	 * This public constructor initalizes the text, font, 
+	 * This public constructor initializes the text, font,
 	 * preferred width, height, style and listeners of this 
 	 * {@code ExitButton} object
 	 * 
@@ -106,7 +107,7 @@ public class MenuButton extends Button {
 	
 	//-------- Controller ----------------
 	/**
-	 * This method is controlls the button view, which updates 
+	 * This method is controls the button view, which updates
 	 * the button style directly inside button class.
 	 * @param e  mouse event
 	 */
