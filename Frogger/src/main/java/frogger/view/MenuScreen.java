@@ -21,8 +21,9 @@ public class MenuScreen {
 	private static final int BUTTON_START_YPOS = 200;
 	private Pane menuPane;
 	private ArrayList<MenuButton> menuButtonList;
-
 	private MenuAnimation anim;
+	
+	
 	/**
 	 * This method ensures only one instance of this {@link 
 	 * MenuScreen} object is created
@@ -35,6 +36,19 @@ public class MenuScreen {
 		return instance;
 	}
 	
+	
+	
+	/**
+	 * This method returns this {@code #menuPane} to be 
+	 * displayed
+	 * @return {@code #menuPane}
+	 */
+	
+	public Pane getPane() {
+		return menuPane;
+	}
+	
+	
 	/**
 	 * This private constructor initializes {@link #menuPane}
 	 * and {@link MenuAnimation} and starts the animation
@@ -46,16 +60,7 @@ public class MenuScreen {
 		playAnim();
 
 	}
-	
-	/**
-	 * This method returns this {@code #menuPane} to be 
-	 * displayed
-	 * @return {@code #menuPane}
-	 */
-	
-	public Pane getPane() {
-		return menuPane;
-	}
+
 	
 	/**
 	 * This method initializes the {@code Pane}
