@@ -5,7 +5,7 @@ import java.util.List;
 
 import frogger.Main;
 import frogger.constant.DEATH;
-import frogger.constant.GameOver;
+import frogger.constant.EndGame;
 import frogger.controller.SelectionController.Controls;
 import frogger.model.GameModel;
 import frogger.model.PlayerAvatar;
@@ -55,7 +55,6 @@ public enum GameController  {
 	
 	private static final Stage mainStage = Main.getPrimaryStage();
 	private static boolean pause = false;
-	private int levelNum = 0; 
 	private PlayerAvatar player; 
 	private World gamePane;
 	private GameScreen gameView;
@@ -65,7 +64,7 @@ public enum GameController  {
 	
 	/**
 	 * This method initializes the game properties such as 
-	 * the controls chosen by user (WASD or arow keys), the 
+	 * the controls chosen by user (WASD or arrow keys), the
 	 * {@link World} (gamePane) and {@code Alert}
 	 * @param control  the key control options ({@link Controls}) 
 	 * chosen by user
@@ -73,6 +72,7 @@ public enum GameController  {
 	public void initGame(Controls control) {
 
 		gameView = new GameScreen(control); 
+		gameModel = new GameModel();
 		gamePane = gameView.getPane();
 		alert = gameView.getAlert();
 		
@@ -91,13 +91,10 @@ public enum GameController  {
 	 * for each new level, then starts the game
 	 */
 	public void nextLevel() {
-		levelNum+=1;
-		gameView.setLevelText(levelNum);
-		gameModel = new GameModel(levelNum);
-		Swamp.resetCtr();
+		gameModel.newLevel();
 		initPlayer();
 	    startGame();
-		System.out.println("This is level "+ levelNum);
+		
 	}
 
 	/**
@@ -110,9 +107,9 @@ public enum GameController  {
 	 * <p>
 	 * @param state  {@code GameOver.NEXT} for next level,
 	 * {@code GameOver.LOSE} when no lives are left
-	 * @see GameOver
+	 * @see EndGame
 	 */
-	public void handleGameDone(GameOver state) {
+	public void handleGameDone(EndGame state) {
 		gameModel.handleDoneLevel(state);
 		stopGame();
 		showScoreDisplay();
@@ -122,9 +119,7 @@ public enum GameController  {
 	 * 
 	 */
 	public void showScoreDisplay() {
-//		ScoreStageLoader.INSTANCE.initScoreView(gameModel.getLevel(), gameModel.getScores());
-//		ScoreStageLoader.INSTANCE.showStage();
-		ViewLoader.INSTANCE.loadScore(gameModel.getLevel(), gameModel.getScores());
+		ViewLoader.INSTANCE.loadScore(gameModel.getLevelList(), gameModel.getScores());
 	 }
 	
 
@@ -141,7 +136,7 @@ public enum GameController  {
 	 * </u1>
 	 * <p>
 	 * 
-     * @param event  the {@code DialogEvent} which occured after 
+     * @param event  the {@code DialogEvent} which occurred after
      * dialog box is closed
      */
 	public void updateView(DialogEvent event) {
@@ -149,14 +144,15 @@ public enum GameController  {
 		gamePane.getChildren().removeAll(gameModel.getList());
 		Swamp.resetCtr();
 		
-		if(gameModel.getState()==GameOver.NEXT) {
+		if(gameModel.getState()==EndGame.NEXT) {
 			player.setScore(0);
 			nextLevel();
 					
 		} else {
+			gameModel.resetGame();
 			ScreenController.INSTANCE.showMenu();
 			new HighScoreFile(gameModel.getScoreString());
-			levelNum=0;
+			
 		}
 		
 		
@@ -174,12 +170,11 @@ public enum GameController  {
 	 * @param event  ActionEvent which occurs when button is fired
 	 */
 	public void handleExit(ActionEvent event) {
-		Swamp.resetCtr();
-		stopGame();
-		levelNum=0;
-		ScreenController.INSTANCE.showMenu();
+		gameModel.resetGame();
 		gamePane.getChildren().clear();
-		gameModel.resetScoreList();
+		stopGame();
+		ScreenController.INSTANCE.showMenu();
+		
 	}
 	
 	/**
@@ -248,7 +243,6 @@ public enum GameController  {
 	 * where the {@link PlayerAvatar} object caught the fly.
 	 */
 	public void showBonus(double bonusX) {
-		System.out.println("gc show bonus");
 		gameView.playBonusAnim(bonusX);
 
 	}
