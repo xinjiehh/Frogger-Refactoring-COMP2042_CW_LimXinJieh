@@ -15,7 +15,7 @@ import javafx.util.Duration;
  */
 public class MenuAnimation {
 	
-	private PlayerAvatar player;
+	private final PlayerAvatar player;
 	private boolean right;
 	private Timeline timeline;
 
