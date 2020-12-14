@@ -26,6 +26,15 @@ public class WetTurtle extends NPC implements Sinkable, RiverSprite {
 	private static final Image turtle2 = new Image(FilePath.TURTLE2_WET,SIZE,SIZE,true,true);
 	private static final Image turtle3 = new Image(FilePath.TURTLE3_WET,SIZE,SIZE,true,true);
 	private static final Image turtle4 = new Image(FilePath.TURTLE4_WET,SIZE,SIZE,true,true);
+	private static final ArrayList<Image> images = new ArrayList<Image>() {
+		{
+			add(turtle1);
+			add(turtle2);
+			add(turtle3);
+			add(turtle4);
+		}
+
+	};
 	private boolean isSunk;
 
 
@@ -36,16 +45,6 @@ public class WetTurtle extends NPC implements Sinkable, RiverSprite {
 	}
 
 	private void initAnimation() {
-		ArrayList<Image> images = new ArrayList<Image>() {
-			{
-				add(turtle1);
-				add(turtle2);
-				add(turtle3);
-				add(turtle4);
-			}
-
-		};
-		
 		NPCAnimation anim = new NPCAnimation(this, images);
 		anim.play();
 	}
