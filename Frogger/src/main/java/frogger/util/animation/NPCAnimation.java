@@ -1,19 +1,19 @@
 package frogger.util.animation;
 
-import frogger.model.Actor;
+import java.util.List;
+
+import frogger.model.npc.NPC;
 import frogger.model.npc.Sinkable;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
-import java.util.List;
-
 public class NPCAnimation extends SpriteAnimationTemplate {
 	List<Image> images;
-	Actor actor;
+	NPC actor;
 	
 
-	public NPCAnimation(Actor actor, List<Image> images) {
+	public NPCAnimation(NPC actor, List<Image> images) {
 		super();
 		this.actor = actor;
 		this.images= images;
@@ -30,14 +30,11 @@ public class NPCAnimation extends SpriteAnimationTemplate {
 		    @Override
 		    protected void interpolate(double fraction) {
 		        int index = (int) (fraction*(images.size()-1));
-		        index = index > images.size()-1 ? images.size()-1 : index;
+		        index = Math.min(index, images.size() - 1);
 		        actor.setImage(images.get(index)); 
 		        
 		        if(actor instanceof Sinkable) {
-		        	if(index==images.size()-1) 
-		        		((Sinkable) actor).setSunk(true);
-		        	else 
-		        		((Sinkable) actor).setSunk(false);
+					((Sinkable) actor).setSunk(index == images.size() - 1);
 
 		        }
 		    }
