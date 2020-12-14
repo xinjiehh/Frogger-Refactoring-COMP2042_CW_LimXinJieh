@@ -2,11 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
-
+<?import javafx.scene.text.*?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/info.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fill="#52cc3c" layoutX="126.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" styleClass="title" text="INFO" textAlignment="CENTER" wrappingWidth="138.978515625">
