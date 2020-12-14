@@ -1,11 +1,10 @@
 package frogger.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import frogger.model.Frog;
-import frogger.model.NPC.Actor;
-import frogger.model.NPC.Swamp;
+import frogger.model.PlayerAvatar;
+import frogger.model.npc.Swamp;
 import javafx.scene.Node;
 
 
@@ -16,19 +15,25 @@ import javafx.scene.Node;
 
 public class GameGenerator {
 	
-	protected final int MAX_LEVEL = 10;
 	private final int SWAMP_Y = 96;
-	private Frog frog; 
+	private PlayerAvatar player; 
 	private List<Node> characterList;
-	private ArrayList<Actor> swamp = new ArrayList<Actor>();
+	//private ArrayList<Actor> swamp = new ArrayList<Actor>();
 		
-	
+	/**
+	 * This method initializes this object by loading elements
+	 * from {@link LevelGenerator} and initializing {@link #characterList}
+	 * and {@link #player}
+	 * 
+	 * @param level  the {@code integer} value of the current level
+	 */
 	public GameGenerator(int level) { 
 		
 		LevelGenerator loader = new LevelGenerator(level);
 		characterList = loader.getAllElementsNode();
 		initSwamp();
 		initFrog();
+		//characterList.add(n);
 
 	}
 	
@@ -37,8 +42,8 @@ public class GameGenerator {
 	 * list of game characters
 	 */
 	private void initFrog() {
-		frog = new Frog();
-		characterList.add(frog);
+		player = new Frog(300, 706.467);//679.8 + FrogModel.movement;
+		characterList.add(player);
 	}
 	
 	/**
@@ -54,13 +59,14 @@ public class GameGenerator {
 	 * This method returns this Frog object
 	 * @return  this Frog object
 	 */
-	public Frog getFrog() {
-		return this.frog;
+	public PlayerAvatar getPlayer() {
+		return this.player;
 	}
 	
 	
 	/**
-	 * This method initializes the swamp objects
+	 * This method initializes the {@link Swamp} objects
+	 * and adds it to {@link #characterList}
 	 */
 	private void initSwamp() {
 		
@@ -68,7 +74,7 @@ public class GameGenerator {
 		for(int i=0; i<5;i++) {
 			int xPos = initialXPos + i*127;
 			characterList.add(new Swamp(xPos,SWAMP_Y));
-			swamp.add(new Swamp(xPos,SWAMP_Y));
+			//swamp.add(new Swamp(xPos,SWAMP_Y));
 		}
 		
 		
