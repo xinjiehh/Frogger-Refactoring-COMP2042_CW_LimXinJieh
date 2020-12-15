@@ -8,13 +8,22 @@ import frogger.model.LevelTemplate;
  *
  */
 public class LevelGenerator extends LevelTemplate {
-
-
+	/** current level of the game */
 	private int level;
+	
+	/** speed increment of all {@link NPC} */
 	private double speed = 0;
+	
+	/** the number of race cars in lane 4 */
 	private int raceCar = 1;
+	
+	/** the number of logs in lane 7 */
 	private int longLog = 2;
+	
+	/** the number of turtles in lane 5 */
 	private int turtle5 = 4;
+	
+	/** the number of turtles in lane 8 */
 	private int turtle8 = 3;
 	
 	public LevelGenerator(int level) {

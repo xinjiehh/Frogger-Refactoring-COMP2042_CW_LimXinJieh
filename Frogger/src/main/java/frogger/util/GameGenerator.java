@@ -15,10 +15,14 @@ import javafx.scene.Node;
 
 public class GameGenerator {
 	
+	/** the y position of the {@code Swamp} object */
 	private final int SWAMP_Y = 96;
+	
+	/** player object of the game */
 	private PlayerAvatar player; 
+	
+	/** the list of all the characters in the game */
 	private List<Node> characterList;
-	//private ArrayList<Actor> swamp = new ArrayList<Actor>();
 		
 	/**
 	 * This method initializes this object by loading elements
@@ -30,10 +34,9 @@ public class GameGenerator {
 	public GameGenerator(int level) { 
 		
 		LevelGenerator loader = new LevelGenerator(level);
-		characterList = loader.getAllElementsNode();
+		characterList = loader.getAllElements();
 		initSwamp();
 		initFrog();
-		//characterList.add(n);
 
 	}
 	
