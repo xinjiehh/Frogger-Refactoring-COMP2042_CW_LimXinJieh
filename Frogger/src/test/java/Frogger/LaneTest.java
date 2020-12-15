@@ -1,13 +1,15 @@
 package Frogger;
 
-import frogger.model.Lane;
-import frogger.model.npc.NPC;
-import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
+
+import frogger.model.Lane;
+import frogger.model.npc.NPC;
+import javafx.scene.Node;
 
 public class LaneTest extends ApplicationTest {
 	
@@ -32,9 +34,9 @@ public class LaneTest extends ApplicationTest {
 		Lane lane = new Lane(3);
 		int nBefore=lane.getElementsList().size();
 		lane.addElements(3, 2);
-		ArrayList<NPC> list = lane.getElementsList();
+		ArrayList<Node> list = lane.getElementsList();
 		assertEquals(list.size(),nBefore+3);
-		assertEquals(list.get(0).getSpeed(),2.00,0);
+		assertEquals(((NPC)list.get(0)).getSpeed(),2.00,0);
 
 	}
 	
