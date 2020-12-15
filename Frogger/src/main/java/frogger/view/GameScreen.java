@@ -118,6 +118,7 @@ public class GameScreen implements Observer {
 			}
 			
 			case "add sprite" -> {
+				System.out.println("add sprit");
 				List<Node> list = ((GameModel)s).getList();
 				gamePane.addAll(list);
 			}
