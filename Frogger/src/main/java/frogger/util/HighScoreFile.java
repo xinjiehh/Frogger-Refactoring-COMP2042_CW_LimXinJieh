@@ -13,15 +13,15 @@ import java.time.format.DateTimeFormatter;
  */
 public class HighScoreFile {
 	
-	private File myObj;
+
 	//https://www.w3schools.com/java/java_files_create.asp
 	//https://stackoverflow.com/questions/13729625/overwriting-txt-file-in-java
 	public HighScoreFile(String message) {
 		
+		File myObj;
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		
-
 	    try {
 	    	
 	      myObj = new File("My High Score.txt");
