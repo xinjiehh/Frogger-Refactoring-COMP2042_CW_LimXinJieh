@@ -1,72 +1,74 @@
 package frogger.util;
 
-
+import frogger.constant.DEATH;
+import frogger.constant.EndGame;
+import frogger.constant.settings.Settings;
 import frogger.controller.GameController;
-import frogger.model.Frog;
-import frogger.model.Frog.FrogDeath;
-import frogger.model.NPC.Swamp;
+import frogger.model.PlayerAvatar;
+import frogger.model.npc.Log;
+import frogger.model.npc.NPC;
+import frogger.model.npc.Swamp;
+import frogger.model.npc.Turtle;
 
 public enum CollisionHandler {
 	
 	INSTANCE;
-	private static final int MAX_FROG = 5;
+	
 	private int swampFrog=0;
 	
-	public void handleDeath(Frog frog, FrogDeath death) {
+	
+	/**
+	 * This method handles the death of the {@link PlayerAvatar}
+	 * by calling the corresponding audio and animation, and
+	 * resetting the {@code PlayerAvatar} state and properties
+	 * @param frog  {@code PlayerAvatar}
+	 * @param death  {@link DEATH} state
+	 */
+	public void handleDeath(PlayerAvatar frog, DEATH death) {
 		
-		if(frog.getDeath()==FrogDeath.NULL) {
-			System.out.println("One life lost");
-			playAudio(death);
-			frog.resetScore();
-			DeathAnimation test = new DeathAnimation(frog, death);
-			test.play();
-			frog.setDeath(death);
-			frog.loseLife();
-			
-			if(frog.getLife()==-1) {
-				GameController.INSTANCE.handleGameOver();
-			}
-		}
+		frog.handleDeath(death);
+		
+		
 		
 	}
 	
-
-	public void handleSwamp(Frog frog, Swamp swamp) {
+	/**
+	 * This method handles when {@link PlayerAvatar}
+	 * comes into contact with a {@link Swamp} object
+	 * @param frog  {@code PlayerAvatar} 
+	 * @param swamp  {@code Swamp} touched by {@code PlayerAvatar} 
+	 */
+	public void handleSwamp(PlayerAvatar frog, Swamp swamp) {
 		
 		if(swamp.hasFly()) {
 			frog.addScore(100);
-			GameController.INSTANCE.showBonus();
-			
-			frog.setBonusX(swamp.getX()+5);
+			GameController.INSTANCE.showBonus(swamp.getX()+5);
 		}
 		
 		swampFrog++;
-		frog.addScore(50);
 		swamp.setOccupied();
-		frog.restartFrog();
-		if(swampFrog==MAX_FROG) {
+		frog.addScore(50);
+		frog.restartPlayer();
+		if(swampFrog==Settings.MAX_FROG) {
 			swampFrog=0;
-			GameController.INSTANCE.handleDoneLevel();
+			GameController.INSTANCE.handleGameDone(EndGame.NEXT);
 		}
 
 	}
 	
 	
-	
-	public void handleAttach(Frog frog, double dx) {
-		frog.attachFrog(dx, 0);
+	/**
+	 * This method handles when {@link PlayerAvatar} intersects
+	 * with {@link Log} or {@link Turtle}
+	 * @param frog  {@code PlayerAvatar}
+	 * @param dx  speed of intersecting
+	 * {@link NPC}
+	 */
+	public void handleAttach(PlayerAvatar frog, double dx) {
+		frog.attachPlayer(dx, 0);
 	}
 	
 
-	/**
-	 * This method plays death audio according to the type of death
-	 * @param death  type of frog death
-	 */
-	private void playAudio(FrogDeath death) {
-		if(death==FrogDeath.CAR)
-			AudioPlayer.INSTANCE.squashSound();
-		else if(death==FrogDeath.WATER)
-			AudioPlayer.INSTANCE.plunkSound();
-	}
+
 
 }
