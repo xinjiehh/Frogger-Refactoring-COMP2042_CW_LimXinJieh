@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 /**
  * This class allows to create an object with basic properties 
  * such as x-position and y-position and common functions
- * such as moving and animation ({@link #act(long)}
+ * such as moving ({@link #move}) and animation ({@link #act})
  */
 
 public abstract class Actor extends ImageView {

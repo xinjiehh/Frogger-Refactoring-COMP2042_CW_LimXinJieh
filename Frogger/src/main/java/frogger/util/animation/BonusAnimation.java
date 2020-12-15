@@ -13,6 +13,7 @@ import javafx.util.Duration;
  */
 public class BonusAnimation extends SpriteAnimationTemplate {
 	
+	/** the bonus image of this animation */
 	private final ImageView bonus;
 
 	public BonusAnimation(ImageView bonus) {

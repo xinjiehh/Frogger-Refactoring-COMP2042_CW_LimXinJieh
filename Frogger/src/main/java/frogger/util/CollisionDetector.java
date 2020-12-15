@@ -2,50 +2,60 @@ package frogger.util;
 
 import java.util.List;
 
-import frogger.model.Frog;
-import frogger.model.Frog.FrogDeath;
-import frogger.model.NPC.Actor;
-import frogger.model.NPC.Log;
-import frogger.model.NPC.Obstacle;
-import frogger.model.NPC.Swamp;
-import frogger.model.NPC.Turtle;
-import frogger.model.NPC.WetTurtle;
+import frogger.constant.DEATH;
+import frogger.model.PlayerAvatar;
+import frogger.model.World;
+import frogger.model.npc.Log;
+import frogger.model.npc.NPC;
+import frogger.model.npc.Obstacle;
+import frogger.model.npc.Sinkable;
+import frogger.model.npc.Swamp;
+import frogger.model.npc.Turtle;
+
+/**
+ * This class implements singleton method. This class is responsible
+ * for detecting the intersection of {@link PlayerAvatar} and another
+ * {@link NPC} object
+ */
 
 public enum CollisionDetector {
 	INSTANCE;
 	
-	
-	/*
-	 * TODO modified, check for intersecting object once, match class
-	 * instead of checking intersecting object for each class
-	 * 
-	 * This method checks if this player object intersect with any
-	 * game elements and handles the situation accordingly 
-	 */
 
-	public void checkIntersectingTest(Frog frog, List<Actor> actors) {
+	/**
+	 * Compared to the original collision detection method which gets objects
+	 * different classes and checks for collision, this method first checks 
+	 * for any collision of {@link NPC} object with the given {@link PlayerAvatar}, 
+	 * then only identifies the subclass of the object and calls the 
+	 * {@link CollisionHandler} methods accordingly
+	 * <p>
+	 * 
+	 * @param frog  the player character
+	 * @param actors  the {@code NPC} objects in {@link World}
+	 */
+	public void checkIntersect(PlayerAvatar frog, List<NPC> actors) {
 		
-		Actor intersectingObj = null;
+		NPC intersectingObj = null;
 		
-		for(Actor actor : actors) {
+		for(NPC actor : actors) {
 			
-			if(actor!=frog && actor.intersects(frog.getBoundsInLocal())) {
+			if(actor.intersects(frog.getBoundsInLocal())) {
 				intersectingObj = actor;
 			}
 		}
 
 			if(intersectingObj instanceof Obstacle) {
-				//CollisionHandler.INSTANCE.handleDeath(frog, FrogDeath.CAR);
+				//CollisionHandler.INSTANCE.handleDeath(frog, DEATH.CAR);
 				
 			} else if ((intersectingObj instanceof Log || intersectingObj instanceof Turtle) && !frog.getNoMove()) {
 
-				CollisionHandler.INSTANCE.handleAttach(frog,intersectingObj.getSpeed());
+				//CollisionHandler.INSTANCE.handleAttach(frog,intersectingObj.getSpeed());
 				
 				
-			} else if(intersectingObj instanceof WetTurtle) {
+			} else if(intersectingObj instanceof Sinkable) {
 				
-				WetTurtle wetTurtle = (WetTurtle) intersectingObj;
-				if(wetTurtle.isSunk()) {
+				Sinkable sinkable = (Sinkable) intersectingObj;
+				if(sinkable.isSunk()) {
 					//frog.handleDeathTest(FrogDeath.WATER);
 					
 				} else {
@@ -60,10 +70,9 @@ public enum CollisionDetector {
 				Swamp swamp = (Swamp) intersectingObj;
 
 				//if frog reaches an occupied swamp spot
-				if (swamp.isActivated()) {
-					//frog.handleDeathTest(FrogDeath.WATER);
-				} else if (swamp.hasCroc()) {
-					//frog.handleDeathTest(FrogDeath.WATER);
+				if (swamp.isActivated() || swamp.hasCroc()) {
+					
+					CollisionHandler.INSTANCE.handleDeath(frog, DEATH.WATER);
 					
 				} else {
 					

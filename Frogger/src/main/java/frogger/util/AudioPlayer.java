@@ -13,12 +13,22 @@ public enum AudioPlayer {
 	
 	INSTANCE;
 	
+	/** sound effect for water death of {@link PlayerAvatar} */
 	private static final AudioClip waterDeathAudio = new AudioClip(new File(FilePath.WATERDEATH_AUDIO).toURI().toString());
+	
+	/** sound effect when {@link PlayerAvatar} hops */
 	private static final AudioClip hopAudio = new AudioClip(new File(FilePath.HOP_AUDIO).toURI().toString());
+	
+	/** sound effect for car death of {@link PlayerAvatar}*/
 	private static final AudioClip carDeathAudio = new AudioClip(new File(FilePath.CARDEATH_AUDIO).toURI().toString());
 	
+	/** media file for background song */
 	private final Media theme = new Media(new File(FilePath.THEME_AUDIO).toURI().toString());
+	
+	/** media player for bckground song */
 	private final MediaPlayer themePlayer = new MediaPlayer(theme);
+	
+	/** volume of all the audio played in the game */
 	private double volume = 0.5;
 
 	/**
