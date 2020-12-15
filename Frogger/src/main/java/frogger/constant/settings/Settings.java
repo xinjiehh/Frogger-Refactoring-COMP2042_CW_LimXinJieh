@@ -1,4 +1,4 @@
-package frogger.constant;
+package frogger.constant.settings;
 
 public class Settings {
 	
