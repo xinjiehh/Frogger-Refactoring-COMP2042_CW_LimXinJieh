@@ -74,10 +74,10 @@ public class GameModel implements Subject {
 	
 	public void newLevel() {
 		this.levelNum+=1;
-		initPlayer();
 		notify("level",this);
 		Swamp.resetCtr();
 		initElements();
+		initPlayer();
 		System.out.println("This is level "+ levelNum);
 	}
 
@@ -297,6 +297,8 @@ public class GameModel implements Subject {
 	 */
 	private void updateScoreList() {
 		scoreString = "";
+		levels.clear();
+		scores.clear();
     	levelScoreList.add(new AbstractMap.SimpleEntry<Integer, Integer>(levelNum, player.getScore()));
     	levelScoreList.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
     	
