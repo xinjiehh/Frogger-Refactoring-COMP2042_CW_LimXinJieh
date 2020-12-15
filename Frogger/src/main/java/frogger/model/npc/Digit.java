@@ -10,8 +10,10 @@ import javafx.scene.image.ImageView;
  *
  */
 public class Digit extends ImageView {
-	
+	/** width of all images belonging to this object */
 	private static final int WIDTH = 30;
+	
+	/** height of all images belonging to this object */
 	private static final int HEIGHT = 30;
 
 	/**

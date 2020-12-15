@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class Frog extends PlayerAvatar {
 	
-
+	/** the size of all images belonging to this object */
 	private static final int IMG_SIZE = 40;
 	
 	public Frog(double startX, double startY) {

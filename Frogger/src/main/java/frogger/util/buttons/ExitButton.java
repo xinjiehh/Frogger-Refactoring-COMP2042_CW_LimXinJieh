@@ -19,7 +19,7 @@ public class ExitButton extends Button {
 	private static final String BUTTON_STYLE = "-fx-background-color: transparent;" + 
 											   "-fx-background-size: cover;" + 
 											   "-fx-background-image: url(\"" + FilePath.BUTTON_PATH ;
-	
+	/** inline css style of this {@code Button} */
 	private static final String BUTTON = BUTTON_STYLE + "exitLeft.png" + "\");";
 
 	

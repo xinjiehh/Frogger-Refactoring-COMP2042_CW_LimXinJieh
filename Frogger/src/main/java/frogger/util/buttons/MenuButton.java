@@ -16,14 +16,17 @@ import java.io.FileNotFoundException;
  *
  */
 public class MenuButton extends Button {
-	private static final String FONT_PATH =  FilePath.DEFAULT_FONT; 
-	
+
+
+	/** inline css style of this {@code Button} */
 	private static final String BUTTON_STYLE = 
 			"-fx-background-color: transparent; " + 
 			"-fx-background-image: url(\"" + FilePath.BUTTON_PATH;
 	
-	
+	/** inline css style of this {@code Button} when pressed */
 	private final String BUTTON_PRESSED = BUTTON_STYLE + "button_pressed.png" + "\");";
+	
+	/** inline css style of this {@code Button} when pressed */
 	private final String BUTTON_UP = BUTTON_STYLE + "button.png" + "\");";
 
 	/**
@@ -52,7 +55,7 @@ public class MenuButton extends Button {
 	private void setButtonFont() {
 		try {
 			
-			setFont(Font.loadFont(new FileInputStream(FONT_PATH), 20));
+			setFont(Font.loadFont(new FileInputStream(FilePath.DEFAULT_FONT), 20));
 
 		} catch (FileNotFoundException e){
 			
