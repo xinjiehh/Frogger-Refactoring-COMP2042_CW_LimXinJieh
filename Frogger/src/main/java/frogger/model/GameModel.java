@@ -1,7 +1,8 @@
 package frogger.model;
 
+import frogger.constant.DEATH;
 import frogger.constant.EndGame;
-import frogger.constant.Settings;
+import frogger.constant.settings.Settings;
 import frogger.controller.GameController;
 import frogger.model.npc.Digit;
 import frogger.model.npc.Swamp;
@@ -54,8 +55,10 @@ public class GameModel implements Subject {
 	/** used to generate the characters / game elements */
 	private GameGenerator generator;
 	
+	/** String variable holding the score and levels */
 	private String scoreString = "";
 	
+	/** flag for current game state, true if paused, false otherwise */
 	private boolean isPaused = false;
 	
 	/**
@@ -63,7 +66,7 @@ public class GameModel implements Subject {
 	 * @param level  the current level
 	 */
 	public GameModel() { 
-		addEvent("sprite","pause","level");
+		addEvent("add sprite","pause","level");
 		//replaced by Observer pattern
 		//GameController.INSTANCE.addToView(elementList); 
 
@@ -71,13 +74,26 @@ public class GameModel implements Subject {
 	
 	public void newLevel() {
 		this.levelNum+=1;
+		initPlayer();
 		notify("level",this);
 		Swamp.resetCtr();
 		initElements();
 		System.out.println("This is level "+ levelNum);
 	}
 
-	
+	/**
+	 * This method initializes this {@link PlayerAvatar} object and its
+	 * properties.
+	 */
+	private void initPlayer() {
+		player.setNoMove(false);
+		player.addScoreListener((obs,oldV,newV)->{
+			setScore(newV.intValue());
+		});
+	    //player.addLifeListener(this::updateLifeView);
+		
+	}
+
 	/**
 	 * This method returns the list of game elements
 	 * @return {@link List} of game element objects ({@link Node}) 
@@ -107,6 +123,9 @@ public class GameModel implements Subject {
 		return state;
 	}
 	
+	public void resetPlayer() {
+		player.setScore(0);
+	}
 	/**
 	 * This method handles the actions to be taken when 
 	 * <u1> 
@@ -145,6 +164,7 @@ public class GameModel implements Subject {
 	public void pauseAllTimer() {
 		isPaused = true;
 		notify("pause", this);
+		player.setNoMove(true);
 	}
 	
 	public int getLevel() {
@@ -158,6 +178,8 @@ public class GameModel implements Subject {
 	public void continueAllTimer() {
 		isPaused = false;
 		notify("pause", this);
+		if(player.getDeath()==DEATH.NULL)
+			player.setNoMove(false);
 		
 	}
 	
@@ -261,7 +283,7 @@ public class GameModel implements Subject {
 		this.player = generator.getPlayer();
 		this.elementList = generator.getList();
 		setScore(player.getScore());
-		notify("sprite", this);
+		notify("add sprite", this);
 	}
 	
 	/**

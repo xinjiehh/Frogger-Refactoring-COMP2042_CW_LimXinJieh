@@ -4,9 +4,8 @@ package frogger.controller;
 import java.util.List;
 
 import frogger.Main;
-import frogger.constant.DEATH;
 import frogger.constant.EndGame;
-import frogger.controller.SelectionController.Controls;
+import frogger.constant.settings.Controls;
 import frogger.model.GameModel;
 import frogger.model.PlayerAvatar;
 import frogger.model.World;
@@ -16,8 +15,6 @@ import frogger.util.CollisionHandler;
 import frogger.util.HighScoreFile;
 import frogger.util.ViewLoader;
 import frogger.view.GameScreen;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -53,13 +50,25 @@ public enum GameController  {
 
 	INSTANCE;
 	
+	/** the {@code Stage} object created in {@link Main} */
 	private static final Stage mainStage = Main.getPrimaryStage();
+	
+	/** the state of the game (pause/play) */
 	private static boolean pause = false;
-	private PlayerAvatar player; 
+	
+	/** the {@link World} loaded from {@link GameScreen} */
 	private World gamePane;
+	
+	/** the {@link GameScreen} controlled by this {@code GameController} object */
 	private GameScreen gameView;
+	
+	/** the {@code Scene} object created in {@link Main} */
 	private Scene scene;
+	
+	/** the {@link GameModel} controlled by this {@code GameController} object */
 	private GameModel gameModel;
+	
+	/** the alert dialog tht pops up to indicate progress (next level, win, game over) */
 	private Alert alert;
 	
 	/**
@@ -92,7 +101,6 @@ public enum GameController  {
 	 */
 	public void nextLevel() {
 		gameModel.newLevel();
-		initPlayer();
 	    startGame();
 		
 	}
@@ -105,8 +113,11 @@ public enum GameController  {
 	 * <li> the {@link PlayerAvatar} object dies and loses all its lives</li>
 	 * </u1>
 	 * <p>
+	 * 
+	 * 
 	 * @param state  {@code GameOver.NEXT} for next level,
 	 * {@code GameOver.LOSE} when no lives are left
+	 * 
 	 * @see EndGame
 	 */
 	public void handleGameDone(EndGame state) {
@@ -116,7 +127,8 @@ public enum GameController  {
 	}
 	
 	/**
-	 * 
+	 * This method calls the {@link ViewLoader} to initialize and
+	 * show the score {@code Stage} pop up
 	 */
 	public void showScoreDisplay() {
 		ViewLoader.INSTANCE.loadScore(gameModel.getLevelList(), gameModel.getScores());
@@ -145,7 +157,6 @@ public enum GameController  {
 		Swamp.resetCtr();
 		
 		if(gameModel.getState()==EndGame.NEXT) {
-			player.setScore(0);
 			nextLevel();
 					
 		} else {
@@ -154,9 +165,7 @@ public enum GameController  {
 			new HighScoreFile(gameModel.getScoreString());
 			
 		}
-		
-		
-				
+			
 	}
 	
 	/**
@@ -247,26 +256,11 @@ public enum GameController  {
 
 	}
 	
-	
-	/**
-	 * This method initializes this {@link PlayerAvatar} object and its
-	 * properties.
-	 */
-	private void initPlayer() {
-		this.player = gameModel.getPlayer();
-		player.setNoMove(false);
-		player.addScoreListener(this::updateScore);
-	    //player.addLifeListener(this::updateLifeView);
-
-	}
-	
 	/** This method calls all necessary methods to start the game. */
 	private void startGame() {
 		AudioPlayer.INSTANCE.playMusic();
 		gamePane.startMotion();
 		gameModel.continueAllTimer();
-		if(player.getDeath()==DEATH.NULL)
-			player.setNoMove(false);
 	}
 	
 	/** This method calls all necessary methods to stop the game. */
@@ -274,30 +268,9 @@ public enum GameController  {
 		AudioPlayer.INSTANCE.stopMusic();
 		gamePane.stopMotion();
 		gameModel.pauseAllTimer();
-		player.setNoMove(true);
 	}
 	
 
-	
-	/**
-	 * This method simulates the method {@code changed} of the 
-	 * {@code ChangeListener} interface and defines the actions 
-	 * to be taken whenever the {@link PlayerAvatar} object scoreProp 
-	 * changes. 
-	 * 
-	 * In this case, this method defines the actions to update the 
-	 * score digit array displayed on the game screen.  
-	 * 
-	 * @param observable  {@code scoreProp} which value changed
-	 * @param oldValue  the old value
-	 * @param newValue  the new value
-	 * @see PlayerAvatar#addScoreListener(ChangeListener)
-	 */
-	private void updateScore(ObservableValue <?extends Number>observable, Number oldValue, Number newValue) {
-		gameModel.setScore(newValue.intValue());
-	}
-	
-	
 	
 	/**
 	 * This method initializes the header text of the {@code 
@@ -348,6 +321,36 @@ public enum GameController  {
 	}
 	
 }
+///**
+//* This method initializes this {@link PlayerAvatar} object and its
+//* properties.
+//*/
+//private void initPlayer() {
+//	this.player = gameModel.getPlayer();
+//	player.setNoMove(false);
+//	player.addScoreListener(this::updateScore);
+//   //player.addLifeListener(this::updateLifeView);
+
+//}
+
+///**
+//* This method simulates the method {@code changed} of the 
+//* {@code ChangeListener} interface and defines the actions 
+//* to be taken whenever the {@link PlayerAvatar} object scoreProp 
+//* changes. 
+//* 
+//* In this case, this method defines the actions to update the 
+//* score digit array displayed on the game screen.  
+//* 
+//* @param observable  {@code scoreProp} which value changed
+//* @param oldValue  the old value
+//* @param newValue  the new value
+//* @see PlayerAvatar#addScoreListener(ChangeListener)
+//*/
+//private void updateScore(ObservableValue <?extends Number>observable, Number oldValue, Number newValue) {
+//	gameModel.setScore(newValue.intValue());
+//}
+//
 
 
 
@@ -422,7 +425,7 @@ public enum GameController  {
 //
 //	
 //	model.addElement(frog);
-//	setNumber(frog.getScore());//gamePane.add(new Digit(0, 30, 360, 25)); //TODO changed 
+//	setNumber(frog.getScore());//gamePane.add(new Digit(0, 30, 360, 25)); //
 //
 //}
 
