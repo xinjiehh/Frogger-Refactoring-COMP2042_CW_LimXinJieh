@@ -9,14 +9,14 @@ public class FilePath {
 	
 	public static final String RESOURCE_PATH = "src/main/resources/";
 	public static final String BONUS = "/misc/100.png";
+	
 	//BACKGROUND
 	public static final String BG_PATH = "/background/";
 	public static final String GAMEBACKGROUND = BG_PATH + "GameBackground2.png";
 	public static final String MENUBACKGROUND = BG_PATH + "MenuBackground.png";
 	
 	public static final String INFO_FXML = "/view/info.fxml";
-	
-	
+
 	//NPC
 	public static final String NPC_PATH = "/npc/";
 	
@@ -50,13 +50,7 @@ public class FilePath {
 	//FROG
 	public static final String FROG_PATH = "/frog/";
 	public static final String FROG_UP = FROG_PATH + "froggerUp.png";
-//	public static final String FROG_LEFT = FROG_PATH + "froggerLeft.png";
-//	public static final String FROG_DOWN = FROG_PATH + "froggerDown.png";
-//	public static final String FROG_RIGHT = FROG_PATH + "froggerRight.png";
 	public static final String FROG_UPJUMP = FROG_PATH + "froggerUpJump.png";
-//	public static final String FROG_LEFTJUMP = FROG_PATH + "froggerLeftJump.png";
-//	public static final String FROG_DOWNJUMP = FROG_PATH + "froggerDownJump.png";
-//	public static final String FROG_RIGHTJUMP = FROG_PATH + "froggerRightJump.png";
 	
 		
 	//FONT
