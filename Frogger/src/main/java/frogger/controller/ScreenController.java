@@ -1,7 +1,7 @@
 package frogger.controller;
 
 import frogger.Main;
-import frogger.controller.SelectionController.Controls;
+import frogger.constant.settings.Controls;
 import frogger.view.MenuScreen;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -17,8 +17,14 @@ import java.util.HashMap;
 public enum ScreenController {
 	INSTANCE;
 	
+	/** variable storing screen ID {@code String} and corresponding screen {@code Pane} 
+	 * as key value pair */
 	private HashMap<String,Pane> screenMap = new HashMap<>();
+	
+	/** the {@code Stage} object created in {@link Main} */
 	private final Stage stage = Main.getPrimaryStage();
+	
+	/** the {@code Scene} object created in {@link Main} */
 	private final Scene scene = stage.getScene();
 	
 	

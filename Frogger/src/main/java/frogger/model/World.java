@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import frogger.constant.DIRECTION;
-import frogger.controller.SelectionController.Controls;
+import frogger.constant.settings.Controls;
 import frogger.model.npc.NPC;
 import frogger.util.CollisionDetector;
 import javafx.animation.AnimationTimer;
@@ -22,7 +22,10 @@ import javafx.scene.layout.Pane;
 
 public class World extends Pane {
 	
+	/** timer responsible for handling animation of {@link NPC} object and collision detection */
     private AnimationTimer motionTimer = null;
+    
+    /** the {@code PlayerAvatar} of this object */
     private PlayerAvatar player;
     
     /** the set of directions selected */
@@ -58,9 +61,9 @@ public class World extends Pane {
 	 * Controls.B} for arrow keys
 	 */
     public World(Controls control) {
-    	if(control==Controls.A)
+    	if(control==Controls.WASD)
     		direction = DIRECTION_A;
-    	else if(control==Controls.B)
+    	else if(control==Controls.ARROW)
     		direction = DIRECTION_B;
     	sceneProperty().addListener(this::createNewListeners);
   
@@ -85,15 +88,11 @@ public class World extends Pane {
                 for (NPC npc: npcs) {
                 	npc.act(now);
                 }
-                
+               
                 List<PlayerAvatar> players = getObjects(PlayerAvatar.class);
-                
-                
                 for(PlayerAvatar p : players) {
                 	player = p;
-                	CollisionDetector.INSTANCE.checkIntersect(player, npcs);
-                	
-                		
+                	CollisionDetector.INSTANCE.checkIntersect(player, npcs);	
                 }
 
             }
@@ -102,12 +101,15 @@ public class World extends Pane {
  
     
     /**
-     * This method starts the collision detection and 
-     * animation of {@link NPC} objects in this {@link 
-     * World} object by starting the motion timer
+     * This method starts the animation of {@link NPC} objects in 
+     * this {@code World} object by starting the motion timer,
+     * which calls the {@code act} method of each {@link NPC} in each
+     * frame and also checks for collision. Also implements Singleton
+     * by ensuring only one {@code motionTimer} is created per JVM.
      */
     public void startMotion() {
-
+    	
+    	//Singleton pattern, ensures only one motionTimer is created
         if (motionTimer == null) {
             createMotionTimer();
         }
@@ -240,8 +242,10 @@ public class World extends Pane {
       
       
       
-    //public abstract void act(long now);
+    
 }
+
+//public abstract void act(long now);
 //List<Frog> frogs = getObjects(Frog.class);
 
 //CollisionDetector.INSTANCE.checkIntersecting(frogs.get(0));

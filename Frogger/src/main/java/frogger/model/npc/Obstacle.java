@@ -13,6 +13,7 @@ import frogger.util.CollisionDetector;
  */
 public class Obstacle extends NPC {
 	
+	/** the type of obstacle image to be displayed */
 	private final OBSTACLE_TYPE type;
 
 	public Obstacle(OBSTACLE_TYPE obstacle) {

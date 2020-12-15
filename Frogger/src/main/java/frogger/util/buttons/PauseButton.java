@@ -15,11 +15,16 @@ import javafx.scene.input.MouseEvent;
  */
 public class PauseButton extends Button {
 
+	/** inline css style of this {@code Button} when pressed */
 	private static final String BUTTON_STYLE = "-fx-background-color: transparent;" + 
 			   "-fx-background-size: cover;" + 
 			   "-fx-background-image: url(\"" + FilePath.BUTTON_PATH ;
 	
+	/** inline css style of this {@code Button} when game is paused */
 	private static final String PLAY_BUTTON = BUTTON_STYLE + "right.png" + "\");";
+	
+	
+	/** inline css style of this {@code Button} when game is played */
 	private static final String PAUSE_BUTTON = BUTTON_STYLE + "pause.png" + "\");";
 	
 	/**

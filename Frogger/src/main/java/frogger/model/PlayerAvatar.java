@@ -28,12 +28,22 @@ import javafx.scene.image.Image;
  */
 public abstract class PlayerAvatar extends Actor implements Subject {
 
-	
+	/** upper limit of the screen */
 	protected static final double LOWER_BOUND = 173.13;
+	
+	/** lower limit of the screen */
 	protected static final double UPPER_BOUND = 800;
+	
+	/** the vertical distance to be moved when corresponding key is pressed */
 	protected static final double MOVEMENT = 13.3333333 * 2;
+	
+	/** the horizontal distance to be moved when corresponding key is pressed */
 	protected static final double MOVEMENT_X = 10.666666 * 2;
+	
+	/** the standard starting y position of this object */
 	protected final double START_YPOS;
+	
+	/** the standard starting x position of this object */
 	protected final double START_XPOS;
 	
 	/** the image for up movement */
@@ -60,8 +70,13 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	/** this determines if this {@code PlayerAvatar} object is able to move or not */
 	protected boolean noMove = false; 
 	
+	/** the list containing images for car death animation of this object */
 	protected List<Image> carDeath = new ArrayList<>();
+	
+	/** the list containing images for water death animation of this object */
 	protected List<Image> waterDeath = new ArrayList<>();
+	
+	/** the map containing death type and corresponding death animation as key value pair */
 	protected Map<DEATH, DeathAnimation> animMap = new HashMap<DEATH, DeathAnimation>();
 
 	
@@ -329,6 +344,7 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 
 	}
 	
+	/** This method returns the integer value of life left for this object */
 	public int getLife() {
 		return lifeProp.intValue();
 	}
@@ -409,13 +425,6 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 
 	}
 	
-
-
-//    public abstract void handleKeyPress(KeyEvent event);
-//    public abstract void handleKeyRelease(KeyEvent event);
-
-
-
 }
 
 

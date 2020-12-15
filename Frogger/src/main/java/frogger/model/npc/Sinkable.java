@@ -12,8 +12,10 @@ import frogger.util.CollisionDetector;
  */
  public interface Sinkable {
 	
+	 /** This method returns true if this object is sunken, false otherwise */
  	boolean isSunk();
 	
+ 	/** This method allows to modify {@code isSunk} state of this object */
  	void setSunk(boolean b);
 
 

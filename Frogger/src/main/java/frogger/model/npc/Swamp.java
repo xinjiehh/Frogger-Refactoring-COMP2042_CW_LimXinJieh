@@ -17,24 +17,52 @@ import javafx.util.Duration;
  */
 
 public class Swamp extends NPC {
-	
+	/** width of all images belonging to this object */
 	private static final int WIDTH = 65;
+	
+	/** height of all images belonging to this object */
 	private static final int HEIGHT = 60;
+	
+	/** the default image of this object */
 	private static final Image END = new Image(FilePath.SWAMP, WIDTH, HEIGHT, false, true);
+	
+	/** the image of this object after coming into contact with a {@link Frog} object */
 	private static final Image FROG_END = new Image(FilePath.S_FROG, WIDTH, HEIGHT, false, true);
 	
+	/** the maximum number of flies to be shown at once on screen */
 	private static int MAX_FLY = 1;
+	
+	/** the maximum number of crocodiles to be shown at once on screen */
 	private static int MAX_CROC = 2;
+	
+	/** the number of flies currently showing on screen */
 	private static int flyCtr = 0;
+	
+	/** the number of crocodiles currently showing on screen */
 	private static int crocCtr = 0;
 	
+	/** x position of this object */
 	private int x;
+	
+	/** y position of this object */
 	private int y;
+	
+	/** flag to determine if this object is currently playing any animation */ 
 	private boolean noAnimation = true;
+	
+	/** flag to determine if this object currently has a fly */
 	private boolean hasFly = false;
+	
+	/** flag to determine if this object currently has a fly */
 	private boolean hasCroc = false;
-	private boolean activated = false;
+	
+	/** flag to determine if this object currently has a frog */
+	private boolean hasFrog = false;
+	
+	/** animation for fly appearance and disappearance */
 	private final FlyAnimation flyAnim = new FlyAnimation();
+	
+	/** animation for crocodile appearance and disappearance */
 	private final CrocAnimation crocAnim = new CrocAnimation();
 
 	
@@ -59,7 +87,7 @@ public class Swamp extends NPC {
 	@Override
 	public void act(long now) {
 		
-		if(!activated) {
+		if(!hasFrog) {
 			
 			if(!hasFly && !hasCroc) {
 				
@@ -112,7 +140,7 @@ public class Swamp extends NPC {
 	 */
 	public void setOccupied() {
 		setImage(FROG_END);
-		activated = true;
+		hasFrog = true;
 	}
 	
 
@@ -123,7 +151,7 @@ public class Swamp extends NPC {
 	 * otherwise
 	 */
 	public boolean isActivated() {
-		return activated;
+		return hasFrog;
 	}
 	
 	/**
@@ -202,7 +230,7 @@ public class Swamp extends NPC {
 				@Override
 				protected void interpolate(double frac) {
 					setImage(FLY_END);
-					if(activated) {
+					if(hasFrog) {
 						setImage(FROG_END);
 						stop();
 						endAnimation();

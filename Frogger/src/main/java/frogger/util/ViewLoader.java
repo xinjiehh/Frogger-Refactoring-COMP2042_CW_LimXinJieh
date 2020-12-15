@@ -16,12 +16,16 @@ public enum ViewLoader {
 	
 	INSTANCE;
 	
+	/** the {@code Stage} object created in {@link Main} */
 	private final Stage mainStage = Main.getPrimaryStage();
+	
+	/** the {@code Scene} object created in {@link Main} */
 	private Pane pane = new Pane();
 
 	/** pop up {@code Stage} separate from main stage */
 	private Stage stage;
 	
+	/** loader to load FXML */
 	private FXMLLoader loader;
 	
 	/**

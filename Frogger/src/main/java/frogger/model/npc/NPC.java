@@ -9,7 +9,11 @@ import javafx.scene.image.Image;
 
 /**
  * This is an abstract base class which specifies an abstract
- * method clone() following the PROTOTYPE pattern.
+ * method clone() following the PROTOTYPE pattern. This class
+ * also follows TEMPLATE pattern, acting as template to make
+ * non player characters. There are hooks (optional steps with
+ * empty body) such as {@code playAnimation()} which can be 
+ * overridden if needed
  * <p>
  * This base class represents all the non-playing characters
  * such as {@link Log}, {@link Obstacle} and {@link Turtle}
@@ -20,16 +24,23 @@ import javafx.scene.image.Image;
 
 public abstract class NPC extends Actor {
 	
+	/** the distance to be moved by this object in each frame */
 	protected double speed; 
 	
+	/** 
+	 * This constructor initializes the size and image of this {@code NPC}
+	 * object using the size and image URL defined in the given {@link NPCType}
+	 * @param type  {@code NPCType} of this object
+	 */
 	public NPC(NPCType type) {
 		int size = type.getSize();
 		Image image = new Image(type.getURL(), size, size, true, true);
 		setImage(image);
-		//System.out.println(getWidth() + " width and " + size);
-		System.out.println(type.toString() + getHeight() + " height");
 	}
-
+	
+	/**
+	 * This is the default public constructor 
+	 */
 	public NPC() {
 		
 	}
@@ -47,15 +58,6 @@ public abstract class NPC extends Actor {
 		playAnimation(now);
 	}
 
-	/**
-	 * This method allows subclasses to define and customize their animation 
-	 * which will be called in each frame. However, there is an easier, predefined 
-	 * way to create generic animation using {@link SpriteAnimationTemplate}.
-	 * @param now  the timestamp of the current frame given in nanoseconds.
-	 */
-	protected void playAnimation(long now) {
-		
-	}
 
 	/**
 	 * This method is the implementation of PROTOTYPE
@@ -75,17 +77,6 @@ public abstract class NPC extends Actor {
 		setY(y);
 		
 	}
-
-
-	
-	@Override
-	protected void checkOutOfBounds() {
-		if (getX() > Main.STAGE_W && speed>0)
-			setX(-getWidth()); //-200
-		if (getX() < -getWidth() && speed<0)
-			setX(Main.STAGE_W); //50,120,200
-	}
-	
 	
 	/**
 	 * This method sets the speed of object
@@ -131,6 +122,25 @@ public abstract class NPC extends Actor {
         return this.getBoundsInLocal().getHeight();
     }
 
+	
+	@Override
+	protected void checkOutOfBounds() {
+		if (getX() > Main.STAGE_W && speed>0)
+			setX(-getWidth()); //-200
+		if (getX() < -getWidth() && speed<0)
+			setX(Main.STAGE_W); //50,120,200
+	}
+	
+
+	/**
+	 * This method allows subclasses to define and customize their animation 
+	 * which will be called in each frame. However, there is an easier, predefined 
+	 * way to create generic animation using {@link SpriteAnimationTemplate}.
+	 * @param now  the timestamp of the current frame given in nanoseconds.
+	 */
+	protected void playAnimation(long now) {
+		
+	}
 
 
 }

@@ -17,7 +17,11 @@ import javafx.animation.Transition;
  */
 
 public abstract class SpriteAnimationTemplate implements Observer {
+	
+	/** the {@code Transition} responsible for this animation */
 	protected Transition animation;
+	
+	/** flag to determine if this animation is in progress */
 	protected boolean donePlaying = true;
 	
 	
@@ -27,12 +31,18 @@ public abstract class SpriteAnimationTemplate implements Observer {
 		
 
 	}
-
+	/**
+	 * This method plays the animation and sets the 
+	 * {@code donePlaying} flag to false
+	 */
 	public void play() {
 		donePlaying = false;
 		animation.play();
 	}
 	
+	/**
+	 * This method pauses the animation
+	 */
 	public void pause() {
 		animation.pause();
 	}

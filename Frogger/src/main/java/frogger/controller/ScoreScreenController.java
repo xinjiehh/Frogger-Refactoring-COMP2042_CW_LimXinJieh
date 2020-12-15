@@ -19,9 +19,16 @@ import java.util.List;
  */
 public class ScoreScreenController {
 	
+	/** variable holding the level list data to be displayed on screen */
 	@FXML private ListView<String> levelList;
+	
+	/** variable storing the score list data to be displayed on screen */
 	@FXML private ListView<String> scoreList;
+	
+	/** variable holding the list of levels arranged in descending order of corresponding scores */
 	private List<String> levels = new ArrayList<>();
+	
+	/** variable holding the list of levels arranged in decending order */
 	private List<String> scores = new ArrayList<>();
 	
 	/**
@@ -73,10 +80,6 @@ public class ScoreScreenController {
 	 * 
 	 * @param param  this {@code ListView<String>} object
 	 * @return cell factory to use in this ListView
-	 * @see ListView#setCellFactory(Callback)
-	 * @see <a href="https://stackoverflow.com/questions/25246496/
-	 * javafx-custom-list-cell-updateitem-being-called-a-lot">Stack Overflow
-	 * question</a>
 	 */
 	private ListCell<String> newCellFactory(ListView<String>param){
 
@@ -96,7 +99,10 @@ public class ScoreScreenController {
 
 }
 
-
+//* @see <a href="https://stackoverflow.com/questions/25246496/
+//* javafx-custom-list-cell-updateitem-being-called-a-lot">Stack Overflow
+//* question</a>
+//@see ListView#setCellFactory(Callback)
 //listView.setCellFactory(new Callback<ListView<String>,ListCell<String>>(){
 //
 //	@Override

@@ -9,16 +9,20 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class NPCAnimation extends SpriteAnimationTemplate {
-	List<Image> images;
-	NPC actor;
+	
+	/** the images to be rotated for this animation */
+	private List<Image> images;
+	
+	/** the {@link NPC} object to be animated */
+	private NPC npc;
 	
 
-	public NPCAnimation(NPC actor, List<Image> images) {
+	public NPCAnimation(NPC npc, List<Image> images) {
 		super();
-		this.actor = actor;
+		this.npc = npc;
 		this.images= images;
 	}
-
+	
 	@Override
 	protected void initAnimation() {
 		animation = new Transition() {
@@ -31,10 +35,10 @@ public class NPCAnimation extends SpriteAnimationTemplate {
 		    protected void interpolate(double fraction) {
 		        int index = (int) (fraction*(images.size()-1));
 		        index = Math.min(index, images.size() - 1);
-		        actor.setImage(images.get(index)); 
+		        npc.setImage(images.get(index)); 
 		        
-		        if(actor instanceof Sinkable) {
-					((Sinkable) actor).setSunk(index == images.size() - 1);
+		        if(npc instanceof Sinkable) {
+					((Sinkable) npc).setSunk(index == images.size() - 1);
 
 		        }
 		    }
