@@ -12,7 +12,8 @@ import frogger.util.CollisionDetector;
  * @see CollisionDetector
  */
 public class Log extends NPC implements RiverSprite {
-
+	
+	/** the type of log to display */
 	private final LOG_TYPE type;
 	
 	public Log(LOG_TYPE log) {

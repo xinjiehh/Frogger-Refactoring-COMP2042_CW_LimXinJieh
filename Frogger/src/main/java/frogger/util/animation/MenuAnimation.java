@@ -15,8 +15,13 @@ import javafx.util.Duration;
  */
 public class MenuAnimation {
 	
+	/** the {@code PlayerAvatar} object in this animation */
 	private final PlayerAvatar player;
+	
+	/** flag to check if {@code PlayerAvatar} should move right */
 	private boolean right;
+	
+	/** timeline responsible for the animation */
 	private Timeline timeline;
 
 	public MenuAnimation(PlayerAvatar player) {
@@ -26,14 +31,25 @@ public class MenuAnimation {
 
 	}
 	
+	/**
+	 * This method plays the timeline
+	 */
 	public void play() {
 		timeline.play();
 	}
 	
+	
+	/**
+	 * This method stops the timeline
+	 */
 	public void stop() {
 		timeline.stop();
 	}
 	
+	/**
+	 * This method initializes the {@code Timeline} object
+	 * responsible for the animation
+	 */
 	private void initTimeline() {
 		
 		timeline = new Timeline (new KeyFrame(Duration.seconds(1), 

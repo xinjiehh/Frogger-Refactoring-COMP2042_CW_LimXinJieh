@@ -34,7 +34,8 @@ public enum MenuController {
 	}
 	
 	/**
-	 * This method handles the exiting of the application
+	 * This method handles the exiting of the application and cleaning 
+	 * up
 	 */
 	public void exit() {
 		Platform.exit();

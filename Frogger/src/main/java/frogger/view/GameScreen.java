@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import frogger.constant.FilePath;
+import frogger.constant.settings.Controls;
 import frogger.controller.GameController;
-import frogger.controller.SelectionController.Controls;
 import frogger.model.Background;
 import frogger.model.GameModel;
 import frogger.model.Observer;
@@ -30,35 +30,57 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * This class acts as view to the corresponding
- * {@link GameController}, displaying objects such as 
- * controls ({@link PauseButton}, {@link ExitButton}, 
- * {@code Slider} for volume) and game elements ({@code 
- * Text} for level.
- * <p>
  * This class is part of the MVC pattern, acting as a view
- * for {@link GameModel}. As MVC pattern is closely related 
- * to Observer pattern, this class also implements Observer 
- * pattern. This class subscribes to the "life" event which
- * is updated by the {@link GameModel} through the {@link 
- * Subject} interface. This class receives and handles the 
- * update via {@link Observer#update} method. This reduces
- * the need to constantly check for updates in every frame
- * using the {@code AnimationTimer} like in the original
- * code.
+ * for {@link GameModel}. This class is constructed like a view 
+ * fxml file, which only display controls ({@link PauseButton}, {@link 
+ * ExitButton}, {@code Slider} for volume) and game elements, then 
+ * the {@code Pane} object is loaded in the controller. The controller 
+ * {@code GameController} is called to handle user input. <p>
+ * 
+ * 
+ * The only functional difference with a fxml view is that this 
+ * class implements {@link Observer} as MVC is closely related 
+ * to Observer pattern. <p>
+ * 
+ * 
+ * For example, this class subscribes to the "life" 
+ * event which is updated by the {@link GameModel} through 
+ * the {@link Subject} interface. This class receives and 
+ * handles the update via {@link Observer#update} method. <p>
+ * 
+ * 
+ * This reduces the need to constantly check for updates in 
+ * every frame using the {@code AnimationTimer} like in the 
+ * original code.
  *
  */
 public class GameScreen implements Observer {
 	
+	/** the amount of lives player has */
 	private static final int FROG_LIFE = 3;
+	
+	/** the text display for level */
 	private Text text = new Text();
+	
+	/** the alert dialog box that pops up to show progress info */
 	private Alert alert = new Alert(AlertType.INFORMATION); 
+	
+	/** the life image array (life bar) shown */
 	private ArrayList<Node> lifeArray = new ArrayList<Node>();
+	
+	/** button for user to pause/play game */
 	private PauseButton pauseButton = new PauseButton();
-	private ImageView bonus = new ImageView();
+	
+	/** button for user to go back to main menu */
 	private ExitButton exitButton = new ExitButton();
+	
+	/** bonus image that appears when frog catches a fly */
+	private ImageView bonus = new ImageView();
 
+	/** Pane object containing all the elements */
 	private World gamePane;
+	
+	/** bonus animation to show and hide bonus image */
 	private BonusAnimation bonusAnim;
 	
 	
@@ -66,7 +88,47 @@ public class GameScreen implements Observer {
 	public GameScreen(Controls control) {
 		gamePane = new World(control);
 		createLayout();
-		Subject.subscribe(this, "life","score","sprite","level");
+		Subject.subscribe(this, "life","add sprite","level");
+	}
+	
+	
+	/**
+	 * In this case, this method defines the actions to be taken 
+	 * whenever there are updates to subscribed events, for example
+	 * when the {@link PlayerAvatar} object {@code lifeProp} or 
+	 * {@code hasBonus} changes (MVC pattern).
+	 * 
+	 * For example, if frog life is reduced, the corresponding 
+	 * frog image is hidden from the life bar {@link #lifeArray}. 
+	 * If frog catches a fly, {@link #bonus} is shown.
+	 */
+	@Override
+	public void update(String eventType, Subject s) {
+
+		switch (eventType) {
+		
+			case "level" -> text.setText("Level " + ((GameModel)s).getLevel());
+			
+			case "life" -> {
+				int life = ((PlayerAvatar) s).getLife();
+				if (life >= 0) {
+					for (int i = 3; i > life; i--)
+						lifeArray.get(i - 1).setVisible(false);
+				}
+			}
+			
+			case "add sprite" -> {
+				List<Node> list = ((GameModel)s).getList();
+				gamePane.addAll(list);
+			}
+			
+			case "remove sprite" -> {
+				List<Node> list = ((GameModel)s).getList();
+				gamePane.getChildren().removeAll(list);
+			}
+			
+			
+		}
 	}
 	
 	/**
@@ -87,8 +149,11 @@ public class GameScreen implements Observer {
 	}
 	
 	/**
-	 * Public method that allows access to World so elements
-	 * @return World
+	 * Public method that allows access to this {@link World} 
+	 * object 
+	 * 
+	 * @return {@code World} object of this {@code 
+	 * GameScreen} object
 	 */
 	public World getPane() {
 		return gamePane;
@@ -240,6 +305,7 @@ public class GameScreen implements Observer {
 	 * object where the {@link PlayerAvatar} object touches a fly.
 	 * It is shown for 1000 milliseconds before being hidden until
 	 * a fly is caught again. 
+	 * 
 	 * @param bonusX  the x-position of the {@code Swamp} where
 	 * the {@code PlayerAvatar} caught the fly
 	 *
@@ -250,34 +316,7 @@ public class GameScreen implements Observer {
 		bonusAnim = new BonusAnimation(bonus);
 		bonusAnim.play();
 	}
-	
-	/**
-	 * In this case, this method defines the actions to be taken 
-	 * whenever the {@link PlayerAvatar} object {@code lifeProp} 
-	 * or {@code hasBonus} changes. (MVC pattern)
-	 * 
-	 * For example, if frog life is reduced, the corresponding 
-	 * frog image is hidden from the life bar {@link #lifeArray}. 
-	 * If frog catches a fly, {@link #bonus} is shown.
-	 */
-	@Override
-	public void update(String eventType, Subject s) {
-		
-		if(eventType.equals("life")) {
-			int life = ((PlayerAvatar)s).getLife();
-			if(life>=0) {
-				for (int i = 3; i > life; i--) 
-					lifeArray.get(i-1).setVisible(false);
-			}
-			
-		} else if (eventType.equals("sprite")) {
-			List<Node> list = ((GameModel)s).getList();
-			gamePane.addAll(list);
-			
-		} else if(eventType.equals("level")) {
-			text.setText("Level " + ((GameModel)s).getLevel());
-		}
-	}
+
 
 
 }

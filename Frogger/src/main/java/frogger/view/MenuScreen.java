@@ -13,21 +13,43 @@ import javafx.scene.layout.Pane;
 
 
 /**
- * This class acts as view to the corresponding {@link MenuController}
+ * Following MVC pattern, this class acts as view to the corresponding 
+ * {@link MenuController}. This class is constructed like a view fxml 
+ * file, whereby it only contains code for display and calls {@code 
+ * Controller} to handle user input then the {@code Pane} object is 
+ * loaded in the controller. The controller is called to handle user
+ * input. <p>
+ * 
+ * This class also implements Singleton using {@link #getInstance} to 
+ * ensure that only one instance of {@code MenuScreen} is created as
+ * only one menu screen is needed per JVM.
  */
+
 public class MenuScreen {
+	
+	/** the instance of this {@code MenuScreen} */
 	private static MenuScreen instance = null;
+	
+	/** the initial x position of the button */
 	private static final int BUTTON_XPOS = 200;
+	
+	/** the initial y position of the button */
 	private static final int BUTTON_START_YPOS = 200;
+	
+	/** {@code Pane} object containing all the nodes */ 
 	private Pane menuPane;
+	
+	/** the list containing all the buttons */
 	private ArrayList<MenuButton> menuButtonList;
+	
+	/** the animation shown on the menu screen */
 	private MenuAnimation anim;
 	
 	
 	/**
 	 * This method ensures only one instance of this {@link 
 	 * MenuScreen} object is created
-	 * @return  {@code MenuScreen} object
+	 * @return  this {@code MenuScreen} object
 	 */
 	public static MenuScreen getInstance() {
 		if(instance == null) {
@@ -39,9 +61,11 @@ public class MenuScreen {
 	
 	
 	/**
-	 * This method returns this {@code #menuPane} to be 
+	 * This method returns the {@code Pane} object to be 
 	 * displayed
-	 * @return {@code #menuPane}
+	 * 
+	 * @return the {@link #menuPane} of this {@code 
+	 * MenuScreen}
 	 */
 	
 	public Pane getPane() {

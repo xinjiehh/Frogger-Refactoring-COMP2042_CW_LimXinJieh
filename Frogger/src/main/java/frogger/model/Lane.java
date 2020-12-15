@@ -2,16 +2,22 @@ package frogger.model;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.reflections.Reflections;
 
 import frogger.Main;
 import frogger.constant.LOG_TYPE;
 import frogger.constant.OBSTACLE_TYPE;
+import frogger.constant.RiverSprite;
 import frogger.model.npc.Log;
 import frogger.model.npc.NPC;
 import frogger.model.npc.Obstacle;
 import frogger.model.npc.Turtle;
 import frogger.model.npc.WetTurtle;
 import frogger.util.RandomSpriteGenerator;
+import javafx.scene.Node;
 
 //a lot of redundant classes,
 //use switch to determine class, then get the constructor
@@ -54,7 +60,8 @@ public final class Lane {
 	/** the distance between each {@link #npc} object */
 	private double distance;
 	
-	private ArrayList<NPC> laneElements = new ArrayList<NPC>();
+	/** list containing all of the {@link NPC} in this {@code Lane} object */
+	private ArrayList<Node> laneElements = new ArrayList<Node>();
 	
 	
 	
@@ -122,7 +129,11 @@ public final class Lane {
 	
 
 	
-	
+	/**
+	 * This method allows random generation of elements in this {@code Lane}
+	 * object
+	 * @param str  "river" for river elements, "road" for road elements
+	 */
 	public void initRandomLaneElement(String str) {
 		
 		if(str.equals("river")) {
@@ -163,7 +174,7 @@ public final class Lane {
 	 * @return {@code ArrayList<Actor>} of elements in this 
 	 * {@code Lane} object
 	 */
-	public ArrayList<NPC> getElementsList(){
+	public ArrayList<Node> getElementsList(){
 		return laneElements;
 	}
 

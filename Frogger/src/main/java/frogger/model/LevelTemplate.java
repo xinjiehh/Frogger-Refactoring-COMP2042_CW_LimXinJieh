@@ -1,11 +1,10 @@
 package frogger.model;
 
-import frogger.model.npc.NPC;
-import javafx.scene.Node;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import javafx.scene.Node;
 
 
 /**
@@ -26,10 +25,7 @@ public abstract class LevelTemplate {
 	protected int laneNum;
 	
 	//useful when removing NPC by lanes, replace level elements
-	protected List<List<NPC>> laneElementsList = new LinkedList<List<NPC>>();
-	
-	//list of swamp objects
-	protected ArrayList<Actor> swamps = new ArrayList<Actor>();
+	protected List<List<Node>> laneElementsList = new LinkedList<List<Node>>();
 	
 	/**
 	 * Method to be overriden by subclass to define 
@@ -56,9 +52,10 @@ public abstract class LevelTemplate {
 	
 	
 	/**
-	 * @return list of all the game elements
+	 * This method returns the list of all the lane elements
+	 * @return list of all the lane elements
 	 */
-	public ArrayList<Node> getAllElementsNode(){
+	public ArrayList<Node> getAllElements(){
 		return this.levelElements;
 	}
 	
@@ -69,7 +66,7 @@ public abstract class LevelTemplate {
 	 * @param i lane number
 	 * @return a list of NPC in a specified lane
 	 */
-	public List<NPC> getLaneElements(int i){
+	public List<Node> getLaneElements(int i){
 		return laneElementsList.get(i-1);
 		
 	}
@@ -82,16 +79,6 @@ public abstract class LevelTemplate {
 	 */
 	public void removeLaneElements(int i) {
 		laneElementsList.remove(i-1);
-	}
-	
-	
-	/**
-	 * This method gets the list of all the elements, arranged in lanes
-	 * @return a list of lists of elements in different lanes
-	 */
-	public List<List<NPC>> getAllLaneElements(){
-		return laneElementsList;
-		
 	}
 
 
