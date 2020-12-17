@@ -1,8 +1,6 @@
 package frogger.controller;
 
 
-import java.util.List;
-
 import frogger.Main;
 import frogger.constant.EndGame;
 import frogger.constant.settings.Controls;
@@ -15,14 +13,15 @@ import frogger.util.CollisionHandler;
 import frogger.util.HighScoreFile;
 import frogger.util.ViewLoader;
 import frogger.view.GameScreen;
+import frogger.view.ProgressScreen;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DialogEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.util.List;
 
 
 /**
@@ -68,13 +67,10 @@ public enum GameController  {
 	/** the {@link GameModel} controlled by this {@code GameController} object */
 	private GameModel gameModel;
 	
-	/** the alert dialog tht pops up to indicate progress (next level, win, game over) */
-	private Alert alert;
-	
 	/**
 	 * This method initializes the game properties such as 
-	 * the controls chosen by user (WASD or arrow keys), the
-	 * {@link World} (gamePane) and {@code Alert}
+	 * the controls chosen by user (WASD or arrow keys) and
+	 * the {@link World} {@code gamePane}
 	 * @param control  the key control options ({@link Controls}) 
 	 * chosen by user
 	 */
@@ -83,7 +79,6 @@ public enum GameController  {
 		gameView = new GameScreen(control); 
 		gameModel = new GameModel();
 		gamePane = gameView.getPane();
-		alert = gameView.getAlert();
 		
 		
 		if (scene==null) {
@@ -100,6 +95,7 @@ public enum GameController  {
 	 * for each new level, then starts the game
 	 */
 	public void nextLevel() {
+		
 		gameModel.newLevel();
 	    startGame();
 		
@@ -135,38 +131,35 @@ public enum GameController  {
 	 }
 	
 
-
-    /** 
-     * This method defines the value of the {@code Alert} property
-     * onHiding. This simulates an {@code EventHandler} to handle 
-     * the {@code DialogEvent} which occurs when user closes the 
-     * dialog box. This method updates the view by either
-	 * <u1> 
-	 * <li> starting the next level, or </li>
-	 * <li> returning to main menu when maximum level 
-	 * is reached </li>
-	 * </u1>
-	 * <p>
-	 * 
-     * @param event  the {@code DialogEvent} which occurred after
-     * dialog box is closed
-     */
-	public void updateView(DialogEvent event) {
-		
-		gamePane.getChildren().removeAll(gameModel.getList());
-		Swamp.resetCtr();
-		
+	private void showProgressScreen() {
 		if(gameModel.getState()==EndGame.NEXT) {
-			nextLevel();
+			
+			ProgressScreen.getInstance().setHeader("NEXT LEVEL\n\n\n");
+			ProgressScreen.getInstance().setButtonText("START");
+			ProgressScreen.getInstance().setButtonAction(e->{
+				nextLevel();
+				Main.getPrimaryStage().getScene().setRoot(gamePane);
+			});
+			
+			
 					
 		} else {
-			gameModel.resetGame();
-			ScreenController.INSTANCE.showMenu();
-			new HighScoreFile(gameModel.getScoreString());
+			String header = (gameModel.getState()==EndGame.LOSE)? "Game over :( " : 
+				"Congratulations, you won!\n";
+			ProgressScreen.getInstance().setHeader(header+"\n\n\n");
+			ProgressScreen.getInstance().setButtonText("MAIN MENU");
+			ProgressScreen.getInstance().setButtonAction(e->{
+				ScreenController.INSTANCE.showMenu();
+				gameModel.resetGame();
+				new HighScoreFile(gameModel.getScoreString());
+			});
 			
 		}
-			
+		
+		Main.getPrimaryStage().getScene().setRoot(ProgressScreen.getInstance().getPane());
 	}
+	
+
 	
 	/**
 	 * This method defines the value of the {@code ButtonBase} 
@@ -186,14 +179,25 @@ public enum GameController  {
 		
 	}
 	
-	/**
-	 * This method defines the next view to show after score stage
-	 * pop up is exited
-	 * @param event  the {@code WindowEvent} that occurs after
+	 /** 
+     * This method defines the value of the score {@code Stage} property 
+     * {@code onHiding}. This simulates an {@code EventHandler} to handle 
+     * the {@code WindowEvent} that occurs when user closes score {@code 
+     * Stage}. This method updates the view by:
+	 * <u1> 
+	 * <li> starting the next level, or </li>
+	 * <li> returning to main menu when maximum level 
+	 * is reached </li>
+	 * </u1>
+	 * <p>
+	 * 
+     * @param event  the {@code WindowEvent} that occurs after
 	 * score stage is hidden 
-	 */
-	public void showNext(WindowEvent event) {
-		showAlert(gameModel.getProgressMessage());
+     */
+	public void showNextScreen(WindowEvent event) {
+		gamePane.getChildren().removeAll(gameModel.getList());
+		Swamp.resetCtr();
+		showProgressScreen();
 	}
 
 	/**
@@ -271,19 +275,6 @@ public enum GameController  {
 	}
 	
 
-	
-	/**
-	 * This method initializes the header text of the {@code 
-	 * @Alert} object and show the alert.
-	 * @param string  {@code String} to be displayed as header
-	 */
-	private void showAlert(String string) {
-
-		alert.setHeaderText(string);
-		alert.show();
-		
-	}
-	
 	/**
 	 * This method initializes this {@code Scene} object
 	 * and adds event filters which handle key press and 
@@ -295,7 +286,7 @@ public enum GameController  {
 		this.scene = mainStage.getScene();
 		this.scene.addEventFilter(KeyEvent.KEY_PRESSED, this::handleKeyPress);
 		this.scene.addEventFilter(KeyEvent.KEY_RELEASED, this::handleKeyRelease);
-	
+		
 	}
 	
 	/**
@@ -321,6 +312,21 @@ public enum GameController  {
 	}
 	
 }
+
+
+
+///**
+// * This method initializes the header text of the {@code 
+// * @Alert} object and show the alert.
+// * @param string  {@code String} to be displayed as header
+// */
+//private void showAlert(String string) {
+//
+//	alert.setHeaderText(string);
+//	alert.show();
+//	
+//}
+
 ///**
 //* This method initializes this {@link PlayerAvatar} object and its
 //* properties.

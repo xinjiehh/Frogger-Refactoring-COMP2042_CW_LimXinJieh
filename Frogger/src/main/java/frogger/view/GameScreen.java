@@ -20,8 +20,6 @@ import frogger.util.animation.BonusAnimation;
 import frogger.util.buttons.ExitButton;
 import frogger.util.buttons.PauseButton;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -62,9 +60,6 @@ public class GameScreen implements Observer {
 	/** the text display for level */
 	private Text text = new Text();
 	
-	/** the alert dialog box that pops up to show progress info */
-	private Alert alert = new Alert(AlertType.INFORMATION); 
-	
 	/** the life image array (life bar) shown */
 	private ArrayList<Node> lifeArray = new ArrayList<Node>();
 	
@@ -80,8 +75,7 @@ public class GameScreen implements Observer {
 	/** Pane object containing all the elements */
 	private World gamePane;
 	
-	/** bonus animation to show and hide bonus image */
-	private BonusAnimation bonusAnim;
+
 	
 	
 
@@ -118,7 +112,6 @@ public class GameScreen implements Observer {
 			}
 			
 			case "add sprite" -> {
-				System.out.println("add sprit");
 				List<Node> list = ((GameModel)s).getList();
 				gamePane.addAll(list);
 			}
@@ -130,23 +123,6 @@ public class GameScreen implements Observer {
 			
 			
 		}
-	}
-	
-	/**
-	 * Public method that allows access to dialog box
-	 * @return an Alert dialog box
-	 */
-	public Alert getAlert() {
-		return alert;
-	}
-	
-
-	/**
-	 * Public method that sets level text shown on screen
-	 * @param i current level number
-	 */
-	public void setLevelText(int i) {
-		text.setText("Level " + i);
 	}
 	
 	/**
@@ -171,7 +147,6 @@ public class GameScreen implements Observer {
 		initLife();
 		initPauseButton();
 		initExitButton(); 
-		initAlert();
 		initBonus();
 		
 	}
@@ -187,14 +162,6 @@ public class GameScreen implements Observer {
 		bonus.setY(50);
 		bonus.setVisible(false);
 		gamePane.add(bonus);
-		
-	}
-
-	/**
-	 * This method initializes the event handler for Alert box when it is closed 
-	 */
-	private void initAlert() {
-		alert.setOnHiding(GameController.INSTANCE::updateView);
 		
 	}
 
@@ -313,8 +280,9 @@ public class GameScreen implements Observer {
 	 * @see BonusAnimation
 	 */
 	public void playBonusAnim(double bonusX) {
+		/** bonus animation to show and hide bonus image */
 		bonus.setX(bonusX);
-		bonusAnim = new BonusAnimation(bonus);
+		BonusAnimation bonusAnim = new BonusAnimation(bonus);
 		bonusAnim.play();
 	}
 
