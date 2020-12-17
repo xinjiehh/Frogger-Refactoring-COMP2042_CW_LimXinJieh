@@ -14,8 +14,7 @@ public class FilePath {
 	public static final String BG_PATH = "/background/";
 	public static final String GAMEBACKGROUND = BG_PATH + "GameBackground2.png";
 	public static final String MENUBACKGROUND = BG_PATH + "MenuBackground.png";
-	
-	public static final String INFO_FXML = "/view/info.fxml";
+
 
 	//NPC
 	public static final String NPC_PATH = "/npc/";
@@ -62,8 +61,11 @@ public class FilePath {
 	public static final String DIGIT_PATH = "/digit/";
 	
 	//FXML
-	public static final String VIEW_SELECT = "/view/selection.fxml";
-	public static final String VIEW_SCORE = "/view/scoreview.fxml";
+	public static final String FXML_PATH = "/view/";
+	public static final String SELECTION_FXML = FXML_PATH + "selection.fxml";
+	public static final String SCORE_FXML = FXML_PATH + "scoreview.fxml";
+	public static final String PROGRESS_FXML = FXML_PATH + "progress.fxml";
+	public static final String INFO_FXML = "/view/info.fxml";
 	
 	//AUDIO
 	public static final String AUDIO_PREFIX = "src/main/resources/audio/";
