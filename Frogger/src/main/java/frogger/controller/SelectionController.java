@@ -5,6 +5,8 @@ import frogger.constant.settings.Controls;
 import frogger.constant.settings.Mode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
@@ -93,5 +95,17 @@ public class SelectionController {
 	}
 
 
+    public void handleMouseEvent(MouseEvent mouseEvent) {
+		switch(mouseEvent.getEventType().toString()) {
+			case "MOUSE_ENTERED":
+				start.setEffect(new DropShadow());
+				break;
+			case "MOUSE_EXITED":
+				start.setEffect(null);
+				break;
+			default:
+				break;
 
+		}
+    }
 }

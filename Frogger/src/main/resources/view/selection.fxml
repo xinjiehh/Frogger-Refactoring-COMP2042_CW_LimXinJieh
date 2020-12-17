@@ -14,7 +14,7 @@
                     <children>
 	                  <Button fx:id="mode" mnemonicParsing="false" onAction="#switchMode" prefWidth="359.0" styleClass="menu__item" text="SINGLE MODE" textAlignment="CENTER" textFill="#60ff26" />
 	                  <Button fx:id="controls" mnemonicParsing="false" onAction="#switchControls" prefWidth="359.0" styleClass="menu__item" text="&lt;    WASD    &gt;" textAlignment="CENTER" textFill="#60ff26" />
-	                  <Button fx:id="start" layoutX="88.0" layoutY="67.0" mnemonicParsing="false" onAction="#startGame" prefWidth="200.0" styleClass="menu__item" text="START" textAlignment="CENTER" textFill="#ff2020" />
+	                  <Button fx:id="start" layoutX="88.0" layoutY="67.0" mnemonicParsing="false" onAction="#startGame" onMouseEntered="#handleMouseEvent" onMouseExited="#handleMouseEvent" onMousePressed="#handleMouseEvent" onMouseReleased="#handleMouseEvent" prefWidth="200.0" styleClass="menu__item" text="START" textAlignment="CENTER" textFill="#ff2020" />
                     </children>
                 </VBox>
             </center>
