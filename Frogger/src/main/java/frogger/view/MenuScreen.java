@@ -16,13 +16,12 @@ import javafx.scene.layout.Pane;
  * Following MVC pattern, this class acts as view to the corresponding 
  * {@link MenuController}. This class is constructed like a view fxml 
  * file, whereby it only contains code for display and calls {@code 
- * Controller} to handle user input then the {@code Pane} object is 
- * loaded in the controller. The controller is called to handle user
- * input. <p>
+ * Controller} to handle user input. This {@code Pane} object is then
+ * loaded in the controller. <p>
  * 
  * This class also implements Singleton using {@link #getInstance} to 
- * ensure that only one instance of {@code MenuScreen} is created as
- * only one menu screen is needed per JVM.
+ * create this screen only when needed and ensure that only one instance 
+ * of {@code MenuScreen} is created as only one menu screen is needed per JVM.
  */
 
 public class MenuScreen {

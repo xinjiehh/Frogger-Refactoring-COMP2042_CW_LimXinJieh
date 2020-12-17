@@ -34,7 +34,7 @@ public class MenuButton extends Button {
 	 * preferred width, height, style and listeners of this 
 	 * {@code ExitButton} object
 	 * 
-	 * @param text  {@code String} to be displayed in this 
+	 * @param header  {@code String} to be displayed in this 
 	 * {@code Button}
 	 */
 	public MenuButton (String text) {

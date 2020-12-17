@@ -57,7 +57,7 @@ public class WetTurtle extends NPC implements Sinkable, RiverSprite {
 	}
 
 	/** 
-	 * This method initializes and playes the animation for this 
+	 * This method initializes and plays the animation for this
 	 * {@code Turtle} object
 	 */
 	private void initAnimation() {

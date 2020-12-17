@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import frogger.constant.FilePath;
+import frogger.model.Frog;
 import frogger.util.animation.SpriteAnimationTemplate;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;

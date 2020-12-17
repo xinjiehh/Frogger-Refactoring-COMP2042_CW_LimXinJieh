@@ -76,7 +76,7 @@ public interface Subject {
      * list from {@code listeners} 
      * 
      * @param listener  the unsubscribing {@code Observer} object
-     * @param eventTypes  {@code String} denoting the type of event
+     * @param eventType  {@code String} denoting the type of event
      */
     default void unsubscribe(Observer listener, String eventType) {
         List<Observer> users = listeners.get(eventType);

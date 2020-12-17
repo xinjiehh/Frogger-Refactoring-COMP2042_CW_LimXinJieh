@@ -133,9 +133,10 @@ public abstract class NPC extends Actor {
 	
 
 	/**
-	 * This method allows subclasses to define and customize their animation 
-	 * which will be called in each frame. However, there is an easier, predefined 
-	 * way to create generic animation using {@link SpriteAnimationTemplate}.
+	 * This method is a hook which allows subclasses to define and customize
+	 * their animation which will be called in each frame. However, there is
+	 * an easier, predefined way to create generic animation using {@link
+	 * SpriteAnimationTemplate}.
 	 * @param now  the timestamp of the current frame given in nanoseconds.
 	 */
 	protected void playAnimation(long now) {
