@@ -9,7 +9,7 @@ import org.reflections.Reflections;
 
 import frogger.constant.LOG_TYPE;
 import frogger.constant.OBSTACLE_TYPE;
-import frogger.constant.RiverSprite;
+import frogger.constant.WaterSprite;
 import frogger.model.npc.Log;
 import frogger.model.npc.NPC;
 import frogger.model.npc.Obstacle;
@@ -20,13 +20,13 @@ import frogger.model.npc.WetTurtle;
  * This method allows random generation of {@link NPC} such as {@link 
  * Obstacle}, {@link Log}, {@link Turtle} and {@link WetTurtle}. To add 
  * a river {@code NPC}, you have to add the corresponding name in switch-case 
- * in {@link #getRandomRiverSprite()}. To add new road {@code NPC}, you have 
+ * in {@link #getRandomWaterSprite()}. To add new road {@code NPC}, you have
  * to add another entry in {@link OBSTACLE_TYPE} enum and modify {@link 
- * #getRandomRoadSprite()}
+ * #getRandomLandSprite()}
  */
 
 public enum RandomSpriteGenerator {
-	
+	/** singleton instance for this class */
 	INSTANCE;
 	
 	/** list of variations of obstacle */
@@ -35,15 +35,15 @@ public enum RandomSpriteGenerator {
 	/** list of variations of logs */
 	private static final LOG_TYPE[] LOGS = LOG_TYPE.values();
 	
-	/** list of river sprites, which are {@link NPC} objects that implement {@link RiverSprite} */
-	private List<String> riverSprites = null;
+	/** list of river sprites, which are {@link NPC} objects that implement {@link WaterSprite} */
+	private List<String> waterSprites = null;
 	
 	/**
 	 * This method return a new road {@link NPC} by selecting from
 	 * {@link OBSTACLE_TYPE} enum
 	 * @return new road {@link NPC} 
 	 */
-	public NPC getRandomRoadSprite() {
+	public NPC getRandomLandSprite() {
 		Random rand = new Random();
 		return new Obstacle(OBSTACLES[rand.nextInt(OBSTACLES.length)]);
 	}
@@ -51,18 +51,18 @@ public enum RandomSpriteGenerator {
 	/**
 	 * This method return a new river {@link NPC} by using 
 	 * a random number generator to select from the classes 
-	 * that implement {@link RiverSprite}. Reflections is
+	 * that implement {@link WaterSprite}. Reflections is
 	 * used to get the corresponding classes.
 	 * 
 	 * @return new river {@link NPC} 
 	 */
-	public NPC getRandomRiverSprite() {
+	public NPC getRandomWaterSprite() {
 		
-		if(riverSprites==null)
-			initRiverSpriteList();
+		if(waterSprites ==null)
+			initWaterSpriteList();
 
 		Random rand = new Random();
-		String sprite = riverSprites.get(rand.nextInt(riverSprites.size()));
+		String sprite = waterSprites.get(rand.nextInt(waterSprites.size()));
 		
 		return switch (sprite) {
 			case "Log" -> getRandomLog();
@@ -75,13 +75,14 @@ public enum RandomSpriteGenerator {
 
 	/**
 	 * This method initializes the list of river sprites by getting
-	 * the classes that implements {@link RiverSprite}
+	 * the classes that implements {@link WaterSprite}
 	 */
-	private void initRiverSpriteList() {
+	private void initWaterSpriteList() {
 		Reflections reflections = new Reflections("frogger.model.npc");
-		Set<Class<? extends RiverSprite>> classes = reflections.getSubTypesOf(frogger.constant.RiverSprite.class);
-		riverSprites = new ArrayList<String>();
-		classes.forEach(c -> {riverSprites.add(c.getSimpleName());});
+		Set<Class<? extends WaterSprite>> classes = reflections.getSubTypesOf(WaterSprite.class);
+		waterSprites = new ArrayList<String>();
+		classes.forEach(c -> {
+			waterSprites.add(c.getSimpleName());});
 	}
 	
 

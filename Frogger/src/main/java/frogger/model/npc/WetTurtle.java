@@ -3,7 +3,7 @@ package frogger.model.npc;
 import java.util.ArrayList;
 
 import frogger.constant.FilePath;
-import frogger.constant.RiverSprite;
+import frogger.constant.WaterSprite;
 import frogger.util.CollisionDetector;
 import frogger.util.animation.NPCAnimation;
 import frogger.util.animation.SpriteAnimationTemplate;
@@ -19,7 +19,7 @@ import javafx.scene.image.Image;
  * of this object based on the time frame passed
  *
  */
-public class WetTurtle extends NPC implements Sinkable, RiverSprite {
+public class WetTurtle extends NPC implements Sinkable, WaterSprite {
 	
 	/** size of all images belonging to this object */
 	private static final int SIZE = 130;

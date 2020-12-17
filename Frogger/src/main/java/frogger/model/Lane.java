@@ -2,15 +2,10 @@ package frogger.model;
 
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import org.reflections.Reflections;
 
 import frogger.Main;
 import frogger.constant.LOG_TYPE;
 import frogger.constant.OBSTACLE_TYPE;
-import frogger.constant.RiverSprite;
 import frogger.model.npc.Log;
 import frogger.model.npc.NPC;
 import frogger.model.npc.Obstacle;
@@ -87,38 +82,31 @@ public final class Lane {
 		switch (laneNum) {
 			case 1 -> {
 				npc = new Obstacle(OBSTACLE_TYPE.TRUCK1);// 720; //800
-				System.out.println("lane 1 height " + npc.getHeight());
 			}
 			
 			case 2, 4 -> {
 				npc = new Obstacle(OBSTACLE_TYPE.CAR);//650
-				System.out.println("lane 2,4 height " + npc.getHeight());
 			}
 			
 			case 3 -> {
 				npc = new Obstacle(OBSTACLE_TYPE.TRUCK2);//780
-				System.out.println("lane 3 height " + npc.getHeight());
 			}
 			
 			case 5 -> {
 				npc = ((int)Math.round(Math.random())==0) ? new Turtle() : new WetTurtle();//730
-				System.out.println("lane 5 height " + npc.getHeight());
 			}
 			
 			case 6, 9 -> {
 				npc = new Log(LOG_TYPE.SHORT);// 750; //800
-				System.out.println("lane 6,9 height " + npc.getHeight());
 			}
 			
 			case 7 -> {
 				npc = new Log(LOG_TYPE.LONG);//900
-				System.out.println("lane 7 height " + npc.getHeight());
 			}
 			
 			case 8 -> {
 				
 				npc = new WetTurtle();//730
-				System.out.println("lane 8 height " + npc.getHeight());
 			}
 			
 			default -> throw new IllegalArgumentException("Lane " + laneNum + "does not exist. Element not created.");
@@ -137,10 +125,10 @@ public final class Lane {
 	public void initRandomLaneElement(String str) {
 		
 		if(str.equals("river")) {
-			npc = RandomSpriteGenerator.INSTANCE.getRandomRoadSprite();
+			npc = RandomSpriteGenerator.INSTANCE.getRandomLandSprite();
 			
 		} else if (str.equals("road")) {
-			npc = RandomSpriteGenerator.INSTANCE.getRandomRiverSprite();
+			npc = RandomSpriteGenerator.INSTANCE.getRandomWaterSprite();
 		}
 		
 	}

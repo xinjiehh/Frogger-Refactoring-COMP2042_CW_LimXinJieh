@@ -7,6 +7,6 @@ import frogger.model.npc.NPC;
  * together
  *
  */
-public interface RiverSprite {
+public interface WaterSprite {
 
 }

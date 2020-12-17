@@ -3,7 +3,7 @@ package frogger.model.npc;
 import java.util.ArrayList;
 
 import frogger.constant.FilePath;
-import frogger.constant.RiverSprite;
+import frogger.constant.WaterSprite;
 import frogger.util.animation.NPCAnimation;
 import javafx.scene.image.Image;
 
@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
  * This class is the model for turtle 
  *
  */
-public class Turtle extends NPC implements RiverSprite {
+public class Turtle extends NPC implements WaterSprite {
 	
 	/** size of all images belonging to this object */
 	private static final int SIZE = 130;

@@ -1,7 +1,7 @@
 package frogger.model.npc;
 
 import frogger.constant.LOG_TYPE;
-import frogger.constant.RiverSprite;
+import frogger.constant.WaterSprite;
 import frogger.model.PlayerAvatar;
 import frogger.util.CollisionDetector;
 
@@ -11,7 +11,7 @@ import frogger.util.CollisionDetector;
  * 
  * @see CollisionDetector
  */
-public class Log extends NPC implements RiverSprite {
+public class Log extends NPC implements WaterSprite {
 	
 	/** the type of log to display */
 	private final LOG_TYPE type;
