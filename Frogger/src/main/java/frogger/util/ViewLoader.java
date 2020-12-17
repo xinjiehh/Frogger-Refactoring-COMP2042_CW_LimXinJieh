@@ -62,7 +62,7 @@ public enum ViewLoader {
 		loadFXML(FilePath.VIEW_SCORE);
 		initNewStage("High Score");
 		((ScoreScreenController) loader.getController()).initView(levelData, scoreData);
-		this.stage.setOnHiding(GameController.INSTANCE::showNext);
+		this.stage.setOnHiding(GameController.INSTANCE::showNextScreen);
 		this.stage.show();
 		
 	}
