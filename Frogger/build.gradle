@@ -16,6 +16,17 @@ plugins {
     
 }
 
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+sourceSets{
+    build {
+        java.srcDir file('src/main/java')
+    }
+}
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
@@ -52,4 +63,4 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.base', 'javafx.media']
 }
  
-mainClassName = 'frogger.Main';
+mainClassName = 'frogger.Main'
