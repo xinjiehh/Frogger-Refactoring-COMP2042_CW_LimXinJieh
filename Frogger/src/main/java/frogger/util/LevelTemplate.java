@@ -1,4 +1,4 @@
-package frogger.model;
+package frogger.util;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-import frogger.model.Lane;
+import frogger.util.Lane;
 import frogger.model.npc.NPC;
 import javafx.scene.Node;
 

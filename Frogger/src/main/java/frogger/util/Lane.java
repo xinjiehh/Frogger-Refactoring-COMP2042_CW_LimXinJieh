@@ -1,4 +1,4 @@
-package frogger.model;
+package frogger.util;
 
 
 import java.util.ArrayList;
@@ -11,18 +11,7 @@ import frogger.model.npc.NPC;
 import frogger.model.npc.Obstacle;
 import frogger.model.npc.Turtle;
 import frogger.model.npc.WetTurtle;
-import frogger.util.RandomSpriteGenerator;
 import javafx.scene.Node;
-
-//a lot of redundant classes,
-//use switch to determine class, then get the constructor
-//new way: switch to create nw object then clone;
-//TODO better to return hashmap or object? 
-//is hashmap considered encapsulation 
-//WHICH USES HashMap<Actor,Integer> for Actor and distance init.
-//TODO THIS IS FACTORY METHOD
-//this ALLOWS SUBCLASS TO CHOOSE TYPE OF OBJECT TO CREATE
-//JAVATPOINT
 
 /**
  * This class implements factory method.  This class contains the creation 
@@ -180,15 +169,3 @@ public final class Lane {
 	
 
 }
-
-
-
-///**
-// * This method returns distance between each {@link #npc} object in a lane
-// * @return  {@code integer} value of distance between each {@link NPC}
-// * object
-// */
-//protected int getDistance() {
-//	return this.distance;
-//}
-

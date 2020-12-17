@@ -1,7 +1,5 @@
 package frogger.util;
 
-import frogger.model.Lane;
-import frogger.model.LevelTemplate;
 import frogger.model.npc.NPC;
 
 /**
