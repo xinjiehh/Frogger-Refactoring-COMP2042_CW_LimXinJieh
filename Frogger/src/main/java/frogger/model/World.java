@@ -19,7 +19,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
-
+/**
+ * This class is a modified version of {@code Pane}. This class filters key press and
+ * creates an {@code AnimationTimer} to animate {@link NPC} objects belonging to this
+ * {@code World} object. The {@code AnimationTimer} also checks for any collision
+ * between {@code NPC} and {@link PlayerAvatar} object
+ */
 public class World extends Pane {
 	
 	/** timer responsible for handling animation of {@link NPC} object and collision detection */
@@ -126,14 +131,17 @@ public class World extends Pane {
     }
     
     /**
-     * This method is used to show {@code Node} by adding 
-     * {@code Node} to this {@code World} object
+     * This method adds {@code Node} to this {@code World} object
      * @param element  {@code Node} to be added
      */
     public void add(Node element) {
         getChildren().add(element);
     }
-    
+
+    /** This method is used to add a list of {@code Node} to this
+     * {@code World} object
+     * @param c  list {@code Node} to be added
+     */
     public void addAll(Collection<Node> c) {
     	getChildren().addAll(c);
     }

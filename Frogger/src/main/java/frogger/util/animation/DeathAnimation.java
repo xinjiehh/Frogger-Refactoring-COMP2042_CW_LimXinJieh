@@ -17,11 +17,9 @@ import javafx.util.Duration;
  * to be 3 different classes, but the code was too similar, hence it 
  * is currently all combined in one class. In the future, if the 
  * animation gets more complex, this class can be easily be further 
- * separated into:
- * <u1>
- * <li> auto animation for {@link NPC}
- * <li> death animation for {@link PlayerAvatar}
- * <li> sinkable animation for {@link Sinkable}
+ * separated into: auto animation for {@link NPC}, death animation for
+ * {@link PlayerAvatar} and sinkable animation for {@link Sinkable}
+ *
  * @see BonusAnimation for example of non-sprite animation
  *
  */
@@ -29,7 +27,12 @@ public class DeathAnimation extends SpriteAnimationTemplate {
 	
 	private final PlayerAvatar player;
 	private final List<Image> images;
-	
+
+	/**
+	 * This method is the constructor for this {@code DeathAnimation} object
+	 * @param player  the {@link PlayerAvatar} to animate
+	 * @param images  the {@code List} of {@code Image} objects for animation
+	 */
 	public DeathAnimation(PlayerAvatar player, List<Image> images) {
 		super();
 		this.player=player;

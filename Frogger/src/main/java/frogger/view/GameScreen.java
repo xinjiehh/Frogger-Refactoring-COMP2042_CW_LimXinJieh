@@ -8,6 +8,7 @@ import java.util.List;
 import frogger.constant.FilePath;
 import frogger.constant.settings.Controls;
 import frogger.controller.GameController;
+import frogger.controller.SelectionController;
 import frogger.model.Background;
 import frogger.model.GameModel;
 import frogger.model.Observer;
@@ -74,11 +75,12 @@ public class GameScreen implements Observer {
 
 	/** Pane object containing all the elements */
 	private World gamePane;
-	
 
-	
-	
 
+	/**
+	 * @param control  key controls selected by user
+	 * @see SelectionController
+	 */
 	public GameScreen(Controls control) {
 		gamePane = new World(control);
 		createLayout();

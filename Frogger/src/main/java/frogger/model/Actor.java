@@ -32,7 +32,7 @@ public abstract class Actor extends ImageView {
 	public abstract void act(long now);
 	
 	/**
-	 * This method must be overriden by subclasses to check if 
+	 * This method must be overridden by subclasses to check if
 	 * this object is out of bounds and carry out the necessary 
 	 * steps to correct it
 	 */

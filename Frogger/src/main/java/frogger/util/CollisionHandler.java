@@ -10,8 +10,12 @@ import frogger.model.npc.NPC;
 import frogger.model.npc.Swamp;
 import frogger.model.npc.Turtle;
 
+/**
+ * This util class implements SINGLETON pattern. It is responsible for handling collision
+ * between {@link PlayerAvatar} and {@link NPC} objects and only one instance is needed per JVM.
+ */
 public enum CollisionHandler {
-	
+	/** singleton instance for this class */
 	INSTANCE;
 	
 	private int swampFrog=0;

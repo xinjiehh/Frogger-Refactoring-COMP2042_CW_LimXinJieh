@@ -24,6 +24,9 @@ public class MenuAnimation {
 	/** timeline responsible for the animation */
 	private Timeline timeline;
 
+	/**
+	 * @param player  {@link PlayerAvatar} to be animated
+	 */
 	public MenuAnimation(PlayerAvatar player) {
 		
 		this.player=player;

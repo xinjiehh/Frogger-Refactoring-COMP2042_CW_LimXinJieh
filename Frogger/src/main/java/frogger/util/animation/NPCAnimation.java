@@ -8,6 +8,10 @@ import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
+/**
+ * This class is responsible for the transforming animation of the {@link NPC}
+ * objects
+ */
 public class NPCAnimation extends SpriteAnimationTemplate {
 	
 	/** the images to be rotated for this animation */
@@ -15,8 +19,11 @@ public class NPCAnimation extends SpriteAnimationTemplate {
 	
 	/** the {@link NPC} object to be animated */
 	private NPC npc;
-	
 
+	/**
+	 * @param npc  {@link NPC} object to be transformed
+	 * @param images  {@code List} of {@code Image} objects for animation
+	 */
 	public NPCAnimation(NPC npc, List<Image> images) {
 		super();
 		this.npc = npc;

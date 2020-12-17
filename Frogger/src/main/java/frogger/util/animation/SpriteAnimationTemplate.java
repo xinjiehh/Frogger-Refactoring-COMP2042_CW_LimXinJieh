@@ -23,8 +23,14 @@ public abstract class SpriteAnimationTemplate implements Observer {
 	
 	/** flag to determine if this animation is in progress */
 	protected boolean donePlaying = true;
-	
-	
+
+	/**
+	 * This method is a public constructor which initializes
+	 * the animation using implementation provided by subclasses
+	 * and subscribes this instance to the "pause" event
+	 *
+	 * @see Subject
+	 */
 	public SpriteAnimationTemplate() {
 		initAnimation();
 		Subject.subscribe(this,"pause");

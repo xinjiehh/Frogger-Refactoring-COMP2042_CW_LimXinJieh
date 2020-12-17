@@ -46,7 +46,7 @@ import java.util.List;
  */
 
 public enum GameController  {
-
+	/** singleton instance of this class */
 	INSTANCE;
 	
 	/** the {@code Stage} object created in {@link Main} */
@@ -103,14 +103,11 @@ public enum GameController  {
 
 	/**
 	 * This method (called by {@link CollisionHandler}) invokes the 
-	 * GameModel object to update its properties when 
-	 * <u1> 
-	 * <li> all five {@link PlayerAvatar} objects have reached the swamp, or</li>
-	 * <li> the {@link PlayerAvatar} object dies and loses all its lives</li>
-	 * </u1>
-	 * <p>
+	 * GameModel object to update its properties when all five {@link
+	 * PlayerAvatar} objects have reached the swamp, or the {@code PlayerAvatar}
+	 * object dies and loses all its lives
 	 * 
-	 * 
+	 *
 	 * @param state  {@code GameOver.NEXT} for next level,
 	 * {@code GameOver.LOSE} when no lives are left
 	 * 
@@ -138,7 +135,7 @@ public enum GameController  {
 	private void showProgressScreen() {
 		if(gameModel.getState()==EndGame.NEXT) {
 			
-			ProgressScreen.getInstance().setHeader("NEXT LEVEL\n\n\n");
+			ProgressScreen.getInstance().setHeader("NEXT LEVEL\n\n\n\n");
 			ProgressScreen.getInstance().setButtonText("START");
 			ProgressScreen.getInstance().setButtonAction(e->{
 				nextLevel();
@@ -155,7 +152,7 @@ public enum GameController  {
 		} else {
 			String header = (gameModel.getState()==EndGame.LOSE)? "Game over :( " :
 				"Congratulations, you won!";
-			ProgressScreen.getInstance().setHeader(header+"\n\n\n");
+			ProgressScreen.getInstance().setHeader(header+"\n\n\n\n");
 			ProgressScreen.getInstance().setButtonText("MAIN MENU");
 			ProgressScreen.getInstance().setButtonAction(e->{
 				ScreenController.INSTANCE.showMenu();
@@ -200,13 +197,9 @@ public enum GameController  {
      * This method defines the value of the score {@code Stage} property 
      * {@code onHiding}. This simulates an {@code EventHandler} to handle 
      * the {@code WindowEvent} that occurs when user closes score {@code 
-     * Stage}. This method updates the view by:
-	 * <u1> 
-	 * <li> starting the next level, or </li>
-	 * <li> returning to main menu when maximum level 
-	 * is reached </li>
-	 * </u1>
-	 * <p>
+     * Stage}. This method updates the view by starting the next level, or
+	  * returning to main menu when maximum level
+	 * is reached
 	 * 
      * @param event  the {@code WindowEvent} that occurs after
 	 * score stage is hidden 

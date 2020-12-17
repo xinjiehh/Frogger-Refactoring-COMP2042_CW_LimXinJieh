@@ -8,14 +8,14 @@ import java.util.Map;
 /**
  * This class is an implementation of the Observer pattern. 
  * This class maintains a list of all interested observers so that 
- * {@link #notify()} can loop through the list of all {@link Observer} 
+ * {@link #notify} can loop through the list of all {@link Observer}
  * and invoke the {@link Observer#update} method on each 
  * registered observer. The observers register and unregister for 
  * updates by calling the {@link #subscribe} and {@link #unsubscribe}
  * methods on Subject. <p>
  * 
  * Any classes responsible for changing the events implement {@code Subject} 
- * and notifies the subscribers via {@link #notify()}. <p>
+ * and notifies the subscribers via {@link #notify}. <p>
  * 
  * One or more instances of classes implementing {@code Observer}
  * may also access classes implementing {@code Subject} for more 

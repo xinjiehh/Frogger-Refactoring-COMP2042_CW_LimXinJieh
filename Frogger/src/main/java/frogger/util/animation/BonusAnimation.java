@@ -16,6 +16,10 @@ public class BonusAnimation extends SpriteAnimationTemplate {
 	/** the bonus image of this animation */
 	private final ImageView bonus;
 
+	/**
+	 * This is the public constructor for this class
+	 * @param bonus  the {@code Image} for bonus to be animated
+	 */
 	public BonusAnimation(ImageView bonus) {
 		super();
 		this.bonus=bonus;

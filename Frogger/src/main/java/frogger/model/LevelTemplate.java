@@ -17,18 +17,21 @@ import javafx.scene.Node;
  */
 
 public abstract class LevelTemplate {
-	
-	//contains all the game characters
+
+	/** list containing all game characters */
 	protected ArrayList<Node> levelElements = new ArrayList<Node>();
-	
+
+	/** this {@link Lane} object */
 	protected Lane lane;
+
+	/** number of the lane to be created */
 	protected int laneNum;
 	
 	//useful when removing NPC by lanes, replace level elements
 	protected List<List<Node>> laneElementsList = new LinkedList<List<Node>>();
 	
 	/**
-	 * Method to be overriden by subclass to define 
+	 * Method to be overridden by subclass to define
 	 */
 	public abstract void initializeLanes();
 	

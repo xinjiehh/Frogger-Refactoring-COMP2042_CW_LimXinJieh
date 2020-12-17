@@ -9,8 +9,12 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 
+/**
+ * This util class implements SINGLETON pattern. It is responsible for playing any audio
+ * and only one instance is needed per JVM.
+ */
 public enum AudioPlayer {
-	
+	/** singleton instance for this enum class */
 	INSTANCE;
 	
 	/** sound effect for water death of {@link PlayerAvatar} */

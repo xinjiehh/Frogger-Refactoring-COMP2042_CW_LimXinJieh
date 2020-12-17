@@ -12,7 +12,7 @@ import javafx.application.Platform;
  * 
  */
 public enum MenuController {
-	
+	/** singleton instance of this class */
 	INSTANCE;
 	
 

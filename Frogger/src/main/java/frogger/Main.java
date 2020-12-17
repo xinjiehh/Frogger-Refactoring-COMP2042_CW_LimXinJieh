@@ -85,11 +85,20 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * The main method to be run
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
+	/**
+	 * This method returns the {@code Stage} of this {@code Main}
+	 * object to be used primarily for all scenes
+	 * @return  the primary {@code Stage} object
+	 */
 	public static Stage getPrimaryStage() {
 		return Main.primaryStage;
 	}

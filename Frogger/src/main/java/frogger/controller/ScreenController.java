@@ -15,6 +15,8 @@ import java.util.HashMap;
  * This class follows singleton method using enum. 
  */
 public enum ScreenController {
+
+	/** singleton instance for this enum class */
 	INSTANCE;
 	
 	/** variable storing screen ID {@code String} and corresponding screen {@code Pane} 

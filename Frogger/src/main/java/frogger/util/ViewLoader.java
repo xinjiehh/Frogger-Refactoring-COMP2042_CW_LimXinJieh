@@ -16,8 +16,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This util class implements SINGLETON pattern. It is responsible for loading the FXML
+ * files and only one instance is needed per JVM.
+ */
 public enum ViewLoader {
-	
+	/** singleton instance for this enum class */
 	INSTANCE;
 	
 	/** the {@code Stage} object created in {@link Main} */
@@ -55,7 +59,8 @@ public enum ViewLoader {
 
 	/**
 	 * This method loads the progress screen
-	 * @param header  message to be shown
+	 * @param header  {@code String} message to be shown
+	 * @param buttonText {@code String} placeholder for button
 	 * @param x  {@code EventHandler} for {@code onAction} property of button
 	 */
 	public void loadProgressScreen(String header,String buttonText, EventHandler<ActionEvent> x) {

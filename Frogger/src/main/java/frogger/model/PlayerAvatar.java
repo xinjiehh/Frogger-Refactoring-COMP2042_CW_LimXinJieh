@@ -85,6 +85,8 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	 * {@code PlayerAvatar} object and its properties to their starting 
 	 * state, and initializes life and score of this {@code PlayerAvatar} 
 	 * object
+	 * @param startX  starting x position of player
+	 * @param startY  starting y position of player
 	 */
 	public PlayerAvatar(double startX, double startY) {
 		this.START_XPOS=startX;
@@ -343,8 +345,12 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 		}
 
 	}
-	
-	/** This method returns the integer value of life left for this object */
+
+	/**
+	 * This method returns the integer value of life left for this object
+	 * @return  number of lives left for this {@code PlayerAvatar} object
+	 * @return  number of lives left for this {@code PlayerAvatar} object
+	 */
 	public int getLife() {
 		return lifeProp.intValue();
 	}

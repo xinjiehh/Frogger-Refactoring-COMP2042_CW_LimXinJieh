@@ -18,7 +18,11 @@ public class Frog extends PlayerAvatar {
 	
 	/** the size of all images belonging to this object */
 	private static final int IMG_SIZE = 40;
-	
+
+	/**
+	 * @param startX  starting x position of this {@code Frog} object
+	 * @param startY  starting y position of this {@code Frog} object
+	 */
 	public Frog(double startX, double startY) {
 		super(startX,startY);
 		 

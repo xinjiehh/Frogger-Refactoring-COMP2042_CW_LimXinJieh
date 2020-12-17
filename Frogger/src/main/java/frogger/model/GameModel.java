@@ -7,6 +7,7 @@ import frogger.controller.GameController;
 import frogger.model.npc.Digit;
 import frogger.model.npc.Swamp;
 import frogger.util.GameGenerator;
+import frogger.util.HighScoreFile;
 import frogger.util.animation.SpriteAnimationTemplate;
 import javafx.scene.Node;
 
@@ -62,8 +63,7 @@ public class GameModel implements Subject {
 	private boolean isPaused = false;
 	
 	/**
-	 * This is the public constructor for this object
-	 * @param level  the current level
+	 * This is the public constructor for this {@code GameModel} object
 	 */
 	public GameModel() { 
 		addEvent("add sprite","pause","level");
@@ -71,7 +71,11 @@ public class GameModel implements Subject {
 		//GameController.INSTANCE.addToView(elementList); 
 
 	}
-	
+
+	/**
+	 * This method creates a new level by initializing the state of the game
+	 * elements such as {@link Swamp} and {@link PlayerAvatar} objects
+	 */
 	public void newLevel() {
 		this.levelNum+=1;
 		notify("level",this);
@@ -87,9 +91,7 @@ public class GameModel implements Subject {
 	 */
 	private void initPlayer() {
 		player.setNoMove(false);
-		player.addScoreListener((obs,oldV,newV)->{
-			setScore(newV.intValue());
-		});
+		player.addScoreListener((obs,oldV,newV)-> setScore(newV.intValue()));
 	    //player.addLifeListener(this::updateLifeView);
 		
 	}
@@ -122,17 +124,11 @@ public class GameModel implements Subject {
 	public EndGame getState() {
 		return state;
 	}
-	
-	public void resetPlayer() {
-		player.setScore(0);
-	}
+
 	/**
-	 * This method handles the actions to be taken when 
-	 * <u1> 
-	 * <li> all five {@code PlayerAvatar} have reached the swamp, or</li>
-	 * <li> the {@code PlayerAvatar} object dies and loses all its lives</li>
-	 * </u1>
-	 * <p>
+	 * This method handles the actions to be taken when all five {@link
+	 * PlayerAvatar} have reached the swamp, or the {@code PlayerAvatar}
+	 * object dies and loses all its lives
 	 * 
 	 * @param state {@link EndGame#LOSE} when all lives are lost, {@link EndGame#NEXT} 
 	 * when all {@code PlayerAvatar} reach the swamp 
@@ -153,7 +149,12 @@ public class GameModel implements Subject {
 			//new HighScoreFile(scoreString);
 		}
 	}
-	
+
+	/**
+	 * This method returns the score string written to the {@link HighScoreFile}
+	 * @return  {@code String} containing scores arranged in descending order and
+	 * corresponding level numbers
+	 */
 	public String getScoreString() {
 		return scoreString;
 	}
@@ -191,20 +192,6 @@ public class GameModel implements Subject {
 	 */
 	public boolean getIsPaused() {
 		return isPaused;
-	}
-	
-
-	
-	/**
-	 * This method returns the progress message according to 
-	 * the state of game 
-	 * @return  String to notify users of the next action
-	 */
-	public String getProgressMessage() {
-		return (state==EndGame.LOSE)? "Game Over" :
-			(levelNum < Settings.MAX_LEVEL)? "Next level!" :
-			"Congratulations, you won the game!";
-		
 	}
 	
 	/**

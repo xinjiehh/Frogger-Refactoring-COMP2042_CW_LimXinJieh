@@ -10,6 +10,7 @@ import frogger.model.Background;
 import frogger.util.buttons.MenuButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -82,15 +83,28 @@ public class ProgressScreen {
 		
 	}
 
+	/**
+	 * This method sets the placeholder for this {@link Button}
+	 * object
+	 * @param str  {@code String} placeholder for button
+	 */
 	public void setButtonText(String str) {
 		button.setText(str);
 	}
-	
+
+	/**
+	 * This method sets the progress message to be displayed
+	 * @param str  {@code String} message to be displayed
+	 */
 	public void setHeader(String str) {
 		header.setText(str);
 		
 	}
 
+	/**
+	 * This method initializes the style of the {@code Text} objects
+	 * to be displayed on screen
+	 */
 	private void initText() {
 		header = new Text();
 		body = new Text();
@@ -107,7 +121,7 @@ public class ProgressScreen {
 
 		header.setFill(Color.LIMEGREEN);
 		body.setFill(Color.WHITE);
-		body.setText("\n\n\n\n\n\n\nor press any key to continue");
+		body.setText("\n\n\n\n\n\nor press any key to continue");
 		progressPane.getChildren().add(body);
 		progressPane.getChildren().add(header);
 
@@ -133,14 +147,22 @@ public class ProgressScreen {
 		button = new MenuButton("");
 		progressPane.getChildren().add(button);
 	}
-	
 
-	
+
+	/**
+	 * This method sets the property {@code onAction} of the button
+	 * @param x  {@code EventHandler} to be executed when button is pressed or
+	 * fired
+	 */
 	public void setButtonAction(EventHandler<ActionEvent> x) {
 		button.setOnAction(x);
 		
 	}
-	
+
+	/**
+	 * This method handles key press on this screen
+	 * @param event  {@code KeyEvent} that fires
+	 */
 	private void handleKeyPress(KeyEvent event) {
 		if(Main.getPrimaryStage().getScene().getRoot()== progressPane)
 			button.fire();

@@ -19,6 +19,7 @@ import frogger.model.npc.Turtle;
  */
 
 public enum CollisionDetector {
+	/** singleton instance for this class */
 	INSTANCE;
 	
 
@@ -45,24 +46,21 @@ public enum CollisionDetector {
 		}
 
 			if(intersectingObj instanceof Obstacle) {
-				//CollisionHandler.INSTANCE.handleDeath(frog, DEATH.CAR);
+				CollisionHandler.INSTANCE.handleDeath(frog, DEATH.CAR);
 				
 			} else if ((intersectingObj instanceof Log || intersectingObj instanceof Turtle) && !frog.getNoMove()) {
 
-				//CollisionHandler.INSTANCE.handleAttach(frog,intersectingObj.getSpeed());
+				CollisionHandler.INSTANCE.handleAttach(frog,intersectingObj.getSpeed());
 				
 				
 			} else if(intersectingObj instanceof Sinkable) {
 				
 				Sinkable sinkable = (Sinkable) intersectingObj;
 				if(sinkable.isSunk()) {
-					//frog.handleDeathTest(FrogDeath.WATER);
+					CollisionHandler.INSTANCE.handleDeath(frog, DEATH.WATER);
 					
 				} else {
-					//frog.attachFrog(intersectingObj.getSpeed(), 0);
 					CollisionHandler.INSTANCE.handleAttach(frog,intersectingObj.getSpeed());
-					
-					
 				}
 				
 			} else if (intersectingObj instanceof Swamp) {
@@ -82,7 +80,7 @@ public enum CollisionDetector {
 			}
 			
 			if (intersectingObj==null && frog.getY() < 413) { //if reach this point no intersect and >413 frog is in water
-				//frog.handleDeathTest(FrogDeath.WATER);
+				CollisionHandler.INSTANCE.handleDeath(frog, DEATH.WATER);
 			
 		}
 	}

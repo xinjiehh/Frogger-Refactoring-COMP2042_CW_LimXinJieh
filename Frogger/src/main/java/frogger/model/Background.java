@@ -13,6 +13,9 @@ import javafx.scene.image.ImageView;
  */
 public class Background extends ImageView {
 
+	/**
+	 * @param url  {@code String} that is the media file path
+	 */
 	public Background(String url) {
 		setImage(new Image(url, Main.STAGE_W, Main.STAGE_H, false, true));
 	}

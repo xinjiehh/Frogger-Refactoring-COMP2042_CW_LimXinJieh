@@ -3,14 +3,10 @@ package frogger.constant;
 import frogger.model.npc.NPC;
 
 /**
- * This interface
- * <u1>
- * <li> achieves loose coupling by reducing dependency of {@link NPC} 
- * on the enums. 
- * <li> improves extendability by tying {@link NPC} variation enums
- * together (such as {@link LOG_TYPE} and {@link OBSTACLE_TYPE})
- * </li>
- * <p>
+ * This interface achieves loose coupling by reducing dependency of {@link NPC}
+ * on the enums and improves extendability by tying {@link NPC} variation enums
+ * together (such as {@link LOG_TYPE} and {@link OBSTACLE_TYPE}).
+ *
  * To add a new enum for variation, implement this interface. 
  * 
  */

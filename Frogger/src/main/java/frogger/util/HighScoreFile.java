@@ -16,6 +16,11 @@ public class HighScoreFile {
 
 	//https://www.w3schools.com/java/java_files_create.asp
 	//https://stackoverflow.com/questions/13729625/overwriting-txt-file-in-java
+
+	/**
+	 * @param message  {@code String} containing the scores arranged in a particular
+	 * order and the corresponding level numbers
+	 */
 	public HighScoreFile(String message) {
 		
 		File myObj;
@@ -39,6 +44,7 @@ public class HighScoreFile {
 	    	      f2.write("Your high score as of " + dtf.format(now) 
 	    	      		+ "\n" + message + "\n\n");
 	    	      f2.close();
+				  System.out.println("My High Score.txt updated");
 	    	      
 	    	  } catch (IOException e) {
 	    		  System.out.println("An error occurred in writing to file.");

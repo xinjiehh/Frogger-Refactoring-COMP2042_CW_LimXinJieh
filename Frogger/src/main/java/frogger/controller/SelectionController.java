@@ -94,7 +94,10 @@ public class SelectionController {
 		ScreenController.INSTANCE.startGame((Controls) controls.getUserData());
 	}
 
-
+	/**
+	 * This method handles the {@code MouseEvent} on the button
+	 * @param mouseEvent  {@code MouseEvent} that fired on the button
+	 */
     public void handleMouseEvent(MouseEvent mouseEvent) {
 		switch(mouseEvent.getEventType().toString()) {
 			case "MOUSE_ENTERED":

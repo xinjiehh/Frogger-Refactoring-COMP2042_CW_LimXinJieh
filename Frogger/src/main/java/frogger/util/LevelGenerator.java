@@ -2,6 +2,7 @@ package frogger.util;
 
 import frogger.model.Lane;
 import frogger.model.LevelTemplate;
+import frogger.model.npc.NPC;
 
 /**
  * This class contains a fixed algorithm used to generate levels
@@ -25,7 +26,10 @@ public class LevelGenerator extends LevelTemplate {
 	
 	/** the number of turtles in lane 8 */
 	private int turtle8 = 3;
-	
+
+	/**
+	 * @param level  integer value of the level to be generated
+	 */
 	public LevelGenerator(int level) {
 		super();
 		this.level = level;
