@@ -126,9 +126,9 @@ public abstract class NPC extends Actor {
 	@Override
 	protected void checkOutOfBounds() {
 		if (getX() > Main.STAGE_W && speed>0)
-			setX(-getWidth()); //-200
+			setX(-getWidth());
 		if (getX() < -getWidth() && speed<0)
-			setX(Main.STAGE_W); //50,120,200
+			setX(Main.STAGE_W);
 	}
 	
 

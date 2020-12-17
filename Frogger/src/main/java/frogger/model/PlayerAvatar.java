@@ -432,37 +432,3 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	}
 	
 }
-
-
-//@Deprecated
-//public <A extends Actor> A getOneIntersectingObject(java.lang.Class<A> cls) {
-//    A intersectingObj = null;
-//    System.out.println("deprecated method used");
-//    
-//    if(getWorld()!=null) {
-//    	
-//    	for (A actor: getWorld().getObjects(cls)) { 
-//        	//if actor of class CLS intersects this,
-//            if (actor.intersects(this.getBoundsInLocal())) {
-//                intersectingObj = actor;
-//                break;
-//            }
-//        }
-//    	
-//    }
-//    
-//    return intersectingObj;
-//}
-//
-//@Deprecated
-//public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls){
-//    ArrayList<A> someArray = new ArrayList<A>();
-//    System.out.println("deprecated method used");
-//    for (A actor: getWorld().getObjects(cls)) { //gameElements.getList()
-//    	//get objects of class, check if each intersects with player object
-//        if (actor.intersects(this.getBoundsInLocal())) {
-//            someArray.add(actor);
-//        }
-//    }
-//    return someArray;
-//}

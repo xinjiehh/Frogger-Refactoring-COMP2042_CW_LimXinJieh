@@ -291,20 +291,3 @@ public class GameScreen implements Observer {
 
 
 }
-
-//else if (eventType=="bonus") {
-////boolean bool = ((GameModel)s).getHasBonus();
-////bonus.setVisible(bool);
-//bonusAnim.play();
-//}
-
-///**
-//* Public method that allows access to bonus image
-//* @return the bonus ImageView
-//*/
-//
-//public ImageView getBonus() {
-//	return bonus;
-//}
-//
-

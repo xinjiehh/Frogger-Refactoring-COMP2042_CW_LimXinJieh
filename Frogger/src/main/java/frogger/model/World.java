@@ -250,45 +250,5 @@ public class World extends Pane {
       
       
       
-    
+
 }
-
-//public abstract void act(long now);
-//List<Frog> frogs = getObjects(Frog.class);
-
-//CollisionDetector.INSTANCE.checkIntersecting(frogs.get(0));
-
-
-//sceneProperty().addListener(new ChangeListener<Scene>() {
-//
-//	@Override
-//	public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
-//		if (newValue != null) {
-//			createNewListeners(newValue);
-//		}
-//	}
-//
-//});
-
-
-//private void touchAllEnd() {
-//if (gameMode == GameMode.DOUBLE) {
-//  activatedEnds.forEach(End::resetActor);
-//}
-//}
-
-//newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-//
-//	@Override
-//	public void handle(KeyEvent event) {
-//		if(getOnKeyReleased() != null) 
-//			getOnKeyReleased().handle(event);
-//		List<Actor> myActors = getObjects(Actor.class);
-//		for (Actor anActor: myActors) {
-//			if (anActor.getOnKeyReleased() != null) {
-//				anActor.getOnKeyReleased().handle(event);
-//			}
-//		}
-//	}
-//	
-//});

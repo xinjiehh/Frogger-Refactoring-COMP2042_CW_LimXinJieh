@@ -76,35 +76,3 @@ public abstract class SpriteAnimationTemplate implements Observer {
 	
 
 }
-
-
-//private int imageIndex = 0 ;
-//private final int frameTime = 2000 ; // milliseconds
-//
-//// ...
-//
-//ImageView imageView = new ImageView();
-//List<Image> images = new ArrayList<>();
-//// populate images...
-//
-//Timeline timeline = new Timeline(new KeyEvent(Duration.millis(frameTime),
-//    e -> imageView.setImage(images.get(imageIndex++))));
-//
-//timeline.setCycleCount(images.size());
-//timeline.play();
-//seq.getChildren().add(animation);
-//seq.getChildren().add(new PauseTransition(Duration.millis(200)));
-//seq.getChildren().add(animation2);
-
-
-
-//animation2 = new Transition() {
-//    {
-//        setCycleDuration(Duration.millis(3000)); // total time for animation
-//    }
-//
-//    @Override
-//    protected void interpolate(double fraction) {
-//      
-//    }
-//};

@@ -100,15 +100,3 @@ public enum RandomSpriteGenerator {
 
 
 }
-
-//RiverSpriteType[] sprites = RiverSpriteType.values();
-//Random rand = new Random();
-//RiverSpriteType sprite = sprites[rand.nextInt(sprites.length)];
-///**
-// * This method returns either {@link Turtle} or {@link WetTurtle}
-// * using random number generator
-// * @return turtle {@link NPC}
-// */
-//private static NPC getRandomTurtle() {
-//	return ((int)Math.round(Math.random())==0) ? new WetTurtle() : new Turtle();
-//}
