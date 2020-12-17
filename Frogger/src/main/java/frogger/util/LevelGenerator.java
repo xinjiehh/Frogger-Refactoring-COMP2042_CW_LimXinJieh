@@ -55,15 +55,15 @@ public class LevelGenerator extends LevelTemplate {
 		turtle8 -= (level==5 || level == 7) ? 1 : 0;
 		
 
-		addLane(1).initLaneElements(3,1+speed); //adds to gameElements list
-		addLane(2).initLaneElements(4,-1+speed);
-		addLane(3).initLaneElements(2,1+speed);
-		addLane(4).initLaneElements(raceCar,5+speed);
-		addLane(5).initLaneElements(turtle5,-1+speed);
-		addLane(6).initLaneElements(3,0.75+speed);
-		addLane(7).initLaneElements(longLog,-2+speed);
-		addLane(8).initLaneElements(turtle8,-2+speed);
-		addLane(9).initLaneElements(3,0.75+speed);
+		createLane(1).initLaneElements(3,1+speed); //adds to gameElements list
+		createLane(2).initLaneElements(4,-1+speed);
+		createLane(3).initLaneElements(2,1+speed);
+		createLane(4).initLaneElements(raceCar,5+speed);
+		createLane(5).initLaneElements(turtle5,-1+speed);
+		createLane(6).initLaneElements(3,0.75+speed);
+		createLane(7).initLaneElements(longLog,-2+speed);
+		createLane(8).initLaneElements(turtle8,-2+speed);
+		createLane(9).initLaneElements(3,0.75+speed);
 
 	}
 

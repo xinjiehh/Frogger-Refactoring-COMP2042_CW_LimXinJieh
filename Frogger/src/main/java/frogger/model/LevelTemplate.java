@@ -32,7 +32,7 @@ public abstract class LevelTemplate {
 	 */
 	public abstract void initializeLanes();
 	
-	public LevelTemplate addLane(int laneNum) {
+	public LevelTemplate createLane(int laneNum) {
 		this.laneNum = laneNum;
 		this.lane = new Lane(laneNum);
 		return this;
