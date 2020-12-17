@@ -1,16 +1,20 @@
 package frogger.util;
 
-import java.io.IOException;
-import java.util.List;
-
 import frogger.Main;
 import frogger.constant.FilePath;
 import frogger.controller.GameController;
+import frogger.controller.ProgressScreenController;
 import frogger.controller.ScoreScreenController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
 
 public enum ViewLoader {
 	
@@ -32,7 +36,7 @@ public enum ViewLoader {
 	 * This method loads the selection view
 	 */
 	public void loadSelection() {
-		loadFXML(FilePath.VIEW_SELECT);
+		loadFXML(FilePath.SELECTION_FXML);
 		mainStage.getScene().setRoot(pane);
 		mainStage.show();
 		
@@ -48,6 +52,25 @@ public enum ViewLoader {
 		this.stage.show();
 		
 	}
+
+	/**
+	 * This method loads the progress screen
+	 * @param header  message to be shown
+	 * @param x  {@code EventHandler} for {@code onAction} property of button
+	 */
+	public void loadProgressScreen(String header,String buttonText, EventHandler<ActionEvent> x) {
+		loadFXML(FilePath.PROGRESS_FXML);
+		ProgressScreenController controller = loader.getController();
+		pane.addEventFilter(KeyEvent.KEY_PRESSED,controller::handleOnKeyPressed);
+		pane.requestFocus();
+		controller.setText(header);
+		controller.setButtonText(buttonText);
+		controller.setButtonAction(x);
+
+		mainStage.getScene().setRoot(pane);
+		mainStage.getScene().getRoot().requestFocus();
+		mainStage.show();
+	}
 	
 	/**
 	 * This method loads the score view layout from the scoreview FXML file 
@@ -59,7 +82,7 @@ public enum ViewLoader {
 	 * @param scoreData  list of scores
 	 */
 	public void loadScore(List<String>levelData, List<String>scoreData) {
-		loadFXML(FilePath.VIEW_SCORE);
+		loadFXML(FilePath.SCORE_FXML);
 		initNewStage("High Score");
 		((ScoreScreenController) loader.getController()).initView(levelData, scoreData);
 		this.stage.setOnHiding(GameController.INSTANCE::showNextScreen);

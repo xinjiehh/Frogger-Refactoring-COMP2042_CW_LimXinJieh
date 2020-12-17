@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 
 import frogger.Main;
 import frogger.constant.FilePath;
-import frogger.controller.MenuController;
 import frogger.model.Background;
-import frogger.util.animation.MenuAnimation;
 import frogger.util.buttons.MenuButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,13 +35,15 @@ public class ProgressScreen {
 	private static ProgressScreen instance = null;
 	
 	/** {@code StackPane} object containing all the nodes */ 
-	private StackPane menuPane;
+	private StackPane progressPane;
 	
 	/** button to show the next screen */
 	private MenuButton button;
 	
 	/** header text to be displayed */
 	private Text header;
+
+	private Text body;
 	
 	/**
 	 * This method ensures only one instance of this {@link 
@@ -62,17 +62,16 @@ public class ProgressScreen {
 	 * This method returns the {@code StackPane} object to be 
 	 * displayed
 	 * 
-	 * @return the {@link #menuPane} of {@code ProgressScreen}
+	 * @return the {@link #progressPane} of {@code ProgressScreen}
 	 */
 	
 	public Pane getPane() {
-		return menuPane;
+		return progressPane;
 	}
 	
 	
 	/**
-	 * This private constructor initializes {@link #menuPane}
-	 * and {@link MenuAnimation} and starts the animation
+	 * This private constructor initializes {@link #progressPane}
 	 */
 	private ProgressScreen() {
 		
@@ -91,15 +90,28 @@ public class ProgressScreen {
 		header.setText(str);
 		
 	}
-	
+
 	private void initText() {
 		header = new Text();
-		
-		try { header.setFont(Font.loadFont(new FileInputStream(FilePath.DEFAULT_FONT),25));
-		} catch (FileNotFoundException e) {e.printStackTrace();}
-		
-		header.setFill(Color.LIMEGREEN); 
-		menuPane.getChildren().add(header);
+		body = new Text();
+		try {
+
+			header.setFont(Font.loadFont(new FileInputStream(FilePath.DEFAULT_FONT),25));
+			body.setFont(Font.loadFont(new FileInputStream(FilePath.DEFAULT_FONT),15));
+
+		} catch (FileNotFoundException e) {
+
+			System.out.println("Error loading font");
+			e.printStackTrace();
+		}
+
+		header.setFill(Color.LIMEGREEN);
+		body.setFill(Color.WHITE);
+		body.setText("\n\n\n\n\n\n\nor press any key to continue");
+		progressPane.getChildren().add(body);
+		progressPane.getChildren().add(header);
+
+
 	}
 
 	/**
@@ -108,20 +120,18 @@ public class ProgressScreen {
 	 * such as the background and buttons
 	 */
 	private void initializePane() {
-		menuPane = new StackPane();
-		menuPane.setCache(true);
+		progressPane = new StackPane();
+		progressPane.setCache(true);
 		createMenuBackground();
 	}
 	
 
 	/**
-	 * This method creates a start button and initializes
-	 * the action handler which calls {@link MenuController}
-	 * to show the selection screen
+	 * This method creates the button shown on screen
 	 */
 	private void createButton() {
 		button = new MenuButton("");
-		menuPane.getChildren().add(button);
+		progressPane.getChildren().add(button);
 	}
 	
 
@@ -132,7 +142,7 @@ public class ProgressScreen {
 	}
 	
 	private void handleKeyPress(KeyEvent event) {
-		if(Main.getPrimaryStage().getScene().getRoot()==menuPane)
+		if(Main.getPrimaryStage().getScene().getRoot()== progressPane)
 			button.fire();
 	}
 	
@@ -143,7 +153,7 @@ public class ProgressScreen {
 	 */
 	private void createMenuBackground() {
 		Background background = new Background(FilePath.MENUBACKGROUND);
-		menuPane.getChildren().add(background);
+		progressPane.getChildren().add(background);
 
 	}
 	

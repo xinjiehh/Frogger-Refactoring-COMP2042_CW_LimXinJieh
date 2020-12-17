@@ -129,8 +129,12 @@ public enum GameController  {
 	public void showScoreDisplay() {
 		ViewLoader.INSTANCE.loadScore(gameModel.getLevelList(), gameModel.getScores());
 	 }
-	
 
+	/**
+	 * This method initializes the {@link ProgressScreen} and shows the
+	 * user's next step in the game. To use FXML, enable the commented
+	 * blocks of code and disable line 176
+	 */
 	private void showProgressScreen() {
 		if(gameModel.getState()==EndGame.NEXT) {
 			
@@ -138,14 +142,19 @@ public enum GameController  {
 			ProgressScreen.getInstance().setButtonText("START");
 			ProgressScreen.getInstance().setButtonAction(e->{
 				nextLevel();
-				Main.getPrimaryStage().getScene().setRoot(gamePane);
+				mainStage.getScene().setRoot(gamePane);
 			});
-			
-			
-					
+
+//			If using FXML, enable to use progress.fxml and disable line 176
+//			ViewLoader.INSTANCE.loadProgressScreen("NEXT LEVEL", "START",
+//					e -> {
+//						nextLevel();
+//						mainStage.getScene().setRoot(gamePane);
+//					});
+
 		} else {
-			String header = (gameModel.getState()==EndGame.LOSE)? "Game over :( " : 
-				"Congratulations, you won!\n";
+			String header = (gameModel.getState()==EndGame.LOSE)? "Game over :( " :
+				"Congratulations, you won!";
 			ProgressScreen.getInstance().setHeader(header+"\n\n\n");
 			ProgressScreen.getInstance().setButtonText("MAIN MENU");
 			ProgressScreen.getInstance().setButtonAction(e->{
@@ -153,10 +162,18 @@ public enum GameController  {
 				gameModel.resetGame();
 				new HighScoreFile(gameModel.getScoreString());
 			});
+
+//			If using FXML, enable to use progress.fxml and disable line 176
+//			ViewLoader.INSTANCE.loadProgressScreen(header, "MAIN MENU",
+//					e->{
+//						ScreenController.INSTANCE.showMenu();
+//						gameModel.resetGame();
+//						new HighScoreFile(gameModel.getScoreString());
+//					});
 			
 		}
-		
-		Main.getPrimaryStage().getScene().setRoot(ProgressScreen.getInstance().getPane());
+		//disable if using FXML
+		mainStage.getScene().setRoot(ProgressScreen.getInstance().getPane());
 	}
 	
 

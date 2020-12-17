@@ -1,0 +1,13 @@
+.root {
+	-fx-font-family: 'Joystix Monospace';
+    -fx-background-image: url("../background/MenuBackground.png");
+    -fx-background-size: 100%;
+}
+
+.button {
+
+-fx-background-color: transparent;
+-fx-background-image: url("../button/button.png");
+-fx-background-size: 100%;
+
+}
