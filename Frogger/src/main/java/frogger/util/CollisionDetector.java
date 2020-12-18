@@ -77,9 +77,7 @@ public enum CollisionDetector {
 					CollisionHandler.INSTANCE.handleSwamp(frog,swamp);
 					
 				}
-			}
-			
-			if (intersectingObj==null && frog.getY() < 413) { //if reach this point no intersect and >413 frog is in water
+			} else if (intersectingObj==null && frog.getY() < 413) { //if reach this point no intersect and >413 frog is in water
 				CollisionHandler.INSTANCE.handleDeath(frog, DEATH.WATER);
 			
 		}
@@ -87,66 +85,3 @@ public enum CollisionDetector {
 	
 
 }
-
-//original check intersecting
-
-//public void checkIntersecting(Frog frog) {
-//	Actor actor = frog.getOneIntersectingObject(Actor.class);
-//
-//	if(actor!=null) {
-//
-//
-//		if(actor instanceof Obstacle) {
-//			frog.handleDeathTest(FrogDeath.CAR);
-//			//AudioPlayer.INSTANCE.squashSound();
-//			System.out.println("here");
-//			
-//		} else if ((actor instanceof Log || actor instanceof Turtle) && !FrogController.noMove) {
-//			
-//			frog.attachFrog(actor.getSpeed(), 0);
-//			//frog.move(actor.getSpeed(), 0);
-//			
-//		} else if(actor instanceof WetTurtle) {
-//			
-//			WetTurtle wetTurtle = frog.getOneIntersectingObject(WetTurtle.class);
-//			if(wetTurtle.isSunk()) {
-//				//waterDeath=true;
-//				
-//			} else {
-//				frog.attachFrog(actor.getSpeed(), 0);
-//				
-//			}
-//			
-//		} else if (actor instanceof End) {
-//			
-//			End end = frog.getOneIntersectingObject(End.class);
-//
-//			//if frog reaches an occupied swamp spot
-//			if (end.isActivated()) {
-//				//waterDeath = true;
-//			} else if (end.hasCroc()) {
-//				//waterDeath=true;
-//				
-//			} else {
-//				
-//				if(end.hasFly()) {
-//					frog.addScore(20);
-//					System.out.println("fc here");
-//					frog.setFlyBonus(true, end.getX()+5);
-//				}
-//
-//				frog.increment();
-//				frog.addScore(50);
-//				end.setOccupied();
-//				restartFrog(frog);
-//				
-//			}
-//		}
-//		
-//	} else if (frog.getY() < 413) { //if reach this point no intersect and >413 frog is in water
-//		//handleDeathTest("water");
-//		
-//	}
-//}
-
-
