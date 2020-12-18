@@ -28,7 +28,7 @@ public class ProgressScreenController {
 	@FXML private Text header;
 	
 	/** the button to start game */ 
-	@FXML private Button start;
+	@FXML private Button startButton;
 
 	/** inline css style of this {@code Button} */
 	private static final String PREFIX =
@@ -57,7 +57,7 @@ public class ProgressScreenController {
 	 * fired
 	 */
 	public void setButtonAction(EventHandler<ActionEvent> x) {
-		start.setOnAction(x);
+		startButton.setOnAction(x);
 		
 	}
 
@@ -67,7 +67,7 @@ public class ProgressScreenController {
 	 * @param buttonText  {@code String} placeholder for button
 	 */
 	public void setButtonText(String buttonText) {
-		start.setText(buttonText);
+		startButton.setText(buttonText);
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class ProgressScreenController {
 	 */
 	@FXML
 	public void handleOnKeyPressed(KeyEvent keyEvent) {
-		start.fire();
+		startButton.fire();
 	}
 
 
@@ -96,10 +96,10 @@ public class ProgressScreenController {
 					setButtonReleasedStyle();
 					break;
 				case "MOUSE_ENTERED":
-					start.setEffect(new DropShadow());
+					startButton.setEffect(new DropShadow());
 					break;
 				case "MOUSE_EXITED":
-					start.setEffect(null);
+					startButton.setEffect(null);
 					break;
 				default:
 					break;
@@ -120,7 +120,7 @@ public class ProgressScreenController {
 			font = Font.font("Sans Serif", 20);
 		}
 		header.setFont(font);
-		start.setFont(font);
+		startButton.setFont(font);
 	}
 
 
@@ -131,9 +131,9 @@ public class ProgressScreenController {
 	private void setButtonPressedStyle() {
 		//inline css style of this {@code Button} when pressed
 		String BUTTON_PRESSED = PREFIX + "button_pressed.png\");";
-		start.setStyle(BUTTON_PRESSED);
-		start.setPrefHeight(45);
-		start.setLayoutY(start.getLayoutY()+4);
+		startButton.setStyle(BUTTON_PRESSED);
+		startButton.setPrefHeight(45);
+		startButton.setLayoutY(startButton.getLayoutY()+4);
 
 	}
 
@@ -145,9 +145,9 @@ public class ProgressScreenController {
 	private void setButtonReleasedStyle() {
 		//inline css style of this {@code Button} when pressed
 		String BUTTON_UP = PREFIX + "button.png" + "\");";
-		start.setStyle(BUTTON_UP);
-		start.setPrefHeight(49);
-		start.setLayoutY(start.getLayoutY()-4);
+		startButton.setStyle(BUTTON_UP);
+		startButton.setPrefHeight(49);
+		startButton.setLayoutY(startButton.getLayoutY()-4);
 
 	}
 
