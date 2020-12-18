@@ -1,12 +1,23 @@
+
+
 # COMP2042 Frogger
 
 Prerequisites
+- IntelliJ
 - Java15
 - Gradle
 
 Javadocs can be found in Frogger.build.docs.javadoc folder
 
-> Due to word limit, this README focuses mainly on what and why refactoring/additions are done. Please refer to Javadocs of mentioned classes for more details on how it's done. Titles and additional formatting are used to make this more presentable, thus leading to slightly exceeding word count. Excluding formatting and disclaimers before this sentence, word count is only 499.
+> ADDITIONAL: 
+ One day before the deadline, I realized I was unsure if the end of each "round" refers to end of each level or end of the game, therefore I have created two versions of high score display:
+> - comparing the levels played in the current game (i.e. comparing level 3 with level 2 and 1 etc) which is my original implementation then generating high score file with level-score entries arranged in descending order of scores
+> - getting the top 10 high scores from previous games (last minute changes) which generates a high score file with the entries arranged in ascending order of levels
+
+> With these, I hope I am able to meet the high score requirements specified in the coursework 
+
+> Due to word limit, this README focuses mainly on what and why refactoring/additions are done. Please refer to Javadocs of mentioned classes for more details on how it's done. Titles and additional formatting are used to make this more presentable, thus leading to slightly exceeding word count. Excluding formatting and disclaimers before this sentence, word count is only 492.
+
 
 
 ## General Refactoring  
@@ -78,7 +89,7 @@ Implemented in 2 ways:
 - Alternatively, interested classes can use predefined methods to add listeners to fields. See `addLifeListener()` and `addScoreListener()` in `PlayerAvatar`.  
   
 ### SRP and Singleton  
-Following SRP, `util` classes such as `AudioPlayer` and `HighScoreFile` are introduced. The `util` classes and some `Controller` classes are also Singletons because only one instance is needed per JVM and it must be accessible by other classes at a well-known access point.   
+Following SRP, `util` classes such as `AudioPlayer` and `HighScoreFile` are introduced. Some `util` and `Controller` classes are also Singletons because only one instance is needed per JVM and it must be accessible by other classes at a well-known access point.   
   
 ### Template Original `Actor` is refactored to be extended by `PlayerAvatar` and `NPC`.   
 Template pattern is used to increase code reusability, decrease redundancy. We can easily make different:   
@@ -90,7 +101,7 @@ Template pattern is used to increase code reusability, decrease redundancy. We c
   
   
 ## Additions  
-- 10 levels, generation of high score file upon completion of all levels.  
+- 10 levels, generation of high score file.
 - Info screen, selection screen for controls (WASD, arrow keys),  progress screen
 - Volume slider, life bar, sound effects, pause, play, back to menu buttons  
 - Swamp animation (crocodiles, flies)
