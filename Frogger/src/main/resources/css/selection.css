@@ -9,7 +9,7 @@
 }
 
 .text-field {
-    -fx-background-color: transparent;
+    -fx-background-color: white;
     -fx-text-fill: green;
     -fx-font-size: 15px;
     -fx-font-family: 'Joystix Monospace';
