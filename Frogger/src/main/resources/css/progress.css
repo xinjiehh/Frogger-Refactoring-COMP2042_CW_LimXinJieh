@@ -6,8 +6,9 @@
 
 .button {
 
--fx-background-color: transparent;
--fx-background-image: url("../button/button.png");
--fx-background-size: 100%;
+    -fx-background-color: transparent;
+    -fx-background-image: url("../button/button.png");
+    -fx-background-size: 100%;
+    -fx-background-size: cover;
 
 }

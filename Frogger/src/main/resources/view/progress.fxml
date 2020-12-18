@@ -14,7 +14,7 @@
     <center>
         <BorderPane prefHeight="800" prefWidth="376.0" BorderPane.alignment="CENTER">
          <center>
-                 <Button fx:id="start" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#handleOnKeyPressed" onMouseEntered="#handleMouseEvent" onMouseExited="#handleMouseEvent" onMousePressed="#handleMouseEvent" onMouseReleased="#handleMouseEvent" prefHeight="49.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-background-size: cover;" styleClass="button" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER" />
+                 <Button fx:id="startButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#handleOnKeyPressed" onMouseEntered="#handleMouseEvent" onMouseExited="#handleMouseEvent" onMousePressed="#handleMouseEvent" onMouseReleased="#handleMouseEvent" prefHeight="49.0" prefWidth="190.0" styleClass="button" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER" />
          </center>
          <top>
                  <Text fx:id="header" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="x" textAlignment="CENTER" BorderPane.alignment="CENTER">
