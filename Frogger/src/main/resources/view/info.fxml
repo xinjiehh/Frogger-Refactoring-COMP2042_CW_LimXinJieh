@@ -5,70 +5,87 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="root" stylesheets="@../css/info.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Text fill="#52cc3c" layoutX="126.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" styleClass="title" text="INFO" textAlignment="CENTER" wrappingWidth="138.978515625">
-         </Text>
-      <Text fill="WHITE" layoutX="30.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="Player has two key control options:  ">
-         </Text>
-      <Text fill="#952ccb" layoutX="39.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="1. WASD">
-         </Text>
-      <Text fill="WHITE" layoutX="33.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode__title" text="RULES" />
-      <Text fill="WHITE" layoutX="30.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="1. Avoid vehicles!">
-         </Text>
-      <Text fill="WHITE" layoutX="30.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="2. Avoid falling into the river! ">
-         </Text>
-      <Text fill="WHITE" layoutX="30.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="3. Beware of sinking turtles and crocs!">
-         </Text>
-      <Text fill="#952ccb" layoutX="39.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="2.  ARROW KEYS">
-
-      </Text>
-      <Text fill="WHITE" layoutX="29.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="4. With each death of the frog, the points earned by that frog will be forfeited" wrappingWidth="370.021484375">
- 
-      </Text>
-      <Text fill="#a400ff" layoutX="29.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="5. You have 3 extra lives. Once your life bar is empty and you die, game over! " wrappingWidth="370.021484375">
-
-      </Text>
-      <Text fill="WHITE" layoutX="65.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" styleClass="mode_content" text="The goal is to help all frogs return safely to the swamp" wrappingWidth="260.478515625">
-
-      </Text>
-      <Pane layoutX="57.0" layoutY="325.0" prefHeight="91.0" prefWidth="286.0" style="-fx-border-color: white; -fx-border-radius: 3;">
-         <children>
-            <Text fill="#03ff27" layoutX="95.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="per forward step" />
-            <Text fill="#03ff27" layoutX="54.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="+10" textAlignment="RIGHT" />
-            <Text fill="#d70000" layoutX="50.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="-10" textAlignment="RIGHT" wrappingWidth="26.43310546875" />
-            <Text fill="#d70000" layoutX="95.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="per backward step" />
-            <Text fill="#00ff09" layoutX="55.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="+50" textAlignment="RIGHT" />
-            <Text fill="#00ff09" layoutX="94.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="per frog arriving home" />
-            <Text fill="#00ff09" layoutX="49.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="+100" textAlignment="RIGHT" />
-            <Text fill="#00ff09" layoutX="95.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content" text="per fly caught" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Pane>
-      <Pane layoutX="251.0" layoutY="107.0" prefHeight="69.0" prefWidth="126.0">
-         <children>
-            <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="52.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../frog/froggerUp.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="80.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../frog/froggerUp.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="24.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../frog/froggerUp.png" />
-               </image>
-            </ImageView>
-            <Text fill="#27ff00" layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" styleClass="mode_content" text="frog life bar" />
-         </children>
-      </Pane>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+      prefWidth="400.0" styleClass="root" stylesheets="@../css/info.css" xmlns="http://javafx.com/javafx/11.0.1">
    <effect>
-      <Blend />
+      <Blend/>
    </effect>
+   <Text fill="#52cc3c" layoutX="126.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         style="-fx-text-alignment: center;" styleClass="title" text="INFO" textAlignment="CENTER"
+         wrappingWidth="138.978515625">
+   </Text>
+   <Text fill="WHITE" layoutX="30.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content"
+         text="Player has two key control options:  ">
+   </Text>
+   <Text fill="#952ccb" layoutX="39.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content"
+         text="1. WASD">
+   </Text>
+   <Text fill="WHITE" layoutX="33.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode__title"
+         text="RULES"/>
+   <Text fill="WHITE" layoutX="30.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content"
+         text="1. Avoid vehicles!">
+   </Text>
+   <Text fill="WHITE" layoutX="30.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content"
+         text="2. Avoid falling into the river! ">
+   </Text>
+   <Text fill="WHITE" layoutX="30.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content"
+         text="3. Beware of sinking turtles and crocs!">
+   </Text>
+   <Text fill="#952ccb" layoutX="39.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content"
+         text="2.  ARROW KEYS">
+
+   </Text>
+   <Text fill="WHITE" layoutX="29.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content"
+         text="4. With each death of the frog, the points earned by that frog will be forfeited"
+         wrappingWidth="370.021484375">
+
+   </Text>
+   <Text fill="#a400ff" layoutX="29.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="mode_content"
+         text="5. You have 3 extra lives. Once your life bar is empty and you die, game over! "
+         wrappingWidth="370.021484375">
+
+   </Text>
+   <Text fill="WHITE" layoutX="65.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         style="-fx-text-alignment: center;" styleClass="mode_content"
+         text="The goal is to help all frogs return safely to the swamp" wrappingWidth="260.478515625">
+
+   </Text>
+   <Pane layoutX="57.0" layoutY="325.0" prefHeight="91.0" prefWidth="286.0"
+         style="-fx-border-color: white; -fx-border-radius: 3;">
+      <opaqueInsets>
+         <Insets/>
+      </opaqueInsets>
+      <Text fill="#03ff27" layoutX="95.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            styleClass="mode_content" text="per forward step"/>
+      <Text fill="#03ff27" layoutX="54.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            styleClass="mode_content" text="+10" textAlignment="RIGHT"/>
+      <Text fill="#d70000" layoutX="50.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            styleClass="mode_content" text="-10" textAlignment="RIGHT" wrappingWidth="26.43310546875"/>
+      <Text fill="#d70000" layoutX="95.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            styleClass="mode_content" text="per backward step"/>
+      <Text fill="#00ff09" layoutX="55.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            styleClass="mode_content" text="+50" textAlignment="RIGHT"/>
+      <Text fill="#00ff09" layoutX="94.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            styleClass="mode_content" text="per frog arriving home"/>
+      <Text fill="#00ff09" layoutX="49.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            styleClass="mode_content" text="+100" textAlignment="RIGHT"/>
+      <Text fill="#00ff09" layoutX="95.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            styleClass="mode_content" text="per fly caught"/>
+   </Pane>
+   <Pane layoutX="251.0" layoutY="107.0" prefHeight="69.0" prefWidth="126.0">
+      <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="52.0" layoutY="34.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <Image url="@../frog/froggerUp.png"/>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="80.0" layoutY="34.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <Image url="@../frog/froggerUp.png"/>
+      </ImageView>
+      <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="24.0" layoutY="34.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <Image url="@../frog/froggerUp.png"/>
+      </ImageView>
+      <Text fill="#27ff00" layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            style="-fx-text-alignment: center;" styleClass="mode_content" text="frog life bar"/>
+   </Pane>
 </Pane>
