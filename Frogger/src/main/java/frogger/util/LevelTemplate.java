@@ -27,14 +27,19 @@ public abstract class LevelTemplate {
 	/** number of the lane to be created */
 	protected int laneNum;
 	
-	//useful when removing NPC by lanes, replace level elements
+	/** list of list of elements by lane */
 	protected List<List<Node>> laneElementsList = new LinkedList<List<Node>>();
 	
 	/**
 	 * Method to be overridden by subclass to define
 	 */
 	public abstract void initializeLanes();
-	
+
+	/**
+	 * This method is used to create a lane
+	 * @param laneNum  lane number of the lane to create
+	 * @return  the lane created
+	 */
 	public LevelTemplate createLane(int laneNum) {
 		this.laneNum = laneNum;
 		this.lane = new Lane(laneNum);
