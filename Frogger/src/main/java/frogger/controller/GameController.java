@@ -124,7 +124,7 @@ public enum GameController  {
 	 * show the score {@code Stage} pop up
 	 */
 	public void showScoreDisplay() {
-		ViewLoader.INSTANCE.loadScore(gameModel.getLevelList(), gameModel.getScores());
+		ViewLoader.INSTANCE.loadScore(gameModel.getLevelList(), gameModel.getScoreList());
 	 }
 
 	/**
@@ -157,7 +157,7 @@ public enum GameController  {
 			ProgressScreen.getInstance().setButtonAction(e->{
 				ScreenController.INSTANCE.showMenu();
 				gameModel.resetGame();
-				new HighScoreFile(gameModel.getScoreString());
+				new HighScoreFile(gameModel.getScoreList(),gameModel.getLevelList());
 			});
 
 //			If using FXML, enable to use progress.fxml and disable line 176
