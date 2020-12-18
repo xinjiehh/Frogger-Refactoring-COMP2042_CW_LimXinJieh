@@ -1,10 +1,12 @@
 package frogger.controller;
 
 import frogger.constant.FilePath;
+import frogger.constant.GameData;
 import frogger.constant.settings.Controls;
 import frogger.constant.settings.Mode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
@@ -28,7 +30,10 @@ public class SelectionController {
 	
 	/** the button to start game */ 
 	@FXML private Button start;
-	
+
+	/** text field to enter player's name */
+	@FXML private TextField username;
+
 	/**
 	 * This method initializes the default font, game mode ({@link Mode#SINGLE})
 	 * and key controls ({@link Controls#WASD})
@@ -36,23 +41,29 @@ public class SelectionController {
 	@FXML
 	public void initialize() {
 		initFont();
+		initNameListener();
 		mode.setUserData(Mode.SINGLE);
 		controls.setUserData(Controls.WASD);
+	}
+
+	private void initNameListener() {
+		username.textProperty().addListener((obs, oldV, newV) -> {
+			String temp = newV;
+			//only allow letters
+			temp = temp.replaceAll("[^a-zA-Z]", "");
+			username.setText(temp);
+		});
 	}
 	/**
 	 * This method initializes the font to be used in the related fxml file
      */
 	private void initFont() {
-		Font font;
-		try {font = Font.loadFont(new FileInputStream(FilePath.DEFAULT_FONT), 20);} 
+		try {
+			Font.loadFont(new FileInputStream(FilePath.DEFAULT_FONT), 20);}
 		catch (FileNotFoundException e){
 			System.out.println("Error loading font for selection");
-			font = Font.font("Sans Serif", 20);
 		}
-	
-		mode.setFont(font);
-		controls.setFont(font);
-		start.setFont(font);
+
 	}
 
 
@@ -91,7 +102,9 @@ public class SelectionController {
 	 */
 	@FXML
 	public void startGame() {
+
 		ScreenController.INSTANCE.startGame((Controls) controls.getUserData());
+		GameData.INSTANCE.setUsername(username.getText());
 	}
 
 	/**

@@ -21,7 +21,9 @@
 }
 
 
-.music {
+.text-field {
     -fx-background-color: transparent;
-    -fx-background-repeat: no-repeat;
+    -fx-text-fill: green;
+    -fx-font-size: 15px;
+    -fx-font-family: 'Joystix Monospace';
 }
