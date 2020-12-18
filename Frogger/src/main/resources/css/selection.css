@@ -1,5 +1,5 @@
 .root {
-	-fx-font-family: 'Joystix Monospace';
+    -fx-font-family: 'Joystix Monospace';
     -fx-background-image: url("../background/MenuBackground.png");
     -fx-background-size: 100%;
 }
@@ -15,9 +15,14 @@
     -fx-font-family: 'Joystix Monospace';
 }
 
+.title {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Joystix Monospace';
+
+}
+
 
 .start-button{
-
     -fx-padding: 15px;
     -fx-background-color: transparent;
     -fx-background-image: url("../button/button.png");

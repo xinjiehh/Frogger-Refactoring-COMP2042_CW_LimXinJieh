@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
@@ -23,9 +22,7 @@ import java.io.FileNotFoundException;
  */
 
 public class SelectionController {
-	/** the button to select game mode options */
-	@FXML private Button mode;
-	
+
 	/** the button to select key control options */ 
 	@FXML private Button controls;
 	
@@ -48,7 +45,6 @@ public class SelectionController {
 	public void initialize() {
 		initFont();
 		initNameListener();
-		mode.setUserData(Mode.SINGLE);
 		controls.setUserData(Controls.WASD);
 	}
 
