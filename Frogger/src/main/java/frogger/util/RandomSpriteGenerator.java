@@ -7,8 +7,8 @@ import java.util.Set;
 
 import org.reflections.Reflections;
 
-import frogger.constant.LOG_TYPE;
-import frogger.constant.OBSTACLE_TYPE;
+import frogger.constant.variation.LOG_TYPE;
+import frogger.constant.variation.OBSTACLE_TYPE;
 import frogger.constant.WaterSprite;
 import frogger.model.npc.Log;
 import frogger.model.npc.NPC;
@@ -81,8 +81,7 @@ public enum RandomSpriteGenerator {
 		Reflections reflections = new Reflections("frogger.model.npc");
 		Set<Class<? extends WaterSprite>> classes = reflections.getSubTypesOf(WaterSprite.class);
 		waterSprites = new ArrayList<String>();
-		classes.forEach(c -> {
-			waterSprites.add(c.getSimpleName());});
+		classes.forEach(c -> waterSprites.add(c.getSimpleName()));
 	}
 	
 

@@ -1,7 +1,7 @@
 package frogger.controller;
 
 import frogger.constant.FilePath;
-import frogger.constant.GameData;
+import frogger.constant.settings.GameData;
 import frogger.constant.settings.Controls;
 import frogger.constant.settings.Mode;
 import javafx.fxml.FXML;

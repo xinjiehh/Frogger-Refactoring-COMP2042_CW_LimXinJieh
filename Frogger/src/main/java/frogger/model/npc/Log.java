@@ -1,6 +1,6 @@
 package frogger.model.npc;
 
-import frogger.constant.LOG_TYPE;
+import frogger.constant.variation.LOG_TYPE;
 import frogger.constant.WaterSprite;
 import frogger.model.PlayerAvatar;
 import frogger.util.CollisionDetector;

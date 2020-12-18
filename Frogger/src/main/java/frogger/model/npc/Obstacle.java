@@ -1,6 +1,6 @@
 package frogger.model.npc;
 
-import frogger.constant.OBSTACLE_TYPE;
+import frogger.constant.variation.OBSTACLE_TYPE;
 import frogger.model.PlayerAvatar;
 import frogger.util.CollisionDetector;
 

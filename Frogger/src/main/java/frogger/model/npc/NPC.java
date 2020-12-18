@@ -1,7 +1,7 @@
 package frogger.model.npc;
 
 import frogger.Main;
-import frogger.constant.NPCType;
+import frogger.constant.variation.NPCType;
 import frogger.model.Actor;
 import frogger.model.World;
 import frogger.util.animation.SpriteAnimationTemplate;

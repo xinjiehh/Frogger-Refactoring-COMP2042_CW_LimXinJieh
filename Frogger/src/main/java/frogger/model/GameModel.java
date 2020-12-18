@@ -2,7 +2,6 @@ package frogger.model;
 
 import frogger.constant.DEATH;
 import frogger.constant.EndGame;
-import frogger.constant.GameData;
 import frogger.constant.settings.Settings;
 import frogger.controller.GameController;
 import frogger.model.npc.Digit;
@@ -20,7 +19,11 @@ import java.util.*;
  * etc). This class also follows the Observer pattern by implementing the
  * Subject interface. Any updates to the {@link #isPaused} will notify the
  * subscribers (in this case, classes implementing {@link SpriteAnimationTemplate})
- * to pause/play {@code Transition} accordingly
+ * to pause/play {@code Transition} accordingly. To sort the levels and scores,
+ * first I use a {@code Map} to store the level and score as key-value pair.
+ * As {@code Map} objects do not have a sort by value function, each level-score
+ * pair is stored in its own map, and those maps are added to this {@link
+ * #levelScoreList} so it can be sorted in descending order of values.
  *
  */
 
@@ -75,14 +78,15 @@ public class GameModel implements Subject {
 	 */
 	public void newLevel() {
 		this.levelNum+=1;
-		GameData.INSTANCE.setLevel(levelNum);
 		notify("level",this);
 		Swamp.resetCtr();
 		initElements();
 		initPlayer();
 		System.out.println("This is level "+ levelNum);
 	}
-
+	public int getScore(){
+		return player.getScore();
+	}
 	/**
 	 * This method initializes this {@link PlayerAvatar} object and its
 	 * properties.

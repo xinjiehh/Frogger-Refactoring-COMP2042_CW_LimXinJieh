@@ -1,20 +1,23 @@
-package frogger.constant;
+package frogger.constant.variation;
+
+import frogger.constant.FilePath;
 
 /**
- * This enum defines the different types of logs and their
+ * This enum defines the type of obstacles and their
  * corresponding file path and image size
  *
  */
-public enum LOG_TYPE implements NPCType {
+
+public enum OBSTACLE_TYPE implements NPCType {
 	
-	LONG(FilePath.L_LOG,300),
-	MEDIUM(FilePath.M_LOG,225),
-	SHORT(FilePath.S_LOG,150);
+	TRUCK1(FilePath.TRUCK1, 120),
+	TRUCK2(FilePath.TRUCK2, 200),
+	CAR(FilePath.CAR, 50);
 	
-	/** the file path for the corresponding log */
-	private final String url;
+	/** the file path for the corresponding obstacle */
+	private final String url; 
 	
-	/** the size of the corresponding log */
+	/** the size of the corresponding obstacle */
 	private final int size;
 	
 	/** 
@@ -22,17 +25,15 @@ public enum LOG_TYPE implements NPCType {
 	 * of the media image
 	 * @return {@code String} of the image url
 	 */
-	@Override
 	public String getURL() {
 		return this.url;
 	}
 	
 	/**
 	 * This method returns the {@code integer} value corresponding
-	 * to the size of the log
+	 * to the size of the obstacle
 	 * @return  {@code integer} value of size
 	 */
-	@Override
 	public int getSize() {
 		return this.size;
 	}
@@ -42,10 +43,9 @@ public enum LOG_TYPE implements NPCType {
 	 * @param url  {@code String} corresponding to the image url
 	 * @param size  {@code integer} value corresponding to image size
 	 */
-	LOG_TYPE(String url, int size) {
-		this.url=url;
-		this.size=size;
+	OBSTACLE_TYPE(String url, int size) {
+		this.url = url;
+		this.size = size;
 	}
 
-	
 }

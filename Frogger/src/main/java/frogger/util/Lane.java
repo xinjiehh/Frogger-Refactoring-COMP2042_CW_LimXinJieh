@@ -4,8 +4,8 @@ package frogger.util;
 import java.util.ArrayList;
 
 import frogger.Main;
-import frogger.constant.LOG_TYPE;
-import frogger.constant.OBSTACLE_TYPE;
+import frogger.constant.variation.LOG_TYPE;
+import frogger.constant.variation.OBSTACLE_TYPE;
 import frogger.model.npc.Log;
 import frogger.model.npc.NPC;
 import frogger.model.npc.Obstacle;
@@ -69,34 +69,34 @@ public final class Lane {
 	private void initLaneElement() {
 
 		switch (laneNum) {
-			case 1 -> {
+			case 1 ->
 				npc = new Obstacle(OBSTACLE_TYPE.TRUCK1);// 720; //800
-			}
+
 			
-			case 2, 4 -> {
+			case 2, 4 ->
 				npc = new Obstacle(OBSTACLE_TYPE.CAR);//650
-			}
+
 			
-			case 3 -> {
+			case 3 ->
 				npc = new Obstacle(OBSTACLE_TYPE.TRUCK2);//780
-			}
+
 			
-			case 5 -> {
+			case 5 ->
 				npc = ((int)Math.round(Math.random())==0) ? new Turtle() : new WetTurtle();//730
-			}
+
 			
-			case 6, 9 -> {
+			case 6, 9 ->
 				npc = new Log(LOG_TYPE.SHORT);// 750; //800
-			}
-			
-			case 7 -> {
+
+
+			case 7 ->
 				npc = new Log(LOG_TYPE.LONG);//900
-			}
+
 			
-			case 8 -> {
+			case 8 ->
 				
 				npc = new WetTurtle();//730
-			}
+
 			
 			default -> throw new IllegalArgumentException("Lane " + laneNum + "does not exist. Element not created.");
 		}

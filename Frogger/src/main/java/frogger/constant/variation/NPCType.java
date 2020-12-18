@@ -1,4 +1,4 @@
-package frogger.constant;
+package frogger.constant.variation;
 
 import frogger.model.npc.NPC;
 
