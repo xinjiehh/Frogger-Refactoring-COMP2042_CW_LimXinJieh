@@ -10,8 +10,7 @@ import frogger.model.World;
 import frogger.model.npc.Swamp;
 import frogger.util.AudioPlayer;
 import frogger.util.CollisionHandler;
-import frogger.util.HighScoreFile;
-import frogger.util.ViewLoader;
+import frogger.util.ScreenLoader;
 import frogger.view.GameScreen;
 import frogger.view.ProgressScreen;
 import javafx.event.ActionEvent;
@@ -66,7 +65,6 @@ public enum GameController  {
 	
 	/** the {@link GameModel} controlled by this {@code GameController} object */
 	private GameModel gameModel;
-	
 	/**
 	 * This method initializes the game properties such as 
 	 * the controls chosen by user (WASD or arrow keys) and
@@ -114,17 +112,33 @@ public enum GameController  {
 	 * @see EndGame
 	 */
 	public void handleGameDone(EndGame state) {
+		showScoreDisplay();
 		gameModel.handleDoneLevel(state);
 		stopGame();
-		showScoreDisplay();
+
 	}
 	
 	/**
-	 * This method calls the {@link ViewLoader} to initialize and
-	 * show the score {@code Stage} pop up
+	 * This method calls the {@link ScreenLoader} to initialize and
+	 * show the score {@code Stage} pop up <p></p>
+	 * <p>For using the first method:</p>
+	 * <p>1. Sort score and level arrays in {@link GameModel}, then use it to
+	 * initialize the score stage</p>
+	 * <p>2. Write to high score file at the end of the game in {@link #showProgressScreen()}
+	 * with the sorted score and level arrays from {@code GameModel}</p>
+	 * <p></p>
+	 * <p>For using the second method:</p>
+	 * <p>1. Write current level and score to high score file using load</p>
+	 * <p>2. Read high score file, then filter and sort entries to get the top 10
+	 * scores, then use it to initialize score stage.</p>
 	 */
+
 	public void showScoreDisplay() {
-		ViewLoader.INSTANCE.loadScore(gameModel.getLevelList(), gameModel.getScoreList());
+		//init high score stage with scores of the levels played in the current game
+		//ScreenLoader.INSTANCE.loadLevelScores(gameModel.getLevelList(), gameModel.getScoreList());
+
+		//init high score file and read top 10 scores from file
+		ScreenLoader.INSTANCE.loadTop10Score(gameModel.getLevel(), gameModel.getScore());
 	 }
 
 	/**
@@ -133,6 +147,7 @@ public enum GameController  {
 	 * blocks of code and disable line 176
 	 */
 	private void showProgressScreen() {
+
 		if(gameModel.getState()==EndGame.NEXT) {
 			
 			ProgressScreen.getInstance().setHeader("NEXT LEVEL\n\n\n\n");
@@ -140,10 +155,11 @@ public enum GameController  {
 			ProgressScreen.getInstance().setButtonAction(e->{
 				nextLevel();
 				mainStage.getScene().setRoot(gamePane);
+
 			});
 
 //			If using FXML, enable to use progress.fxml and disable line 176
-//			ViewLoader.INSTANCE.loadProgressScreen("NEXT LEVEL", "START",
+//			ScreenLoader.INSTANCE.loadProgressScreen("NEXT LEVEL", "START",
 //					e -> {
 //						nextLevel();
 //						mainStage.getScene().setRoot(gamePane);
@@ -157,11 +173,15 @@ public enum GameController  {
 			ProgressScreen.getInstance().setButtonAction(e->{
 				ScreenController.INSTANCE.showMenu();
 				gameModel.resetGame();
-				new HighScoreFile(gameModel.getScoreList(),gameModel.getLevelList());
+
+				/* write current game data to high score file at the end of the game so the
+				   scores are sorted in descending order */
+				//new HighScoreFile(gameModel.getScoreList(),gameModel.getLevelList());
+
 			});
 
 //			If using FXML, enable to use progress.fxml and disable line 176
-//			ViewLoader.INSTANCE.loadProgressScreen(header, "MAIN MENU",
+//			ScreenLoader.INSTANCE.loadProgressScreen(header, "MAIN MENU",
 //					e->{
 //						ScreenController.INSTANCE.showMenu();
 //						gameModel.resetGame();
