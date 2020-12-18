@@ -2,12 +2,12 @@ package frogger.model;
 
 import frogger.constant.DEATH;
 import frogger.constant.EndGame;
+import frogger.constant.GameData;
 import frogger.constant.settings.Settings;
 import frogger.controller.GameController;
 import frogger.model.npc.Digit;
 import frogger.model.npc.Swamp;
 import frogger.util.GameGenerator;
-import frogger.util.HighScoreFile;
 import frogger.util.animation.SpriteAnimationTemplate;
 import javafx.scene.Node;
 
@@ -29,7 +29,7 @@ public class GameModel implements Subject {
 	private static final int SCORE_X = 550; 
 	private static final int SCORE_Y = 10;
 	
-	/** list of played levels and their corresponding scores stored in Map as key-value pair */
+	/** list of played levels and their corresponding scores stored in {@code Map} as key-value pair */
 	private static List<Map.Entry<Integer, Integer>> levelScoreList = new ArrayList<>();
 	
 	/** list of level numbers in order */
@@ -56,9 +56,6 @@ public class GameModel implements Subject {
 	/** used to generate the characters / game elements */
 	private GameGenerator generator;
 	
-	/** String variable holding the score and levels */
-	private String scoreString = "";
-	
 	/** flag for current game state, true if paused, false otherwise */
 	private boolean isPaused = false;
 	
@@ -78,6 +75,7 @@ public class GameModel implements Subject {
 	 */
 	public void newLevel() {
 		this.levelNum+=1;
+		GameData.INSTANCE.setLevel(levelNum);
 		notify("level",this);
 		Swamp.resetCtr();
 		initElements();
@@ -151,15 +149,6 @@ public class GameModel implements Subject {
 	}
 
 	/**
-	 * This method returns the score string written to the {@link HighScoreFile}
-	 * @return  {@code String} containing scores arranged in descending order and
-	 * corresponding level numbers
-	 */
-	public String getScoreString() {
-		return scoreString;
-	}
-
-	/**
 	 * This method stops all timers/animations
 	 */
 	public void pauseAllTimer() {
@@ -200,7 +189,7 @@ public class GameModel implements Subject {
 	 * 
 	 * @return  {@link List} of scores as {@code String} objects
 	 */
-	public List<String> getScores(){
+	public List<String> getScoreList(){
 		return scores;
 	}
 	
@@ -283,15 +272,14 @@ public class GameModel implements Subject {
 	 * 
 	 */
 	private void updateScoreList() {
-		scoreString = "";
+
 		levels.clear();
 		scores.clear();
     	levelScoreList.add(new AbstractMap.SimpleEntry<Integer, Integer>(levelNum, player.getScore()));
     	levelScoreList.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
     	
     	 for (Map.Entry<Integer, Integer> entry : levelScoreList) {
-    		scoreString = scoreString + "Level " + entry.getKey() + "\t: " + entry.getValue() + "\n";
-         	levels.add(entry.getKey().toString());
+    		levels.add(entry.getKey().toString());
          	scores.add(entry.getValue().toString());
          }
     	 
