@@ -193,8 +193,8 @@ public class World extends Pane {
      * @param code  {@code KeyCode} of the {@code KeyEvent}
      * @param keyPress  true if key press, false if key release
      */
-    private void moveFrog(KeyCode code, boolean keyPress) { //judge jump direction
-    	if(direction.containsKey(code))
+    private void moveFrog(KeyCode code, boolean keyPress) {
+    	if(direction.containsKey(code) && !player.getNoMove())
     	    player.jump(direction.get(code), keyPress);
     	
     }
