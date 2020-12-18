@@ -6,7 +6,8 @@ package frogger.constant;
  */
 
 public class FilePath {
-	
+
+	public static final String HIGH_SCORE_FILE = "My High Score.txt";
 	public static final String RESOURCE_PATH = "src/main/resources/";
 	public static final String BONUS = "/misc/100.png";
 	
