@@ -5,18 +5,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" styleClass="root" stylesheets="@../css/scoreview.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frogger.controller.ScoreScreenController">
    <left>
-      <VBox prefHeight="164.0" alignment="CENTER" prefWidth="450.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text fill="#6b2b90" styleClass="title" text="HIGH SCORES" textAlignment="CENTER" />
-            <HBox prefHeight="500.0" prefWidth="400.0">
-               <children>
-                  <ListView fx:id="levelList" prefHeight="500.0" styleClass="level" />
-                  <ListView fx:id="scoreList" prefHeight="500.0" styleClass="score" />
-               </children>
-            </HBox>
-         </children>
+      <VBox alignment="CENTER" prefHeight="164.0" prefWidth="450.0" BorderPane.alignment="CENTER">
+         <Text fill="#6b2b90" styleClass="title" text="HIGH SCORES" textAlignment="CENTER"/>
+         <HBox prefHeight="500.0" prefWidth="400.0">
+            <ListView fx:id="levelList" styleClass="level"/>
+            <ListView fx:id="scoreList" styleClass="score"/>
+         </HBox>
       </VBox>
    </left>
 </BorderPane>
