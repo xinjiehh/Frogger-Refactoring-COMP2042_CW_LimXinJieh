@@ -9,6 +9,9 @@ import frogger.model.npc.Log;
 import frogger.model.npc.NPC;
 import frogger.model.npc.Swamp;
 import frogger.model.npc.Turtle;
+import javafx.animation.Animation;
+import javafx.animation.Transition;
+import javafx.util.Duration;
 
 /**
  * This util class implements SINGLETON pattern. It is responsible for handling collision
@@ -17,8 +20,16 @@ import frogger.model.npc.Turtle;
 public enum CollisionHandler {
 	/** singleton instance for this class */
 	INSTANCE;
-	
+
+	/** total number of frogs at the swamp */
 	private int swampFrog=0;
+
+	/** delay before player is respawned */
+	private Animation respawn = new Transition(){
+		@Override
+		protected void interpolate(double frac) { }
+		{setCycleDuration(Duration.millis(600));}
+	};
 	
 	
 	/**
@@ -52,7 +63,16 @@ public enum CollisionHandler {
 		swampFrog++;
 		swamp.setOccupied();
 		frog.addScore(50);
+		frog.setVisible(false);
 		frog.restartPlayer();
+		frog.setNoMove(true);
+		//delay before player reappears
+		respawn.setOnFinished(e->{
+			frog.setVisible(true);
+			frog.setNoMove(false);
+		});
+		respawn.play();
+
 		if(swampFrog==Settings.MAX_FROG) {
 			swampFrog=0;
 			GameController.INSTANCE.handleGameDone(EndGame.NEXT);
