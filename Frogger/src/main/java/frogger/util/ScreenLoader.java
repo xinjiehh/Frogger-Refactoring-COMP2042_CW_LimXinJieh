@@ -14,18 +14,36 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This util class implements SINGLETON pattern. It is responsible for loading the FXML
  * files and only one instance is needed per JVM.
  */
-public enum ViewLoader {
+public enum ScreenLoader {
 	/** singleton instance for this enum class */
 	INSTANCE;
-	
+
+	/** contains the top 10 ranking names*/
+	private final static ArrayList<String> ranks = new ArrayList<>() {{
+		add("1ST");
+		add("2ND");
+		add("3RD");
+		add("4TH");
+		add("5TH");
+		add("6TH");
+		add("7TH");
+		add("8TH");
+		add("9TH");
+		add("10TH");
+	}};
+
 	/** the {@code Stage} object created in {@link Main} */
 	private final Stage mainStage = Main.getPrimaryStage();
+
+	/** the file used to store permanent high score */
+	private final HighScoreFile file = new HighScoreFile();
 	
 	/** the {@code Scene} object created in {@link Main} */
 	private Pane pane = new Pane();
@@ -35,7 +53,12 @@ public enum ViewLoader {
 	
 	/** loader to load FXML */
 	private FXMLLoader loader;
-	
+
+
+
+
+
+
 	/**
 	 * This method loads the selection view
 	 */
@@ -71,22 +94,22 @@ public enum ViewLoader {
 		controller.setText(header);
 		controller.setButtonText(buttonText);
 		controller.setButtonAction(x);
-
 		mainStage.getScene().setRoot(pane);
-		mainStage.getScene().getRoot().requestFocus();
 		mainStage.show();
 	}
-	
+
 	/**
-	 * This method loads the score view layout from the scoreview FXML file 
-	 * and initializes this Pane object with the loaded object hierarchy. This
-	 * method also calls the related controller to initialize the data to be
-	 * shown in the view.
+	 * This method compares the different scores played in the current game.
+	 * This method loads the score view layout from the scoreview FXML file and
+	 * initializes this Pane object with the loaded object hierarchy. This method
+	 * also calls the related controller class to initialize the data to be shown
+	 * in the view (levels played in the current game and corresponding scores)
 	 * 
 	 * @param levelData  list of levels played
 	 * @param scoreData  list of scores
+	 * @see #loadTop10Score(int, int) to get top 10 scores of a level
 	 */
-	public void loadScore(List<String>levelData, List<String>scoreData) {
+	public void loadLevelScores(List<String>levelData, List<String>scoreData) {
 		loadFXML(FilePath.SCORE_FXML);
 		initNewStage("High Score");
 		((ScoreScreenController) loader.getController()).initView(levelData, scoreData);
@@ -94,6 +117,31 @@ public enum ViewLoader {
 		this.stage.show();
 		
 	}
+
+	/**
+	 * This method is used to load the top 10 scores of a particular level. This method
+	 * loads the score view layout from the scoreview FXML file and initializes this Pane
+	 * object with the loaded object hierarchy. This method also updates the high score
+	 * file and calls the related controller to initialize the top 10 high scores to be
+	 * shown in the view.
+	 *
+	 * @param level  level played
+	 * @param score  corresponding score
+	 */
+	public void loadTop10Score(int level, int score) {
+		loadFXML(FilePath.SCORE_FXML);
+		initNewStage("High Score");
+		file.addToFile(level,score);
+
+		HighScoreReader.INSTANCE.readTop10(level);
+		((ScoreScreenController) loader.getController()).initView(ranks, HighScoreReader.INSTANCE.getTop10());
+
+		this.stage.setOnHiding(GameController.INSTANCE::showNextScreen);
+		this.stage.show();
+
+	}
+
+
 	
 	/**
 	 * This method initializes this {@link #stage} and

@@ -1,6 +1,6 @@
 package frogger.controller;
 
-import frogger.util.ViewLoader;
+import frogger.util.ScreenLoader;
 import frogger.view.MenuScreen;
 import javafx.application.Platform;
 
@@ -21,7 +21,7 @@ public enum MenuController {
 	 * users to choose their controls
 	 */
 	public void viewSelection() {
-		ViewLoader.INSTANCE.loadSelection();
+		ScreenLoader.INSTANCE.loadSelection();
 
 	}
 	
@@ -30,7 +30,7 @@ public enum MenuController {
 	 * a brief overview of the game
 	 */
 	public void showInfo() {
-		ViewLoader.INSTANCE.loadInfo();
+		ScreenLoader.INSTANCE.loadInfo();
 	}
 	
 	/**
