@@ -8,9 +8,13 @@ import frogger.constant.FilePath;
  *
  */
 public enum LOG_TYPE implements NPCType {
-	
+	/** date for long log image */
 	LONG(FilePath.L_LOG,300),
+
+	/** date for medium log image */
 	MEDIUM(FilePath.M_LOG,225),
+
+	/** date for short log image */
 	SHORT(FilePath.S_LOG,150);
 	
 	/** the file path for the corresponding log */

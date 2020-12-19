@@ -16,6 +16,11 @@ public class Obstacle extends NPC {
 	/** the type of obstacle image to be displayed */
 	private final OBSTACLE_TYPE type;
 
+
+	/**
+	 * This is the public constructor for this {@code Obstacle} object
+	 * @param obstacle  {@link OBSTACLE_TYPE} to be created
+	 */
 	public Obstacle(OBSTACLE_TYPE obstacle) {
 		super(obstacle);
 		this.type=obstacle;

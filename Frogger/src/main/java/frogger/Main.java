@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/** This class is the default entry point of JavaFX application */
 public class Main extends Application {
 	/** the default stage height */
 	public static final double STAGE_H = 800;
@@ -42,10 +43,7 @@ public class Main extends Application {
 		}
 	}
 
-	/**
-	 * The main method to be run
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 		launch(args);
 	}

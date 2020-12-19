@@ -9,9 +9,14 @@ import frogger.constant.FilePath;
  */
 
 public enum OBSTACLE_TYPE implements NPCType {
-	
-	TRUCK1(FilePath.TRUCK1, 120),
-	TRUCK2(FilePath.TRUCK2, 200),
+
+	/** data for short truck image */
+	SHORT_TRUCK(FilePath.TRUCK_SHORT, 120),
+
+	/** data for long truck image */
+	LONG_TRUCK(FilePath.TRUCK_LONG, 200),
+
+	/** data for car image */
 	CAR(FilePath.CAR, 50);
 	
 	/** the file path for the corresponding obstacle */

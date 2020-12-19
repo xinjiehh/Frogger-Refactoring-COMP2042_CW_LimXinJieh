@@ -33,9 +33,9 @@ public class Turtle extends NPC implements WaterSprite {
 			add(turtle3);
 		}};
 
-	
-		
-		
+
+
+	/** This is the public constructor for this {@code Turtle} object */
 	public Turtle() {
 		super();
 		setImage(turtle2);

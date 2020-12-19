@@ -6,6 +6,8 @@ package frogger.constant.settings;
    *
    */
   public enum Mode {
-	  SINGLE,
-	  DOUBLE
+      /** single player mode*/
+      SINGLE,
+      /** multiplayer mode */
+      DOUBLE
   }

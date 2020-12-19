@@ -70,7 +70,7 @@ public final class Lane {
 
 		switch (laneNum) {
 			case 1 ->
-				npc = new Obstacle(OBSTACLE_TYPE.TRUCK1);// 720; //800
+				npc = new Obstacle(OBSTACLE_TYPE.SHORT_TRUCK);// 720; //800
 
 			
 			case 2, 4 ->
@@ -78,7 +78,7 @@ public final class Lane {
 
 			
 			case 3 ->
-				npc = new Obstacle(OBSTACLE_TYPE.TRUCK2);//780
+				npc = new Obstacle(OBSTACLE_TYPE.LONG_TRUCK);//780
 
 			
 			case 5 ->

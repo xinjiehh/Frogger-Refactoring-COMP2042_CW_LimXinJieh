@@ -49,7 +49,7 @@ public class WetTurtle extends NPC implements Sinkable, WaterSprite {
 	/** flag to determine if this {@code WetTurtle} is sunken */
 	private boolean isSunk;
 
-
+	/** This is the public constructor for this {@code WetTurtle} object */
 	public WetTurtle() {
 		super();
 		setImage(turtle2);

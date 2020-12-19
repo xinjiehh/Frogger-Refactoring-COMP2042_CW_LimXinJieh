@@ -84,6 +84,11 @@ public class GameModel implements Subject {
 		initPlayer();
 		System.out.println("This is level "+ levelNum);
 	}
+
+	/**
+	 * This method returns the score of the current level
+	 * @return score of the current level
+	 */
 	public int getScore(){
 		return player.getScore();
 	}
@@ -160,7 +165,11 @@ public class GameModel implements Subject {
 		notify("pause", this);
 		player.setNoMove(true);
 	}
-	
+
+	/**
+	 * This method returns the current level number
+	 * @return current level number
+	 */
 	public int getLevel() {
 		return levelNum;
 	}

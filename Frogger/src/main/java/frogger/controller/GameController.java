@@ -120,7 +120,7 @@ public enum GameController  {
 	
 	/**
 	 * This method calls the {@link ScreenLoader} to initialize and
-	 * show the score {@code Stage} pop up <p></p>
+	 * show the score {@code Stage} pop up <p> </p>
 	 * <p>For using the first method:</p>
 	 * <p>1. Sort score and level arrays in {@link GameModel}, then use it to
 	 * initialize the score stage</p>
