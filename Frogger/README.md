@@ -14,7 +14,7 @@ Javadocs can be found in `Frogger.build.docs.javadoc`
 
 > With these, I hope I am able to meet the high score requirements specified in the coursework 
 
-> Due to word limit, this README focuses mainly on what and why refactoring/additions are done. Please refer to Javadocs of mentioned classes for more details on how it's done. Titles and additional formatting are used to make this more presentable, thus leading to extra word count. Excluding formatting and disclaimers before this sentence, word count is 531.
+> Due to word limit, this README focuses mainly on what and why refactoring/additions are done. Please refer to Javadocs of mentioned classes for more details on how it's done. Titles and additional formatting are used to make this more presentable, thus leading to extra word count. Excluding formatting and disclaimers before this sentence, word count is 533.
 
   
 
@@ -29,7 +29,7 @@ Javadocs can be found in `Frogger.build.docs.javadoc`
 - JUnit testing, gradle build
 
 ## Fixes
-- In the original code, a new frog will respawn and jump forward at the same time as current frog entering the swamp, causing unnecessary death
+- Fix bug in the original code where a new frog will respawn and jump forward at the same time as current frog entering the swamp, causing unnecessary death
 - Match the color of the turtle background with game background
 
 ## General Refactoring  
