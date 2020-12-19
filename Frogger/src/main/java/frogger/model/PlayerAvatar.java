@@ -195,15 +195,16 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 	 */
 	public void jump(DIRECTION direction, boolean keyPress) {
 		if (!noMove) {
-			
+
+			//if key is released and player has previously jumped
 			if(!keyPress && isJump) {
 				isJump = false;
 			} 
-			
+			//play sound on key press
 			if(keyPress) {
 				AudioPlayer.INSTANCE.hopSound();
 			}
-			
+
 			setImage(isJump? imgW2 : imgW1);
 			switch (direction) {
 			case UP:
@@ -231,7 +232,7 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 				break;
 
 			}	
-			
+			//switch jump flag
 			isJump = !isJump;
 		} 
 	}
@@ -348,7 +349,6 @@ public abstract class PlayerAvatar extends Actor implements Subject {
 
 	/**
 	 * This method returns the integer value of life left for this object
-	 * @return  number of lives left for this {@code PlayerAvatar} object
 	 * @return  number of lives left for this {@code PlayerAvatar} object
 	 */
 	public int getLife() {
