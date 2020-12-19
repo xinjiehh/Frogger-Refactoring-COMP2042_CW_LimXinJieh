@@ -8,7 +8,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /** This class is the default entry point of JavaFX application */
+
 public class Main extends Application {
+
 	/** the default stage height */
 	public static final double STAGE_H = 800;
 	
