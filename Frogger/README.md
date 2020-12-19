@@ -1,9 +1,9 @@
 # COMP2042 Frogger
 
 Prerequisites
-- IntelliJ
-- Java15
-- Gradle
+- IntelliJ (after importing project, go to File -> Invalidate cache and restart)
+- Java 15 (required to run project in cmd)
+- Gradle (must be added to system variables to run project in cmd)
 
 Javadocs can be found in `Frogger.build.docs.javadoc`
 
