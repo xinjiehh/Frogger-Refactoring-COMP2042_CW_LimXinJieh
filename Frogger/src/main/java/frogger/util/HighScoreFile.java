@@ -2,6 +2,7 @@ package frogger.util;
 
 import frogger.constant.FilePath;
 import frogger.constant.settings.Settings;
+import frogger.controller.GameController;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,6 +16,9 @@ import java.util.List;
  * either upon completion of all the levels with the entries sorted
  * in descending order of scores, or after each level with the
  * entries sorted in ascending order of level number
+ *
+ * @see HighScoreReader
+ * @see GameController#showScoreDisplay()
  *
  */
 public class HighScoreFile {

@@ -12,8 +12,8 @@ import java.util.Scanner;
 /**
  * This class is used to read the designated high score file and extract
  * specific information. For example, I have implemented {@link #readTop10}
- * method to extract top 10 scores of a specific level from the file. Refer to
- * {@link ScreenLoader#loadTop10Score} method for example implementation.
+ * method to extract top 10 scores of a specific level from the file.
+ * @see ScreenLoader#loadTop10Score method for example implementation.
  */
 
 public enum HighScoreReader {

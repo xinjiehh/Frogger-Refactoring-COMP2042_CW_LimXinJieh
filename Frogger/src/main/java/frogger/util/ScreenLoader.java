@@ -108,6 +108,7 @@ public enum ScreenLoader {
 	 * @param levelData  list of levels played
 	 * @param scoreData  list of scores
 	 * @see #loadTop10Score(int, int) to get top 10 scores of a level
+	 * @see GameController#showScoreDisplay() for example implementation
 	 */
 	public void loadLevelScores(List<String>levelData, List<String>scoreData) {
 		loadFXML(FilePath.SCORE_FXML);
@@ -127,6 +128,8 @@ public enum ScreenLoader {
 	 *
 	 * @param level  level played
 	 * @param score  corresponding score
+	 * @see #loadLevelScores to compare the levels of the current game
+	 * @see GameController#showScoreDisplay() for example implementation
 	 */
 	public void loadTop10Score(int level, int score) {
 		loadFXML(FilePath.SCORE_FXML);
