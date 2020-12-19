@@ -3,7 +3,12 @@ package frogger.model;
 import frogger.view.GameScreen;
 
 /**
- * This class is an implementation of the Observer pattern. 
+ * This class is an implementation of the Observer pattern, reducing
+ * the usage of boolean flags to indicate object state and minimising
+ * the need for {@code AnimationTimer} to constantly check flag state
+ * in each frame like in the original code. With the Observer pattern,
+ * the subscribed {@code Observer} object will be automatically updated
+ * when there is a change in value.
  * 
  * Any classes interested in the events can implement {@code Observer}, 
  * override {@link #update} method, and call the {@link Subject#subscribe}
